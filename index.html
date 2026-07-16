@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Delas - Comunidade de Tecnologia e Dados para Mulheres</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron (Futuristic) and Inter (Clean Body Text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#080b11',
+                            card: '#0f1422',
+                            border: '#1f293d',
+                            cyan: '#00f2fe',
+                            magenta: '#ff007f',
+                            purple: '#7000ff',
+                            neonGreen: '#39ff14',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Rajdhani', 'sans-serif'],
+                        cyber: ['Orbitron', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 15px rgba(0, 242, 254, 0.4)',
+                        'neon-magenta': '0 0 15px rgba(255, 0, 127, 0.4)',
+                        'neon-purple': '0 0 20px rgba(112, 0, 255, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Cybernetic Aesthetic -->
+    <style>
+        body {
+            background-color: #080b11;
+            font-family: 'Inter', sans-serif;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Futuristic Grid Overlay */
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+
+        /* Glowing keyframe animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080b11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff007f;
+        }
+    </style>
+</head>
+<body class="text-gray-100 overflow-x-hidden min-h-screen relative">
+    <!-- Background Grid -->
+    <div class="absolute inset-0 cyber-grid pointer-events-none z-0"></div>
+
+    <!-- Navbar / Header -->
+    <header class="sticky top-0 z-50 bg-cyber-bg/80 backdrop-blur-md border-b border-cyber-border/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo Section -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-12 h-12 rounded-full overflow-hidden border border-cyber-cyan/50 shadow-neon-cyan">
+                    <img src="image_e59da3.jpg" alt="Logo Data Delas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='https://placehold.co/100x100/0f1422/00f2fe?text=DD'">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-cyber text-lg tracking-wider bg-gradient-to-r from-cyber-cyan via-white to-cyber-magenta bg-clip-text text-transparent font-bold">DATA DELAS</span>
+                    <span class="text-[10px] text-cyber-cyan tracking-widest uppercase font-tech">Tech & Data Community</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 font-tech text-lg">
+                <a href="#sobre" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200">Sobre</a>
+                <a href="#voste" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200">Parceria</a>
+                <a href="#eventos" class="text-gray-300 hover:text-cyber-magenta transition-colors duration-200">Eventos</a>
+                <a href="#linkedin" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200">Novidades</a>
+                <a href="#criadora" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200">Fundadora</a>
+                <a href="#voluntariado" class="text-cyber-magenta hover:text-cyber-magenta/80 font-bold tracking-wider transition-colors duration-200">Seja Voluntária!</a>
+            </nav>
+
+            <!-- CTA & Mobile Menu Button -->
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/5511999999999" target="_blank" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-tech font-bold px-5 py-2.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-emerald-500/20 active:scale-95 text-sm uppercase tracking-wider">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                    Comunidade WhatsApp
+                </a>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-cyber-cyan focus:outline-none p-2" aria-label="Menu principal">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-card/95 border-b border-cyber-border/80 px-4 pt-2 pb-6 space-y-3 absolute w-full left-0 transition-all duration-300 backdrop-blur-lg">
+            <a href="#sobre" class="block py-2 text-gray-300 hover:text-cyber-cyan font-tech text-lg transition-colors">Sobre</a>
+            <a href="#voste" class="block py-2 text-gray-300 hover:text-cyber-cyan font-tech text-lg transition-colors">Parceria</a>
+            <a href="#eventos" class="block py-2 text-gray-300 hover:text-cyber-magenta font-tech text-lg transition-colors">Eventos</a>
+            <a href="#linkedin" class="block py-2 text-gray-300 hover:text-cyber-cyan font-tech text-lg transition-colors">Novidades</a>
+            <a href="#criadora" class="block py-2 text-gray-300 hover:text-cyber-cyan font-tech text-lg transition-colors">Fundadora</a>
+            <a href="#voluntariado" class="block py-2 text-cyber-magenta font-tech font-bold text-lg transition-colors">Seja Voluntária!</a>
+            <hr class="border-cyber-border">
+            <a href="https://wa.me/5511999999999" target="_blank" class="flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-tech font-bold py-3 rounded-lg w-full text-center tracking-wide uppercase">
+                <i class="fab fa-whatsapp text-lg"></i>
+                Comunidade WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-24 md:py-32 overflow-hidden z-10">
+        <!-- Floating Neon Orbs in Background -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 rounded-full bg-cyber-purple/10 blur-[100px] animate-pulse-slow"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-cyber-cyan/10 blur-[120px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Info -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyber-purple/20 border border-cyber-purple/50 text-xs sm:text-sm text-cyber-cyan font-tech uppercase tracking-widest mx-auto lg:mx-0">
+                        <i class="fa-solid fa-circle-nodes text-cyber-magenta animate-pulse"></i> Conectando Mulheres em Tech & Dados
+                    </div>
+
+                    <h1 class="font-cyber text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                        Enxergue o seu valor em <span class="bg-gradient-to-r from-cyber-cyan via-purple-400 to-cyber-magenta bg-clip-text text-transparent">Dados e Tecnologia</span>
+                    </h1>
+
+                    <p class="text-gray-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        A comunidade <strong class="text-white font-semibold">Data Delas</strong> foi criada com um propósito audacioso: ajudar mulheres a quebrarem barreiras, dominarem as ferramentas do futuro e alcançarem o protagonismo nas carreiras de dados e tecnologia.
+                    </p>
+
+                    <!-- Interactive Tech Grid Callouts -->
+                    <div class="grid grid-cols-2 gap-4 pt-4 max-w-md mx-auto lg:mx-0">
+                        <div class="p-4 rounded-xl bg-cyber-card/40 border border-cyber-border hover:border-cyber-cyan/40 transition-all duration-300">
+                            <span class="block font-cyber text-2xl font-bold text-cyber-cyan">+500+</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider">Mulheres na comunidade</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-cyber-card/40 border border-cyber-border hover:border-cyber-magenta/40 transition-all duration-300">
+                            <span class="block font-cyber text-2xl font-bold text-cyber-magenta">100%</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider">Foco Feminino</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6 justify-center lg:justify-start">
+                        <a href="https://chat.whatsapp.com/GAePcMCiRjv5PTwh7STKRH?mode=hqctcla" target="_blank" class="px-8 py-4 rounded-xl bg-gradient-to-r from-cyber-purple to-cyber-magenta text-white font-cyber font-bold uppercase tracking-wider shadow-neon-purple hover:scale-[1.02] transition-all duration-300 text-center text-sm">
+                            Entrar no Grupo WhatsApp <i class="fa-solid fa-arrow-trend-up ml-1"></i>
+                        </a>
+                        <a href="#eventos" class="px-8 py-4 rounded-xl bg-cyber-card border border-cyber-border hover:border-cyber-cyan text-gray-300 hover:text-white font-cyber font-bold uppercase tracking-wider hover:scale-[1.02] transition-all duration-300 text-center text-sm shadow-sm hover:shadow-neon-cyan/20">
+                            Próximos Eventos
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Cyber Logo / Tree Representation -->
+                <div class="lg:col-span-5 flex justify-center items-center relative">
+                    <!-- Tech Aura behind image -->
+                    <div class="absolute w-72 sm:w-80 h-72 sm:h-80 rounded-full bg-gradient-to-tr from-cyber-cyan to-cyber-magenta opacity-30 blur-[40px] animate-pulse"></div>
+                    
+                    <div class="relative w-72 sm:w-96 h-72 sm:h-96 rounded-2xl overflow-hidden border-2 border-cyber-cyan/30 shadow-neon-cyan p-1 bg-cyber-card/80 animate-float">
+                        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-magenta"></div>
+                        <img src="image_e59da3.jpg" alt="Logo Data Delas" class="w-full h-full object-cover rounded-xl" onerror="this.src='https://placehold.co/500x500/0f1422/00f2fe?text=DATA+DELAS'">
+                        
+                        <!-- HUD Scan Lines Elements for sci-fi look -->
+                        <div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,_rgba(0,0,0,0.25)_50%),_linear-gradient(90deg,_rgba(255,0,0,0.06),_rgba(0,255,0,0.02),_rgba(0,0,255,0.06))] bg-[size:100%_4px,_6px_100%] pointer-events-none opacity-40"></div>
+                        <div class="absolute bottom-4 left-4 bg-cyber-bg/90 border border-cyber-cyan/50 px-3 py-1.5 rounded text-[10px] font-cyber text-cyber-cyan tracking-wider">
+                            <span class="inline-block w-2 h-2 rounded-full bg-cyber-cyan animate-ping mr-2"></span>SYS.STATUS: ONLINE
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Goal & Mission Section -->
+    <section id="sobre" class="py-20 relative border-t border-cyber-border bg-cyber-card/20 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide mb-4">
+                    Nossa <span class="bg-gradient-to-r from-cyber-cyan to-cyber-purple bg-clip-text text-transparent">Missão Cibernética</span>
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-cyber-cyan to-cyber-magenta mx-auto rounded"></div>
+                <p class="text-gray-400 mt-6 text-base sm:text-lg">
+                    Construindo conexões seguras e oportunidades sólidas para impulsionar a diversidade de gênero nas posições de tomada de decisão.
+                </p>
+            </div>
+
+            <!-- Goal Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="relative group p-8 rounded-2xl bg-cyber-card border border-cyber-border hover:border-cyber-cyan/50 transition-all duration-300 shadow-lg hover:-translate-y-2">
+                    <div class="absolute -top-6 left-8 w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-cyan to-blue-600 flex items-center justify-center text-white text-xl shadow-neon-cyan">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-cyber text-xl font-bold mt-4 mb-3 text-white group-hover:text-cyber-cyan transition-colors">Capacitação Estratégica</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Oferecer as ferramentas analíticas e técnicas fundamentais para que você possa entender, analisar e estruturar dados com segurança e autonomia.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="relative group p-8 rounded-2xl bg-cyber-card border border-cyber-border hover:border-cyber-purple/50 transition-all duration-300 shadow-lg hover:-translate-y-2">
+                    <div class="absolute -top-6 left-8 w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-purple to-pink-600 flex items-center justify-center text-white text-xl shadow-neon-purple">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="font-cyber text-xl font-bold mt-4 mb-3 text-white group-hover:text-cyber-purple transition-colors">Networking Exclusivo</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Uma ponte segura e dinâmica entre profissionais da área de dados, de iniciantes a gerentes seniores, promovendo trocas reais de mentoria e carreira.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="relative group p-8 rounded-2xl bg-cyber-card border border-cyber-border hover:border-cyber-magenta/50 transition-all duration-300 shadow-lg hover:-translate-y-2">
+                    <div class="absolute -top-6 left-8 w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-magenta to-red-500 flex items-center justify-center text-white text-xl shadow-neon-magenta">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="font-cyber text-xl font-bold mt-4 mb-3 text-white group-hover:text-cyber-magenta transition-colors">Aceleração de Carreira</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Desmistificar cargos de tecnologia, capacitar mulheres para transições de carreira de sucesso e destacar a importância do desenvolvimento de liderança feminina.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership: Voste Academy -->
+    <section id="voste" class="py-20 relative bg-gradient-to-b from-cyber-bg to-cyber-card/40 border-t border-cyber-border z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-cyber-card border-2 border-cyber-purple/30 rounded-3xl p-8 md:p-12 shadow-neon-purple relative overflow-hidden">
+                <!-- Aesthetic Grid Highlight -->
+                <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-cyber-cyan/10 blur-[60px] pointer-events-none"></div>
+                <div class="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-cyber-magenta/10 blur-[60px] pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Partnership Details -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyber-cyan/50 text-xs text-cyber-cyan font-tech uppercase tracking-widest">
+                            <span class="inline-block w-2 h-2 rounded-full bg-cyber-cyan animate-pulse"></span> Aliança Tecnológica Oficial
+                        </div>
+                        
+                        <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide text-white leading-tight">
+                            Parceria Estratégica com a <span class="bg-gradient-to-r from-cyber-cyan to-cyber-magenta bg-clip-text text-transparent">Voste Academy</span>
+                        </h2>
+
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            A <strong class="text-white">Voste Academy</strong> une forças com o Data Delas para promover treinamento prático de alta performance. Juntas, estamos estruturando programas e concedendo benefícios focados nas necessidades do mercado de dados, ajudando nossas alunas a conquistarem posições de grande impacto corporativo.
+                        </p>
+
+                        <!-- Partnership perks list -->
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 mt-0.5 rounded-full bg-cyber-magenta/20 flex items-center justify-center text-cyber-magenta text-xs flex-shrink-0">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-gray-300 text-sm">Acesso a workshops práticos exclusivos de SQL, Analytics, e Inteligência de Negócios.</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 mt-0.5 rounded-full bg-cyber-magenta/20 flex items-center justify-center text-cyber-magenta text-xs flex-shrink-0">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-gray-300 text-sm">Cupons e condições de desconto exclusivos para membros oficiais do Data Delas nas formações da Voste.</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 mt-0.5 rounded-full bg-cyber-magenta/20 flex items-center justify-center text-cyber-magenta text-xs flex-shrink-0">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-gray-300 text-sm">Mentoria conjunta sobre portfólio no GitHub, Medium, e estruturação de perfil LinkedIn.</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA button with real redirection fallback / styled link -->
+                        <div class="pt-4">
+                            <a href="https://vosteacademy.com" target="_blank" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-blue-600 text-white font-cyber font-bold uppercase text-xs sm:text-sm tracking-wider shadow-neon-cyan hover:scale-[1.02] transition-all duration-300">
+                                Conhecer a Voste Academy <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Partnership Visual HUD Graphics -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="w-full max-w-sm rounded-2xl bg-cyber-bg/80 border border-cyber-border p-6 flex flex-col justify-between h-80 relative shadow-inner">
+                            <div class="flex items-center justify-between border-b border-cyber-border pb-4">
+                                <span class="font-cyber text-xs text-cyber-cyan font-bold tracking-widest uppercase">CONEXÃO DATA-VOSTE</span>
+                                <div class="w-3 h-3 rounded-full bg-cyber-neonGreen animate-pulse"></div>
+                            </div>
+                            
+                            <!-- Visual flow graphic -->
+                            <div class="my-6 flex items-center justify-around relative">
+                                <div class="flex flex-col items-center gap-2">
+                                    <div class="w-16 h-16 rounded-full bg-cyber-card border-2 border-cyber-cyan flex items-center justify-center shadow-neon-cyan overflow-hidden">
+                                        <img src="image_e59da3.jpg" alt="Data Delas Logo" class="w-12 h-12 object-cover rounded-full" onerror="this.src='https://placehold.co/50/00f2fe/fff?text=DD'">
+                                    </div>
+                                    <span class="font-tech text-xs text-gray-400 uppercase tracking-widest">Data Delas</span>
+                                </div>
+
+                                <!-- Connecting futuristic lines and icons -->
+                                <div class="flex-1 flex flex-col items-center justify-center">
+                                    <div class="text-cyber-magenta text-xl animate-bounce mb-1">
+                                        <i class="fa-solid fa-handshake"></i>
+                                    </div>
+                                    <div class="w-full flex items-center justify-center">
+                                        <span class="w-1/3 h-[2px] bg-gradient-to-r from-cyber-cyan to-transparent"></span>
+                                        <div class="w-2 h-2 rounded-full bg-cyber-purple animate-ping mx-1"></div>
+                                        <span class="w-1/3 h-[2px] bg-gradient-to-l from-cyber-magenta to-transparent"></span>
+                                    </div>
+                                    <span class="text-[9px] text-cyber-neonGreen tracking-widest font-tech uppercase mt-1">Sincronizado</span>
+                                </div>
+
+                                <div class="flex flex-col items-center gap-2">
+                                    <div class="w-16 h-16 rounded-full bg-cyber-card border-2 border-cyber-magenta flex items-center justify-center shadow-neon-magenta text-white font-cyber text-lg font-black tracking-widest">
+                                        VOSTE
+                                    </div>
+                                    <span class="font-tech text-xs text-gray-400 uppercase tracking-widest">Voste Academy</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-cyber-bg border border-cyber-border p-3 rounded-xl text-center">
+                                <span class="text-[11px] text-gray-400 font-tech uppercase">Oportunidades Ativas:</span>
+                                <div class="font-cyber text-sm text-cyber-neonGreen mt-0.5 font-bold">15% de Desconto p/ Membros</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section with Switchable Tabs and Interactive Modals -->
+    <section id="eventos" class="py-20 relative border-t border-cyber-border z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide text-white">
+                        Hub de <span class="bg-gradient-to-r from-cyber-cyan to-cyber-magenta bg-clip-text text-transparent">Eventos</span>
+                    </h2>
+                    <p class="text-gray-400 mt-2">Participe das nossas sessões interativas e revise o conteúdo gravado.</p>
+                </div>
+                
+                <!-- Custom Futuristic Tab Switcher -->
+                <div class="flex rounded-xl bg-cyber-card p-1.5 border border-cyber-border self-start">
+                    <button id="tab-upcoming" onclick="switchEventsTab('upcoming')" class="px-5 py-2.5 rounded-lg font-cyber font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 bg-gradient-to-r from-cyber-cyan to-blue-600 text-white shadow-neon-cyan">
+                        Próximos Eventos
+                    </button>
+                    <button id="tab-past" onclick="switchEventsTab('past')" class="px-5 py-2.5 rounded-lg font-cyber font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 text-gray-400 hover:text-white">
+                        Eventos Passados
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upcoming Events Panel -->
+            <div id="events-upcoming-panel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Upcoming Card 1 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl overflow-hidden hover:border-cyber-cyan/50 transition-all duration-300 flex flex-col justify-between h-full group hover:shadow-neon-cyan/20">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
+                        <div class="absolute top-4 left-4 bg-cyber-cyan text-cyber-bg font-cyber font-bold text-[10px] tracking-wider uppercase px-2 py-1 rounded z-20 shadow-sm">
+                            Inscrições Abertas
+                        </div>
+                        <div class="absolute top-4 right-4 bg-cyber-bg/90 border border-cyber-cyan/30 text-cyber-cyan font-tech text-xs px-2.5 py-1 rounded-md z-20">
+                            <i class="fa-regular fa-clock mr-1"></i> 22 Set às 19:30
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Capa Workshop Power BI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cyber text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyber-cyan transition-colors">Workshop: Power BI para Tomada de Decisão</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
+                                Aprenda a estruturar KPIs reais de negócios, modelar dados do absoluto zero e construir painéis interativos que contam uma história impactante para executivos.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-cyber-border flex items-center justify-between">
+                            <span class="text-xs text-cyber-cyan font-tech"><i class="fa-solid fa-video mr-1"></i> Transmissão Online</span>
+                            <button onclick="openRegistrationModal('Power BI para Tomada de Decisão')" class="px-4 py-2 rounded-lg bg-cyber-cyan hover:bg-cyber-cyan/90 text-cyber-bg font-cyber font-bold text-xs uppercase tracking-wider transition-all duration-300">
+                                Inscrever-se
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Card 2 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl overflow-hidden hover:border-cyber-cyan/50 transition-all duration-300 flex flex-col justify-between h-full group hover:shadow-neon-cyan/20">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
+                        <div class="absolute top-4 left-4 bg-cyber-cyan text-cyber-bg font-cyber font-bold text-[10px] tracking-wider uppercase px-2 py-1 rounded z-20 shadow-sm">
+                            Inscrições Abertas
+                        </div>
+                        <div class="absolute top-4 right-4 bg-cyber-bg/90 border border-cyber-cyan/30 text-cyber-cyan font-tech text-xs px-2.5 py-1 rounded-md z-20">
+                            <i class="fa-regular fa-clock mr-1"></i> 08 Out às 20:00
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Capa Tech Mentoria" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cyber text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyber-cyan transition-colors">Mentoria Coletiva: Transição e Carreira em Tech</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
+                                Um bate-papo focado em guiar mulheres que desejam transicionar de carreira ou atingir seu próximo cargo de liderança operacional e técnica.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-cyber-border flex items-center justify-between">
+                            <span class="text-xs text-cyber-cyan font-tech"><i class="fa-solid fa-users-viewfinder mr-1"></i> Sala Exclusiva Zoom</span>
+                            <button onclick="openRegistrationModal('Transição e Carreira em Tech')" class="px-4 py-2 rounded-lg bg-cyber-cyan hover:bg-cyber-cyan/90 text-cyber-bg font-cyber font-bold text-xs uppercase tracking-wider transition-all duration-300">
+                                Inscrever-se
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Card 3 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl overflow-hidden hover:border-cyber-cyan/50 transition-all duration-300 flex flex-col justify-between h-full group hover:shadow-neon-cyan/20">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
+                        <div class="absolute top-4 left-4 bg-cyber-purple text-white font-cyber font-bold text-[10px] tracking-wider uppercase px-2 py-1 rounded z-20 shadow-sm">
+                            Em Breve
+                        </div>
+                        <div class="absolute top-4 right-4 bg-cyber-bg/90 border border-cyber-purple/30 text-cyber-purple font-tech text-xs px-2.5 py-1 rounded-md z-20">
+                            <i class="fa-regular fa-clock mr-1"></i> Novembro/26
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Capa Hackathon Data Delas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cyber text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyber-purple transition-colors">Hackathon Exclusivo: Mulheres em Ação</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
+                                Desafios práticos com dados públicos reais de mobilidade e logística. Monte sua squad, codifique soluções e ganhe premiações incríveis com nossos parceiros.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-cyber-border flex items-center justify-between">
+                            <span class="text-xs text-cyber-purple font-tech"><i class="fa-solid fa-laptop-code mr-1"></i> Presencial / Híbrido</span>
+                            <button disabled class="px-4 py-2 rounded-lg bg-cyber-border text-gray-500 font-cyber font-bold text-xs uppercase tracking-wider cursor-not-allowed">
+                                Em Breve
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Past Events Panel (Hidden by default, containing interactive video simulator) -->
+            <div id="events-past-panel" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Past Card 1 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl overflow-hidden hover:border-cyber-magenta/50 transition-all duration-300 flex flex-col justify-between h-full group hover:shadow-neon-magenta/20">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
+                        <button onclick="playVideo('Como se Preparar para Processos Seletivos em Dados', 'O processo seletivo ideal envolve domínio técnico, construção de portfólio contextualizado e preparação impecável de comportamento organizacional.')" class="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/20 z-20 group-hover:scale-105 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-full bg-cyber-magenta text-white flex items-center justify-center shadow-neon-magenta text-xl animate-pulse">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </button>
+                        <div class="absolute top-4 left-4 bg-cyber-border text-gray-300 font-tech text-xs px-2 py-1 rounded z-20">
+                            Junho, 2026
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80" alt="Capa Processos Seletivos" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cyber text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyber-magenta transition-colors">Como se Preparar para Processos Seletivos em Dados</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
+                                Dicas diretas sobre testes práticos de SQL, manipulação básica de bibliotecas de Python, modelagem, e portfólios eficazes para recrutadoras tech.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-cyber-border flex items-center justify-between">
+                            <span class="text-xs text-cyber-magenta font-tech"><i class="fa-regular fa-clock mr-1"></i> Gravação: 1h 45m</span>
+                            <button onclick="playVideo('Como se Preparar para Processos Seletivos em Dados', 'O processo seletivo ideal envolve domínio técnico, construção de portfólio contextualizado e preparação impecável de comportamento organizacional.')" class="text-cyber-magenta font-tech font-bold text-sm hover:underline uppercase tracking-wider">
+                                Assistir Gravação
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Card 2 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl overflow-hidden hover:border-cyber-magenta/50 transition-all duration-300 flex flex-col justify-between h-full group hover:shadow-neon-magenta/20">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
+                        <button onclick="playVideo('Introdução Prática a Banco de Dados e SQL', 'Bancos de dados estruturam e gerenciam dados brutos. O SQL é a linguagem fundamental para extrair respostas estratégicas a partir das bases.')" class="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/20 z-20 group-hover:scale-105 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-full bg-cyber-magenta text-white flex items-center justify-center shadow-neon-magenta text-xl animate-pulse">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </button>
+                        <div class="absolute top-4 left-4 bg-cyber-border text-gray-300 font-tech text-xs px-2 py-1 rounded z-20">
+                            Maio, 2026
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80" alt="Capa SQL" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cyber text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyber-magenta transition-colors">Introdução Prática a Banco de Dados e SQL</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
+                                Entenda a estrutura de bancos relacionais e aprenda os principais comandos (SELECT, JOINs, GROUP BY) usando conjuntos de dados reais de e-commerce.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-cyber-border flex items-center justify-between">
+                            <span class="text-xs text-cyber-magenta font-tech"><i class="fa-regular fa-clock mr-1"></i> Gravação: 2h 10m</span>
+                            <button onclick="playVideo('Introdução Prática a Banco de Dados e SQL', 'Bancos de dados estruturam e gerenciam dados brutos. O SQL é a linguagem fundamental para extrair respostas estratégicas a partir das bases.')" class="text-cyber-magenta font-tech font-bold text-sm hover:underline uppercase tracking-wider">
+                                Assistir Gravação
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Card 3 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl overflow-hidden hover:border-cyber-magenta/50 transition-all duration-300 flex flex-col justify-between h-full group hover:shadow-neon-magenta/20">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
+                        <button onclick="playVideo('Lançamento Oficial Data Delas', 'Fundada por Carolina Artioli, a Data Delas surge para construir o maior hub de liderança feminina e operações focadas em dados.')" class="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/20 z-20 group-hover:scale-105 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-full bg-cyber-magenta text-white flex items-center justify-center shadow-neon-magenta text-xl animate-pulse">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </button>
+                        <div class="absolute top-4 left-4 bg-cyber-border text-gray-300 font-tech text-xs px-2 py-1 rounded z-20">
+                            Março, 2026
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80" alt="Capa Lançamento" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cyber text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyber-magenta transition-colors">Painel de Estreia: O Futuro da Liderança de Dados</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
+                                Encontro de inauguração onde explicamos o manifesto da comunidade, compartilhamos jornadas desafiadoras e iniciamos mentorias coletivas.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-cyber-border flex items-center justify-between">
+                            <span class="text-xs text-cyber-magenta font-tech"><i class="fa-regular fa-clock mr-1"></i> Gravação: 1h 20m</span>
+                            <button onclick="playVideo('Painel de Estreia: O Futuro da Liderança de Dados', 'Fundada por Carolina Artioli, a Data Delas surge para construir o maior hub de liderança feminina e operações focadas em dados.')" class="text-cyber-magenta font-tech font-bold text-sm hover:underline uppercase tracking-wider">
+                                Assistir Gravação
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LinkedIn Feed Simulation Section -->
+    <section id="linkedin" class="py-20 relative bg-cyber-card/10 border-t border-cyber-border z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide mb-4">
+                    Conexões no <span class="bg-gradient-to-r from-blue-400 to-cyber-cyan bg-clip-text text-transparent">LinkedIn</span>
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-cyber-cyan mx-auto rounded"></div>
+                <p class="text-gray-400 mt-6 text-sm sm:text-base">
+                    Confira as nossas postagens oficiais mais engajadas diretamente da nossa rede de talentos.
+                </p>
+            </div>
+
+            <!-- LinkedIn Carousel / Post Grid (Highly Interactive Mockups) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                <!-- Mock LinkedIn Post 1 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:border-blue-500/30 transition-all duration-300">
+                    <div>
+                        <!-- Header of Post -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-full border border-cyber-cyan/50 p-0.5 overflow-hidden">
+                                    <img src="image_e59da3.jpg" alt="Data Delas Logo" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/100x100/0f1422/00f2fe?text=DD'">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-white flex items-center gap-1.5 hover:text-cyber-cyan transition-colors">
+                                        Data Delas
+                                        <span class="text-blue-500 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                    </h4>
+                                    <p class="text-[10px] text-gray-400">5.200+ seguidores • Editado • <i class="fa-solid fa-earth-americas"></i></p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-white p-1 text-sm" aria-label="Mais ações"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </div>
+                        <!-- Content -->
+                        <div class="text-xs sm:text-sm text-gray-300 space-y-3 leading-relaxed mb-4">
+                            <p>🎯 <strong class="text-white">COMO DESTRAVAR SUA CONFIAÇA EM PROJETOS DE BIG DATA?</strong></p>
+                            <p>Muitas vezes, nós mulheres nos sentimos intimidadas diante de infraestruturas massivas de processamento. A verdade? A lógica básica é idêntica! Comece por partes, entenda as queries e domine a governança.</p>
+                            <p class="text-cyber-cyan">#MulheresEmTech #CienciaDeDados #DataDelas #LiderancaFeminina</p>
+                        </div>
+                    </div>
+
+                    <!-- Post Engagement Stats & Interaction buttons -->
+                    <div>
+                        <div class="flex items-center justify-between text-[11px] text-gray-400 pb-3 border-b border-cyber-border mb-3">
+                            <div class="flex items-center gap-1">
+                                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-[9px]"><i class="fa-solid fa-thumbs-up"></i></span>
+                                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-pink-600 text-white text-[9px] -ml-2"><i class="fa-solid fa-heart"></i></span>
+                                <span class="ml-1 text-gray-300 font-medium">184 reações</span>
+                            </div>
+                            <span>32 comentários • 12 compartilhamentos</span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-1 text-center">
+                            <button onclick="simulateReaction(this)" class="py-2 rounded hover:bg-white/5 text-gray-400 hover:text-blue-400 flex items-center justify-center gap-1.5 transition-colors text-xs">
+                                <i class="fa-regular fa-thumbs-up"></i> Gostei
+                            </button>
+                            <button onclick="focusComment(this)" class="py-2 rounded hover:bg-white/5 text-gray-400 hover:text-white flex items-center justify-center gap-1.5 transition-colors text-xs">
+                                <i class="fa-regular fa-comment-dots"></i> Comentar
+                            </button>
+                            <button onclick="simulateShare(this)" class="py-2 rounded hover:bg-white/5 text-gray-400 hover:text-white flex items-center justify-center gap-1.5 transition-colors text-xs">
+                                <i class="fa-solid fa-arrows-spin"></i> Apoiar
+                            </button>
+                            <a href="https://linkedin.com" target="_blank" class="py-2 rounded hover:bg-white/5 text-gray-400 hover:text-cyber-cyan flex items-center justify-center gap-1.5 transition-colors text-xs">
+                                <i class="fa-solid fa-paper-plane"></i> Ver link
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mock LinkedIn Post 2 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:border-blue-500/30 transition-all duration-300">
+                    <div>
+                        <!-- Header of Post -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-full border border-cyber-cyan/50 p-0.5 overflow-hidden">
+                                    <img src="image_e59da3.jpg" alt="Data Delas Logo" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/100x100/0f1422/00f2fe?text=DD'">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-white flex items-center gap-1.5 hover:text-cyber-cyan transition-colors">
+                                        Data Delas
+                                        <span class="text-blue-500 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                    </h4>
+                                    <p class="text-[10px] text-gray-400">5.200+ seguidores • 1 dia atrás • <i class="fa-solid fa-earth-americas"></i></p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-white p-1 text-sm" aria-label="Mais ações"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </div>
+                        <!-- Content -->
+                        <div class="text-xs sm:text-sm text-gray-300 space-y-3 leading-relaxed mb-4">
+                            <p>🚀 <strong class="text-white">CONEXÃO DATA DELAS + VOSTE ACADEMY!</strong></p>
+                            <p>Uma parceria focada em gerar impacto e resultados escaláveis de verdade. Nossa missão é preparar mulheres prontas para desafios reais em posições de liderança e operações de alto crescimento.</p>
+                            <p class="text-cyber-cyan">#Parceria #VosteAcademy #MulheresNoTopo #Analytics</p>
+                        </div>
+                    </div>
+
+                    <!-- Post Engagement Stats & Interaction buttons -->
+                    <div>
+                        <div class="flex items-center justify-between text-[11px] text-gray-400 pb-3 border-b border-cyber-border mb-3">
+                            <div class="flex items-center gap-1">
+                                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-[9px]"><i class="fa-solid fa-thumbs-up"></i></span>
+                                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-pink-600 text-white text-[9px] -ml-2"><i class="fa-solid fa-heart"></i></span>
+                                <span class="ml-1 text-gray-300 font-medium">321 reações</span>
+                            </div>
+                            <span>54 comentários • 28 compartilhamentos</span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-1 text-center">
+                            <button onclick="simulateReaction(this)" class="py-2 rounded hover:bg-white/5 text-gray-400 hover:text-blue-400 flex items-center justify-center gap-1.5 transition-colors text-xs">
+                                <i class="fa-regular fa-thumbs-up"></i> Gostei
+                            </button>
+                            <button onclick="focusComment(this)" class="py-2 rounded hover:bg-white/5 text-gray-400 hover:text-white flex items-center justify-center gap-1.5 transition-colors text-xs">
+                                <i class="fa-regular fa-comment-dots"></i> Comentar
+                            </button>
+                            <button onclick="simulateShare(this)" class="py-2 rounded hover:bg-white/5 text-gray-400 hover:text-white flex items-center justify-center gap-1.5 transition-colors text-xs">
+                                <i class="fa-solid fa-arrows-spin"></i> Apoiar
+                            </button>
+                            <a href="https://linkedin.com" target="_blank" class="py-2 rounded hover:bg-white/5 text-gray-400 hover:text-cyber-cyan flex items-center justify-center gap-1.5 transition-colors text-xs">
+                                <i class="fa-solid fa-paper-plane"></i> Ver link
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Bio Section -->
+    <section id="criadora" class="py-20 relative border-t border-cyber-border bg-gradient-to-t from-cyber-bg to-cyber-card/30 z-10">
+        <!-- Abstract Glowing background elements -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-cyber-purple/5 blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="font-cyber text-xs text-cyber-cyan tracking-widest uppercase">A Mente por Trás do Movimento</span>
+                <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide mt-2 text-white">
+                    Nossa <span class="bg-gradient-to-r from-cyber-cyan to-cyber-purple bg-clip-text text-transparent">Fundadora</span>
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-cyber-cyan to-cyber-purple mx-auto rounded mt-3"></div>
+            </div>
+
+            <!-- Profile Content Area -->
+            <div class="max-w-5xl mx-auto bg-cyber-card/80 border border-cyber-border rounded-3xl p-6 sm:p-10 shadow-neon-purple relative overflow-hidden backdrop-blur-md">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Profile Picture (image_e5a0e4.jpg) with Cyber Frames -->
+                    <div class="md:col-span-5 flex justify-center relative">
+                        <!-- Neon Frame Glow -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-cyber-cyan to-cyber-magenta opacity-30 rounded-2xl blur-[15px]"></div>
+                        
+                        <!-- Main Frame -->
+                        <div class="relative w-full max-w-[320px] aspect-square rounded-2xl overflow-hidden border-2 border-cyber-cyan/50 shadow-neon-cyan p-1 bg-cyber-card">
+                            <img src="image_e5a0e4.jpg" alt="Carolina Artioli - Fundadora do Data Delas" class="w-full h-full object-cover rounded-xl" onerror="this.src='https://placehold.co/400x400/0f1422/ff007f?text=Carolina+Artioli'">
+                            
+                            <!-- Bottom Badge of Photo -->
+                            <div class="absolute bottom-3 left-3 right-3 bg-cyber-bg/95 border border-cyber-border rounded-lg p-2.5 text-center backdrop-blur-sm">
+                                <span class="block font-cyber text-xs font-bold text-cyber-cyan">CAROLINA ARTIOLI</span>
+                                <span class="block text-[9px] text-gray-400 font-tech tracking-wider uppercase mt-0.5">Gerente de Operações - Marketplace na 99</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resume details / Bio Content -->
+                    <div class="md:col-span-7 space-y-6">
+                        <div>
+                            <span class="text-xs font-tech text-cyber-magenta uppercase tracking-wider font-semibold block">Liderança & Inovação</span>
+                            <h3 class="font-cyber text-2xl font-bold text-white mt-1">Carolina Artioli</h3>
+                            <div class="h-[1px] w-full bg-cyber-border my-3"></div>
+                        </div>
+
+                        <!-- Mini Bio Bullet points -->
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed font-light">
+                            Com mais de <strong class="text-white">12 anos de experiência</strong> sólida liderando operações regionais complexas, gestão de processos robustos, customer experience e produtos digitais inovadores em startups e grandes corporações multinacionais.
+                        </p>
+
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed font-light">
+                            Sua expertise é centrada em estruturar processos inovadores baseados em dados (<em class="text-cyber-cyan font-tech">data-driven</em>), otimizar KPIs cruciais, impulsionar o NPS e desenhar jornadas de sucesso escaláveis para clientes B2B e B2C.
+                        </p>
+
+                        <!-- Tech Keywords/Badges -->
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded bg-cyber-bg border border-cyber-border text-[11px] text-gray-300 font-tech">Operações</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-bg border border-cyber-border text-[11px] text-gray-300 font-tech">Transformação Digital</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-bg border border-cyber-border text-[11px] text-gray-300 font-tech">Produto Digital</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-bg border border-cyber-border text-[11px] text-gray-300 font-tech">Processos & KPIs</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-bg border border-cyber-border text-[11px] text-gray-300 font-tech">Power BI</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-bg border border-cyber-border text-[11px] text-gray-300 font-tech">CX / CS</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-bg border border-cyber-border text-[11px] text-gray-300 font-tech">Liderança</span>
+                        </div>
+
+                        <!-- Call to actions/Social media link integrations -->
+                        <div class="pt-4 border-t border-cyber-border flex flex-col sm:flex-row items-center gap-4">
+                            <a href="mailto:carolinaartioli@hotmail.com" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-cyber-bg border border-cyber-border hover:border-cyber-cyan text-gray-300 hover:text-white text-xs sm:text-sm font-cyber font-bold transition-all duration-300">
+                                <i class="fa-regular fa-envelope text-cyber-cyan"></i> carolinaartioli@hotmail.com
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-xs sm:text-sm font-cyber font-bold transition-all duration-300 shadow-md">
+                                <i class="fab fa-linkedin"></i> Conectar LinkedIn
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Section ("Deseja ser voluntária?") -->
+    <section id="voluntariado" class="py-20 relative border-t border-cyber-border bg-cyber-card/10 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Volunteer Info and Visuals -->
+                    <div class="lg:col-span-5 space-y-6 text-center lg:text-left">
+                        <span class="font-cyber text-xs text-cyber-magenta tracking-widest uppercase font-bold">Faça Parte da Nossa Squad</span>
+                        <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide text-white leading-tight">
+                            Deseja ser <span class="bg-gradient-to-r from-cyber-magenta to-cyber-purple bg-clip-text text-transparent">Voluntária?</span>
+                        </h2>
+                        
+                        <p class="text-gray-400 text-sm sm:text-base leading-relaxed font-light">
+                            A comunidade Data Delas cresce através da força colaborativa. Se você tem paixão por tecnologia, curadoria de dados, design, marketing digital ou quer moderar grupos de mentoria, nós queremos você na nossa equipe!
+                        </p>
+
+                        <!-- Dynamic quotes of current volunteers -->
+                        <div class="p-4 rounded-xl bg-cyber-card border border-cyber-border italic text-xs text-gray-400 text-left relative">
+                            <span class="absolute -top-3 left-4 bg-cyber-magenta text-white font-cyber px-2 py-0.5 rounded text-[9px]">SQUAD FEEDBACK</span>
+                            "Ser voluntária no Data Delas me permitiu expandir meu networking corporativo, expor minhas conquistas no LinkedIn e, o mais importante, ver vidas de mulheres sendo de fato impactadas."
+                        </div>
+                    </div>
+
+                    <!-- Volunteer Form -->
+                    <div class="lg:col-span-7 bg-cyber-card border border-cyber-border rounded-3xl p-6 sm:p-8 shadow-neon-magenta relative">
+                        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyber-magenta to-cyber-purple"></div>
+                        
+                        <form id="volunteer-form" onsubmit="handleVolunteerSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="flex flex-col gap-1.5">
+                                    <label for="vol-name" class="font-cyber text-[11px] text-cyber-magenta tracking-wider uppercase font-bold">Seu Nome Completo</label>
+                                    <input type="text" id="vol-name" required placeholder="Ex: Maria Souza" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-magenta transition-colors">
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label for="vol-email" class="font-cyber text-[11px] text-cyber-magenta tracking-wider uppercase font-bold">E-mail para Contato</label>
+                                    <input type="email" id="vol-email" required placeholder="Ex: maria@provedor.com" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-magenta transition-colors">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="flex flex-col gap-1.5">
+                                    <label for="vol-linkedin" class="font-cyber text-[11px] text-cyber-magenta tracking-wider uppercase font-bold">Perfil do LinkedIn</label>
+                                    <input type="url" id="vol-linkedin" required placeholder="https://linkedin.com/in/perfil" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-magenta transition-colors">
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label for="vol-area" class="font-cyber text-[11px] text-cyber-magenta tracking-wider uppercase font-bold">Área de Atuação Ideal</label>
+                                    <select id="vol-area" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-magenta transition-colors">
+                                        <option value="moderacao" class="bg-cyber-card">Mentoria e Moderação</option>
+                                        <option value="conteudo" class="bg-cyber-card">Produção de Conteúdo (Copy)</option>
+                                        <option value="design" class="bg-cyber-card">Design Visual e Social Media</option>
+                                        <option value="tecnica" class="bg-cyber-card">Apoio em Aulas e Tech</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-1.5">
+                                <label for="vol-message" class="font-cyber text-[11px] text-cyber-magenta tracking-wider uppercase font-bold">Por que quer fazer parte do Data Delas?</label>
+                                <textarea id="vol-message" rows="3" required placeholder="Conte brevemente sobre seus objetivos..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-magenta transition-colors resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyber-magenta to-cyber-purple text-white font-cyber font-bold uppercase tracking-wider shadow-neon-magenta hover:scale-[1.01] transition-all duration-300 mt-2 text-sm">
+                                Enviar Minha Proposta de Apoio
+                            </button>
+                        </form>
+
+                        <!-- Dynamic Success Feedback Frame -->
+                        <div id="volunteer-success" class="hidden absolute inset-0 bg-cyber-card/95 border border-cyber-magenta rounded-3xl p-8 flex flex-col items-center justify-center text-center backdrop-blur-sm z-30">
+                            <div class="w-16 h-16 rounded-full bg-cyber-magenta/20 text-cyber-magenta flex items-center justify-center text-3xl mb-4 shadow-neon-magenta">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <h3 class="font-cyber text-xl font-bold text-white mb-2">Inscrição Enviada!</h3>
+                            <p class="text-gray-300 text-xs sm:text-sm max-w-sm mb-6 leading-relaxed">
+                                Parabéns! Seus dados foram computados em nossa base. Nossa comissão organizadora ou a própria Carolina entrará em contato em breve.
+                            </p>
+                            <button onclick="resetVolunteerForm()" class="px-6 py-2.5 rounded-xl bg-cyber-bg border border-cyber-border text-gray-300 hover:text-white hover:border-cyber-magenta font-cyber text-xs uppercase tracking-wider transition-all duration-300">
+                                Enviar Outra Resposta
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-cyber-card/60 border-t border-cyber-border relative z-10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+                
+                <!-- Brand section inside footer -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border border-cyber-cyan/50 shadow-neon-cyan">
+                            <img src="image_e59da3.jpg" alt="Data Delas Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/80x80/0f1422/00f2fe?text=DD'">
+                        </div>
+                        <span class="font-cyber text-lg tracking-wider bg-gradient-to-r from-cyber-cyan to-cyber-magenta bg-clip-text text-transparent font-bold">DATA DELAS</span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-sm leading-relaxed">
+                        Apoiando e impulsionando mulheres com segurança, direcionamento estratégico e liderança técnica em todo o ecossistema de dados e tecnologia.
+                    </p>
+                </div>
+
+                <!-- Fast Links Inside Footer -->
+                <div class="md:col-span-3 space-y-4">
+                    <h5 class="font-cyber text-xs tracking-widest text-cyber-cyan uppercase font-bold">Navegação</h5>
+                    <ul class="space-y-2 text-sm text-gray-400 font-tech text-base">
+                        <li><a href="#sobre" class="hover:text-white transition-colors">Objetivos e Missão</a></li>
+                        <li><a href="#voste" class="hover:text-white transition-colors">Voste Academy</a></li>
+                        <li><a href="#eventos" class="hover:text-white transition-colors">Eventos & Gravações</a></li>
+                        <li><a href="#criadora" class="hover:text-white transition-colors">Carolina Artioli</a></li>
+                    </ul>
+                </div>
+
+                <!-- Tech/Social Contacts inside footer -->
+                <div class="md:col-span-4 space-y-4">
+                    <h5 class="font-cyber text-xs tracking-widest text-cyber-magenta uppercase font-bold">Participe e Conecte-se</h5>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://wa.me/5511999999999" target="_blank" class="w-10 h-10 rounded-lg bg-cyber-bg border border-cyber-border flex items-center justify-center text-gray-300 hover:text-emerald-400 hover:border-emerald-500/50 transition-all duration-300 hover:scale-105" aria-label="Canal WhatsApp">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-lg bg-cyber-bg border border-cyber-border flex items-center justify-center text-gray-300 hover:text-blue-400 hover:border-blue-500/50 transition-all duration-300 hover:scale-105" aria-label="LinkedIn Data Delas">
+                            <i class="fab fa-linkedin text-lg"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-lg bg-cyber-bg border border-cyber-border flex items-center justify-center text-gray-300 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300 hover:scale-105" aria-label="Instagram">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="mailto:carolinaartioli@hotmail.com" class="w-10 h-10 rounded-lg bg-cyber-bg border border-cyber-border flex items-center justify-center text-gray-300 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-all duration-300 hover:scale-105" aria-label="Email para contato">
+                            <i class="fa-regular fa-envelope text-lg"></i>
+                        </a>
+                    </div>
+                    <div class="text-xs text-gray-500">
+                        <p>Dúvidas? Entre em contato por e-mail ou DM do LinkedIn.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright bar -->
+            <div class="border-t border-cyber-border pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 Data Delas. Todos os direitos reservados. Design e Tecnologia.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-gray-300 transition-colors">Termos de Uso</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-gray-300 transition-colors">Políticas de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Video Player Modal (Simulates recorded lectures/videos) -->
+    <div id="video-modal" class="hidden fixed inset-0 bg-cyber-bg/95 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-cyber-card border-2 border-cyber-magenta rounded-3xl w-full max-w-3xl overflow-hidden relative shadow-neon-magenta">
+            
+            <!-- Video Frame Header -->
+            <div class="bg-cyber-bg p-4 flex items-center justify-between border-b border-cyber-border">
+                <div class="flex items-center gap-2">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-cyber-magenta animate-pulse"></span>
+                    <h4 id="video-modal-title" class="font-cyber text-sm font-bold text-white tracking-wide truncate max-w-lg">Nome do Evento Gravado</h4>
+                </div>
+                <button onclick="closeVideoModal()" class="text-gray-400 hover:text-white p-1 text-lg" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Simulated Player Screen -->
+            <div class="relative aspect-video bg-black flex flex-col items-center justify-center p-6 text-center group">
+                
+                <!-- Background visual static simulation -->
+                <div class="absolute inset-0 bg-cover bg-center opacity-20 filter blur-sm bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80')]"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-black/30"></div>
+                
+                <!-- Active Content on Player -->
+                <div id="video-screen-content" class="z-10 space-y-6">
+                    <div id="video-loading" class="hidden">
+                        <div class="w-16 h-16 border-4 border-cyber-magenta border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <span class="font-tech text-cyber-magenta tracking-widest text-sm uppercase">Sincronizando stream...</span>
+                    </div>
+
+                    <div id="video-ready" class="space-y-4">
+                        <div class="w-20 h-20 rounded-full bg-cyber-magenta/20 text-cyber-magenta flex items-center justify-center text-3xl mx-auto shadow-neon-magenta hover:scale-110 transition-transform duration-300 cursor-pointer" onclick="simulatePlayState()">
+                            <i id="play-pause-icon" class="fa-solid fa-play ml-1"></i>
+                        </div>
+                        <div class="max-w-md mx-auto">
+                            <p class="font-cyber text-lg font-bold text-white">Pronto para iniciar!</p>
+                            <p id="video-modal-desc" class="text-xs sm:text-sm text-gray-400 mt-2">Clique no play para assistir a gravação integral do encontro oficial.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Player Controls simulation at bottom -->
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent p-4 z-20 flex flex-col gap-2">
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden cursor-pointer" onclick="clickProgressBar(event)">
+                        <div id="video-progress" class="bg-cyber-magenta h-full w-[25%] transition-all duration-300"></div>
+                    </div>
+                    <!-- Controls line -->
+                    <div class="flex items-center justify-between text-xs font-tech text-gray-300">
+                        <div class="flex items-center gap-4">
+                            <button onclick="simulatePlayState()" class="hover:text-white"><i class="fa-solid fa-play"></i></button>
+                            <span id="video-timer">23:14 / 1:45:00</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <button class="hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                            <button class="hover:text-white"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal (For Upcoming Events) -->
+    <div id="registration-modal" class="hidden fixed inset-0 bg-cyber-bg/95 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-cyber-card border-2 border-cyber-cyan rounded-3xl w-full max-w-md overflow-hidden relative shadow-neon-cyan p-6 sm:p-8">
+            <button onclick="closeRegistrationModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+            
+            <span class="font-cyber text-xs text-cyber-cyan tracking-widest uppercase block mb-1">Garantir Vaga</span>
+            <h4 id="reg-modal-title" class="font-cyber text-lg sm:text-xl font-bold text-white mb-6">Nome do Evento Selecionado</h4>
+
+            <form onsubmit="handleRegistrationSubmit(event)" class="space-y-4">
+                <div class="flex flex-col gap-1.5">
+                    <label for="reg-name" class="font-cyber text-[10px] text-cyber-cyan tracking-wider uppercase">Nome Completo</label>
+                    <input type="text" id="reg-name" required placeholder="Digite seu nome" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan transition-colors">
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label for="reg-email" class="font-cyber text-[10px] text-cyber-cyan tracking-wider uppercase">Endereço de E-mail</label>
+                    <input type="email" id="reg-email" required placeholder="nome@exemplo.com" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan transition-colors">
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label for="reg-occupation" class="font-cyber text-[10px] text-cyber-cyan tracking-wider uppercase">Área ou Cargo Atual</label>
+                    <input type="text" id="reg-occupation" placeholder="Ex: Estudante, Desenvolvedora, Analista" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan transition-colors">
+                </div>
+                <div class="flex items-center gap-2 pt-2">
+                    <input type="checkbox" id="reg-terms" required class="accent-cyber-cyan">
+                    <label for="reg-terms" class="text-xs text-gray-400 leading-snug">Autorizo receber lembretes e alertas de transmissão por e-mail e WhatsApp.</label>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-blue-600 text-white font-cyber font-bold uppercase tracking-wider shadow-neon-cyan hover:scale-[1.01] transition-all duration-300 mt-4 text-xs sm:text-sm">
+                    Confirmar Minha Inscrição Gratuita
+                </button>
+            </form>
+
+            <!-- Success Screen on Registration -->
+            <div id="reg-success" class="hidden absolute inset-0 bg-cyber-card p-8 flex flex-col items-center justify-center text-center z-30">
+                <div class="w-16 h-16 rounded-full bg-cyber-cyan/20 text-cyber-cyan flex items-center justify-center text-3xl mb-4 shadow-neon-cyan">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <h4 class="font-cyber text-lg font-bold text-white mb-2">Presença Confirmada!</h4>
+                <p class="text-gray-400 text-xs sm:text-sm mb-6 max-w-xs leading-relaxed">
+                    Você foi inserida em nossa lista de transmissão! O link de acesso será enviado 1 hora antes do início do evento.
+                </p>
+                <button onclick="closeRegistrationModal()" class="px-6 py-2.5 rounded-xl bg-cyber-bg border border-cyber-border text-gray-300 hover:text-white font-cyber text-xs uppercase tracking-wider transition-all">
+                    Fechar Janela
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Alert Box (Avoids native Alerts) -->
+    <div id="alert-box" class="hidden fixed bottom-6 right-6 z-50 bg-cyber-card border-2 border-cyber-cyan rounded-2xl p-4 shadow-neon-cyan max-w-sm flex items-start gap-3 transform translate-y-20 transition-transform duration-300">
+        <div class="w-8 h-8 rounded-full bg-cyber-cyan/20 text-cyber-cyan flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-bell"></i>
+        </div>
+        <div>
+            <h5 id="alert-title" class="font-cyber text-xs font-bold text-white uppercase tracking-wider">Aviso do Sistema</h5>
+            <p id="alert-desc" class="text-xs text-gray-400 mt-1">Simulação completada com êxito.</p>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Event switcher system (Upcoming vs Past)
+        function switchEventsTab(tab) {
+            const btnUpcoming = document.getElementById('tab-upcoming');
+            const btnPast = document.getElementById('tab-past');
+            const panelUpcoming = document.getElementById('events-upcoming-panel');
+            const panelPast = document.getElementById('events-past-panel');
+
+            if (tab === 'upcoming') {
+                btnUpcoming.className = "px-5 py-2.5 rounded-lg font-cyber font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 bg-gradient-to-r from-cyber-cyan to-blue-600 text-white shadow-neon-cyan";
+                btnPast.className = "px-5 py-2.5 rounded-lg font-cyber font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 text-gray-400 hover:text-white";
+                panelUpcoming.classList.remove('hidden');
+                panelPast.classList.add('hidden');
+            } else {
+                btnPast.className = "px-5 py-2.5 rounded-lg font-cyber font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 bg-gradient-to-r from-cyber-magenta to-cyber-purple text-white shadow-neon-magenta";
+                btnUpcoming.className = "px-5 py-2.5 rounded-lg font-cyber font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 text-gray-400 hover:text-white";
+                panelPast.classList.remove('hidden');
+                panelUpcoming.classList.add('hidden');
+            }
+        }
+
+        // Volunteer Form Submission Logic
+        function handleVolunteerSubmit(event) {
+            event.preventDefault();
+            const successFrame = document.getElementById('volunteer-success');
+            successFrame.classList.remove('hidden');
+        }
+
+        function resetVolunteerForm() {
+            document.getElementById('volunteer-form').reset();
+            const successFrame = document.getElementById('volunteer-success');
+            successFrame.classList.add('hidden');
+        }
+
+        // Upcoming Event Registration Modal Logic
+        function openRegistrationModal(eventName) {
+            document.getElementById('reg-modal-title').textContent = eventName;
+            document.getElementById('registration-modal').classList.remove('hidden');
+            document.getElementById('reg-success').classList.add('hidden');
+        }
+
+        function closeRegistrationModal() {
+            document.getElementById('registration-modal').classList.add('hidden');
+        }
+
+        function handleRegistrationSubmit(event) {
+            event.preventDefault();
+            document.getElementById('reg-success').classList.remove('hidden');
+        }
+
+        // Video Player Modal Simulation Logic
+        let isPlaying = false;
+        let progressInterval;
+
+        function playVideo(videoTitle, videoDesc) {
+            document.getElementById('video-modal-title').textContent = videoTitle;
+            document.getElementById('video-modal-desc').textContent = videoDesc;
+            document.getElementById('video-modal').classList.remove('hidden');
+            
+            // Show dynamic connection state loading
+            document.getElementById('video-loading').classList.remove('hidden');
+            document.getElementById('video-ready').classList.add('hidden');
+
+            setTimeout(() => {
+                document.getElementById('video-loading').classList.add('hidden');
+                document.getElementById('video-ready').classList.remove('hidden');
+            }, 1000);
+        }
+
+        function closeVideoModal() {
+            document.getElementById('video-modal').classList.add('hidden');
+            isPlaying = false;
+            clearInterval(progressInterval);
+            const playIcon = document.getElementById('play-pause-icon');
+            playIcon.className = "fa-solid fa-play ml-1";
+        }
+
+        function simulatePlayState() {
+            const playIcon = document.getElementById('play-pause-icon');
+            const pBar = document.getElementById('video-progress');
+            
+            if (!isPlaying) {
+                isPlaying = true;
+                playIcon.className = "fa-solid fa-pause";
+                showCustomAlert("Transmissão Ativa", "Carregando cache cibernético de mídia.");
+
+                // Slowly increment simulated progress bar
+                let currentWidth = parseFloat(pBar.style.width) || 25;
+                progressInterval = setInterval(() => {
+                    if (currentWidth < 100) {
+                        currentWidth += 0.5;
+                        pBar.style.width = currentWidth + "%";
+                        
+                        // update time text
+                        const minutes = Math.floor((currentWidth / 100) * 105);
+                        document.getElementById('video-timer').textContent = `${minutes}:14 / 1:45:00`;
+                    } else {
+                        clearInterval(progressInterval);
+                    }
+                }, 1000);
+            } else {
+                isPlaying = false;
+                playIcon.className = "fa-solid fa-play ml-1";
+                clearInterval(progressInterval);
+            }
+        }
+
+        function clickProgressBar(event) {
+            const rect = event.currentTarget.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const percentage = (clickX / rect.width) * 100;
+            document.getElementById('video-progress').style.width = percentage + "%";
+            
+            const totalSecs = 105 * 60; // 1:45:00 in seconds
+            const currentSecs = Math.floor((percentage / 100) * totalSecs);
+            const mins = Math.floor(currentSecs / 60);
+            const secs = currentSecs % 60;
+            document.getElementById('video-timer').textContent = `${mins}:${secs < 10 ? '0' + secs : secs} / 1:45:00`;
+        }
+
+        // LinkedIn Feed engagement mock reactions
+        function simulateReaction(button) {
+            const thumb = button.querySelector('i');
+            if (thumb.classList.contains('fa-regular')) {
+                thumb.className = "fa-solid fa-thumbs-up";
+                button.className = "py-2 rounded hover:bg-white/5 text-blue-400 flex items-center justify-center gap-1.5 transition-colors text-xs";
+                showCustomAlert("Ação Registrada", "Você curtiu a publicação da comunidade!");
+            } else {
+                thumb.className = "fa-regular fa-thumbs-up";
+                button.className = "py-2 rounded hover:bg-white/5 text-gray-400 hover:text-blue-400 flex items-center justify-center gap-1.5 transition-colors text-xs";
+            }
+        }
+
+        function focusComment(button) {
+            showCustomAlert("Comentários Simulados", "Para comentar de verdade, acesse o canal oficial no LinkedIn!");
+        }
+
+        function simulateShare(button) {
+            showCustomAlert("Apoio Registrado", "Obrigado por ajudar a disseminar a palavra da comunidade!");
+        }
+
+        // Notification Alerts logic instead of alert()
+        let alertTimeout;
+        function showCustomAlert(title, desc) {
+            const alertBox = document.getElementById('alert-box');
+            document.getElementById('alert-title').textContent = title;
+            document.getElementById('alert-desc').textContent = desc;
+
+            alertBox.classList.remove('hidden');
+            // Animate up
+            setTimeout(() => {
+                alertBox.classList.remove('translate-y-20');
+            }, 50);
+
+            clearTimeout(alertTimeout);
+            alertTimeout = setTimeout(() => {
+                alertBox.classList.add('translate-y-20');
+                setTimeout(() => {
+                    alertBox.classList.add('hidden');
+                }, 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
