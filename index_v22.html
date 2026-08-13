@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Delas - Comunidade de Tecnologia e Dados para Mulheres</title>
+    
+    <!-- Favicon: Coração Azul 💙 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💙</text></svg>">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron, Inter & Rajdhani -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#080b11',
+                            card: '#0f1422',
+                            border: '#1f293d',
+                            cyan: '#00f2fe',
+                            magenta: '#ff007f',
+                            purple: '#7000ff',
+                            neonGreen: '#39ff14',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Rajdhani', 'sans-serif'],
+                        cyber: ['Orbitron', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 15px rgba(0, 242, 254, 0.4)',
+                        'neon-magenta': '0 0 15px rgba(255, 0, 127, 0.4)',
+                        'neon-purple': '0 0 20px rgba(112, 0, 255, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Cybernetic Aesthetic -->
+    <style>
+        body {
+            background-color: #080b11;
+            font-family: 'Inter', sans-serif;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Futuristic Grid Overlay */
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+
+        /* Glowing keyframe animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080b11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f2fe;
+        }
+    </style>
+</head>
+<body class="text-gray-100 overflow-x-hidden min-h-screen relative">
+    <!-- Background Grid -->
+    <div class="absolute inset-0 cyber-grid pointer-events-none z-0"></div>
+
+    <header class="sticky top-0 z-50 bg-cyber-bg/80 backdrop-blur-md border-b border-cyber-border/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo Section -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-12 h-12 rounded-full overflow-hidden border border-cyber-cyan/50 shadow-neon-cyan bg-cyber-card">
+                    <img src="logo_data_delas.png" alt="Logo Data Delas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='image_e59da3.png'; this.onerror=function(){this.src='https://placehold.co/100x100/0f1422/00f2fe?text=DD'};">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-cyber text-lg tracking-wider bg-gradient-to-r from-cyber-cyan via-white to-cyber-magenta bg-clip-text text-transparent font-bold">DATA DELAS</span>
+                    <span class="text-[10px] text-cyber-cyan tracking-widest uppercase font-tech">Tech & Data Community</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 font-tech text-lg">
+                <a href="#sobre" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200">Sobre</a>
+                <a href="#parcerias" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200">Parcerias</a>
+                <a href="#vagas" class="text-cyber-cyan hover:text-white font-bold tracking-wide transition-colors duration-200 flex items-center gap-1.5"><i class="fa-solid fa-briefcase text-xs"></i> Vagas</a>
+                <a href="#linkedin" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200">Novidades</a>
+                <a href="#equipe" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200">Liderança</a>
+            </nav>
+
+            <!-- CTA & Mobile Menu Button -->
+            <div class="flex items-center gap-4">
+                <a href="https://chat.whatsapp.com/GAePcMCiRjv5PTwh7STKRH?mode=hqctcla" target="_blank" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-tech font-bold px-5 py-2.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-emerald-500/20 active:scale-95 text-sm uppercase tracking-wider">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                    Comunidade WhatsApp
+                </a>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-cyber-cyan focus:outline-none p-2" aria-label="Menu principal">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-card/95 border-b border-cyber-border/80 px-4 pt-2 pb-6 space-y-3 absolute w-full left-0 transition-all duration-300 backdrop-blur-lg">
+            <a href="#sobre" class="block py-2 text-gray-300 hover:text-cyber-cyan font-tech text-lg transition-colors">Sobre</a>
+            <a href="#parcerias" class="block py-2 text-gray-300 hover:text-cyber-cyan font-tech text-lg transition-colors">Parcerias</a>
+            <a href="#vagas" class="block py-2 text-cyber-cyan font-tech text-lg font-bold transition-colors">Vagas Tech & Dados</a>
+            <a href="#linkedin" class="block py-2 text-gray-300 hover:text-cyber-cyan font-tech text-lg transition-colors">Novidades</a>
+            <a href="#equipe" class="block py-2 text-gray-300 hover:text-cyber-cyan font-tech text-lg transition-colors">Liderança</a>
+            <hr class="border-cyber-border">
+            <a href="https://chat.whatsapp.com/GAePcMCiRjv5PTwh7STKRH?mode=hqctcla" target="_blank" class="flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-tech font-bold py-3 rounded-lg w-full text-center tracking-wide uppercase">
+                <i class="fab fa-whatsapp text-lg"></i>
+                Comunidade WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <section class="relative pt-12 pb-24 md:py-32 overflow-hidden z-10">
+        <!-- Floating Neon Orbs in Background -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 rounded-full bg-cyber-purple/10 blur-[100px] animate-pulse-slow"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-cyber-cyan/10 blur-[120px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Info -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyber-purple/20 border border-cyber-purple/50 text-xs sm:text-sm text-cyber-cyan font-tech uppercase tracking-widest mx-auto lg:mx-0">
+                        <i class="fa-solid fa-circle-nodes text-cyber-magenta animate-pulse"></i> Conectando Mulheres em Tech & Dados
+                    </div>
+
+                    <h1 class="font-cyber text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                        Enxergue o seu valor em <span class="bg-gradient-to-r from-cyber-cyan via-purple-400 to-cyber-magenta bg-clip-text text-transparent">Dados e Tecnologia</span>
+                    </h1>
+
+                    <p class="text-gray-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        A comunidade <strong class="text-white font-semibold">Data Delas</strong> foi criada com um propósito audacioso: ajudar mulheres a quebrarem barreiras, dominarem as ferramentas do futuro e alcançarem o protagonismo nas carreiras de dados e tecnologia.
+                    </p>
+
+                    <!-- Interactive Tech Grid Callouts -->
+                    <div class="grid grid-cols-2 gap-4 pt-4 max-w-md mx-auto lg:mx-0">
+                        <div class="p-4 rounded-xl bg-cyber-card/40 border border-cyber-border hover:border-cyber-cyan/40 transition-all duration-300">
+                            <span class="block font-cyber text-2xl font-bold text-cyber-cyan">150+</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider">Mulheres Conectadas</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-cyber-card/40 border border-cyber-border hover:border-cyber-magenta/40 transition-all duration-300">
+                            <span class="block font-cyber text-2xl font-bold text-cyber-magenta">100%</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider">Foco Feminino</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6 justify-center lg:justify-start">
+                        <a href="https://chat.whatsapp.com/GAePcMCiRjv5PTwh7STKRH?mode=hqctcla" target="_blank" class="px-8 py-4 rounded-xl bg-gradient-to-r from-cyber-purple to-cyber-magenta text-white font-cyber font-bold uppercase tracking-wider shadow-neon-purple hover:scale-[1.02] transition-all duration-300 text-center text-sm">
+                            Entrar no Grupo WhatsApp <i class="fa-solid fa-arrow-trend-up ml-1"></i>
+                        </a>
+                        <a href="#vagas" class="px-8 py-4 rounded-xl bg-cyber-card border border-cyber-border hover:border-cyber-cyan text-gray-300 hover:text-white font-cyber font-bold uppercase tracking-wider hover:scale-[1.02] transition-all duration-300 text-center text-sm shadow-sm hover:shadow-neon-cyan/20">
+                            Ver Mural de Vagas
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Cyber Logo -->
+                <div class="lg:col-span-5 flex justify-center items-center relative">
+                    <div class="absolute w-72 sm:w-80 h-72 sm:h-80 rounded-full bg-gradient-to-tr from-cyber-cyan to-cyber-magenta opacity-30 blur-[40px] animate-pulse"></div>
+                    
+                    <div class="relative w-72 sm:w-96 h-72 sm:h-96 rounded-2xl overflow-hidden border-2 border-cyber-cyan/30 shadow-neon-cyan p-1 bg-cyber-card/80 animate-float">
+                        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-magenta"></div>
+                        <img src="logo_data_delas.png" alt="Logo Data Delas" class="w-full h-full object-cover rounded-xl" onerror="this.src='image_e59da3.png'; this.onerror=function(){this.src='https://placehold.co/500x500/0f1422/00f2fe?text=DATA+DELAS'};">
+                        
+                        <!-- HUD Scan Lines Elements -->
+                        <div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,_rgba(0,0,0,0.25)_50%),_linear-gradient(90deg,_rgba(255,0,0,0.06),_rgba(0,255,0,0.02),_rgba(0,0,255,0.06))] bg-[size:100%_4px,_6px_100%] pointer-events-none opacity-40"></div>
+                        <div class="absolute bottom-4 left-4 bg-cyber-bg/90 border border-cyber-cyan/50 px-3 py-1.5 rounded text-[10px] font-cyber text-cyber-cyan tracking-wider">
+                            <span class="inline-block w-2 h-2 rounded-full bg-cyber-cyan animate-ping mr-2"></span>SYS.STATUS: ONLINE
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-20 relative border-t border-cyber-border bg-cyber-card/20 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide mb-4">
+                    Nossa <span class="bg-gradient-to-r from-cyber-cyan to-cyber-purple bg-clip-text text-transparent">Missão</span>
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-cyber-cyan to-cyber-magenta mx-auto rounded"></div>
+                <p class="text-gray-400 mt-6 text-base sm:text-lg">
+                    Construindo conexões seguras e oportunidades sólidas para impulsionar a diversidade de gênero nas posições de tomada de decisão.
+                </p>
+            </div>
+
+            <!-- Goal Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="relative group p-8 rounded-2xl bg-cyber-card border border-cyber-border hover:border-cyber-purple/50 transition-all duration-300 shadow-lg hover:-translate-y-2">
+                    <div class="absolute -top-6 left-8 w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-purple to-pink-600 flex items-center justify-center text-white text-xl shadow-neon-purple">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="font-cyber text-xl font-bold mt-4 mb-3 text-white group-hover:text-cyber-purple transition-colors">Networking Exclusivo</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Uma ponte segura e dinâmica entre profissionais da área de dados, de iniciantes a gerentes seniores, promovendo trocas reais de mentoria e carreira.
+                    </p>
+                </div>
+
+                <div class="relative group p-8 rounded-2xl bg-cyber-card border border-cyber-border hover:border-cyber-magenta/50 transition-all duration-300 shadow-lg hover:-translate-y-2">
+                    <div class="absolute -top-6 left-8 w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-magenta to-red-500 flex items-center justify-center text-white text-xl shadow-neon-magenta">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="font-cyber text-xl font-bold mt-4 mb-3 text-white group-hover:text-cyber-magenta transition-colors">Aceleração de Carreira</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Desmistificar cargos de tecnologia, capacitar mulheres para transições de carreira de sucesso e destacar a importância do desenvolvimento de liderança feminina.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="parcerias" class="py-20 relative bg-gradient-to-b from-cyber-bg to-cyber-card/40 border-t border-cyber-border z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-cyber-card border-2 border-cyber-purple/30 rounded-3xl p-8 md:p-12 shadow-neon-purple relative overflow-hidden">
+                <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-cyber-cyan/10 blur-[60px] pointer-events-none"></div>
+                <div class="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-cyber-magenta/10 blur-[60px] pointer-events-none"></div>
+
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyber-cyan/50 text-xs text-cyber-cyan font-tech uppercase tracking-widest mb-3">
+                        <span class="inline-block w-2 h-2 rounded-full bg-cyber-cyan animate-pulse"></span> Ecossistema de Parcerias
+                    </div>
+                    <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide text-white">
+                        Alianças <span class="bg-gradient-to-r from-cyber-cyan to-cyber-magenta bg-clip-text text-transparent">Estratégicas</span>
+                    </h2>
+                    <p class="text-gray-400 text-xs sm:text-sm mt-3">Conectando a comunidade Data Delas às melhores instituições de ensino e desenvolvimento corporativo.</p>
+                </div>
+
+                <div class="max-w-3xl mx-auto bg-cyber-bg/90 border border-cyber-border rounded-2xl p-6 sm:p-10 shadow-inner flex flex-col items-center justify-center text-center relative">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 my-4 w-full">
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-24 h-24 rounded-full bg-cyber-card border-2 border-cyber-cyan p-1 shadow-neon-cyan overflow-hidden">
+                                <img src="logo_data_delas.png" alt="Data Delas Logo" class="w-full h-full object-cover rounded-full" onerror="this.src='image_e59da3.png'; this.onerror=function(){this.src='https://placehold.co/100x100/0f1422/00f2fe?text=DD'};">
+                            </div>
+                            <span class="font-tech text-sm text-gray-300 font-bold uppercase tracking-widest">Data Delas</span>
+                        </div>
+
+                        <div class="text-cyber-magenta text-2xl animate-pulse flex items-center justify-center">
+                            <i class="fa-solid fa-link"></i>
+                        </div>
+
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-24 h-24 rounded-full bg-cyber-card border-2 border-cyber-magenta p-1 shadow-neon-magenta overflow-hidden">
+                                <img src="vostge.png" alt="Logo Parceria Voste" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/100x100/0f1422/ff007f?text=VOSTE'">
+                            </div>
+                            <span class="font-tech text-sm text-gray-300 font-bold uppercase tracking-widest">Voste Academy</span>
+                        </div>
+                    </div>
+
+                    <div class="w-full max-w-md mt-6 pt-6 border-t border-cyber-border/80 flex flex-col items-center">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-purple/20 border border-cyber-purple/60 text-cyber-cyan font-tech text-xs uppercase tracking-widest mb-3 animate-pulse">
+                            <i class="fa-solid fa-spinner animate-spin text-cyber-magenta"></i> STATUS: LOADING / NOVAS TURMAS EM BREVE
+                        </div>
+                        <p class="text-gray-400 text-xs leading-relaxed max-w-sm">
+                            No momento não há turmas ou cupons ativos para esta parceria. Fique atenta ao nosso grupo no WhatsApp para o lançamento do próximo ciclo de formações!
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="vagas" class="py-20 relative border-t border-cyber-border bg-cyber-card/30 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-xs text-emerald-400 font-tech uppercase tracking-widest mb-2">
+                        <i class="fa-solid fa-shield-halved text-cyber-neonGreen"></i> Curadoria por Carolina Artioli & Squad
+                    </div>
+                    <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide text-white">
+                        Mural de <span class="bg-gradient-to-r from-cyber-cyan via-emerald-400 to-cyber-neonGreen bg-clip-text text-transparent">Vagas em Tech & Dados</span>
+                    </h2>
+                    <p class="text-gray-400 mt-2 text-sm">Oportunidades selecionadas para conectar talentos da comunidade a times de alta performance.</p>
+                </div>
+                
+                <div class="flex flex-wrap gap-3 self-start md:self-auto">
+                    <button onclick="openEncouragementModal()" class="px-5 py-3 rounded-xl bg-cyber-purple/30 border border-cyber-magenta/60 hover:bg-cyber-purple/50 text-white font-cyber text-xs uppercase tracking-wider transition-all duration-300 shadow-neon-magenta flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-cyber-cyan text-sm animate-pulse"></i> Na dúvida se deve se candidatar?
+                    </button>
+                </div>
+            </div>
+
+            <!-- Banner Motivacional de Apoio para Mulheres -->
+            <div class="mb-10 bg-gradient-to-r from-cyber-card via-cyber-purple/20 to-cyber-card border border-cyber-purple/40 rounded-2xl p-6 sm:p-8 relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6 shadow-neon-purple">
+                <div class="space-y-2 text-center sm:text-left">
+                    <span class="font-cyber text-xs text-cyber-cyan uppercase tracking-widest"><i class="fa-solid fa-heart text-cyber-magenta mr-1"></i> Impulso de Carreira Data Delas</span>
+                    <h3 class="font-cyber text-xl font-bold text-white">Você não precisa preencher 100% dos requisitos para tentar!</h3>
+                    <p class="text-gray-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
+                        Sabia que mulheres costumam se candidatar apenas quando atendem a todos os requisitos, enquanto homens aplicam com 60%? Seus projetos, bagagem e vontade de aprender valem muito!
+                    </p>
+                </div>
+                <button onclick="openEncouragementModal()" class="px-6 py-3 rounded-xl bg-cyber-magenta text-white font-cyber font-bold text-xs uppercase tracking-wider hover:bg-pink-600 transition-all shadow-md whitespace-nowrap">
+                    Entenda como se destacar <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+
+            <!-- Dynamic Job Listings Grid (Populated via JS) -->
+            <div id="jobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Content Injected via JavaScript below -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION LINKEDIN -->
+    <section id="linkedin" class="py-20 relative bg-cyber-card/10 border-t border-cyber-border z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide mb-4">
+                    Conexões no <span class="bg-gradient-to-r from-blue-400 to-cyber-cyan bg-clip-text text-transparent">LinkedIn</span>
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-cyber-cyan mx-auto rounded"></div>
+                <p class="text-gray-400 mt-6 text-sm sm:text-base mb-6">
+                    Confira as nossas publicações mais recentes e acompanhe os bastidores do Data Delas.
+                </p>
+
+                <!-- BOTÃO EM DESTAQUE PARA O LINKEDIN OFICIAL -->
+                <a href="https://www.linkedin.com/company/data-delas/" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyber-cyan hover:from-blue-500 hover:to-cyber-cyan text-white font-cyber font-bold text-xs uppercase tracking-wider shadow-neon-cyan transition-all transform hover:scale-105">
+                    <i class="fa-brands fa-linkedin text-lg"></i> Seguir Data Delas no LinkedIn <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
+                </a>
+            </div>
+
+            <!-- CONTAINER DOS EMBEDS LINKEDIN -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
+                
+                <!-- Embed 1 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl p-3 shadow-lg flex flex-col items-center justify-center overflow-hidden">
+                    <div class="w-full text-xs text-gray-400 mb-2 flex justify-between items-center px-2">
+                        <span class="font-tech text-cyber-cyan"><i class="fa-brands fa-linkedin"></i> Post Oficial</span>
+                        <a href="https://www.linkedin.com/company/data-delas/" target="_blank" class="hover:underline text-[10px]">Data Delas <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="w-full flex justify-center bg-cyber-bg/80 rounded-xl p-1 border border-cyber-border/60 overflow-hidden min-h-[480px]">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7486237640959131648" class="w-full h-[520px] rounded-lg" frameborder="0" allowfullscreen="" title="Publicação incorporada"></iframe>
+                    </div>
+                </div>
+
+                <!-- Embed 2 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl p-3 shadow-lg flex flex-col items-center justify-center overflow-hidden">
+                    <div class="w-full text-xs text-gray-400 mb-2 flex justify-between items-center px-2">
+                        <span class="font-tech text-cyber-cyan"><i class="fa-brands fa-linkedin"></i> Destaque da Comunidade</span>
+                        <a href="https://www.linkedin.com/company/data-delas/" target="_blank" class="hover:underline text-[10px]">Data Delas <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="w-full flex justify-center bg-cyber-bg/80 rounded-xl p-1 border border-cyber-border/60 overflow-hidden min-h-[480px]">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7485888027505123328" class="w-full h-[520px] rounded-lg" frameborder="0" allowfullscreen="" title="Publicação incorporada"></iframe>
+                    </div>
+                </div>
+
+                <!-- Embed 3 -->
+                <div class="bg-cyber-card border border-cyber-border rounded-2xl p-3 shadow-lg flex flex-col items-center justify-center overflow-hidden">
+                    <div class="w-full text-xs text-gray-400 mb-2 flex justify-between items-center px-2">
+                        <span class="font-tech text-cyber-cyan"><i class="fa-brands fa-linkedin"></i> Novidades & Eventos</span>
+                        <a href="https://www.linkedin.com/company/data-delas/" target="_blank" class="hover:underline text-[10px]">Data Delas <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="w-full flex justify-center bg-cyber-bg/80 rounded-xl p-1 border border-cyber-border/60 overflow-hidden min-h-[480px]">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7485466385565794304?collapsed=1" class="w-full h-[520px] rounded-lg" frameborder="0" allowfullscreen="" title="Publicação incorporada"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="equipe" class="py-20 relative border-t border-cyber-border bg-gradient-to-t from-cyber-bg to-cyber-card/30 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="font-cyber text-xs text-cyber-cyan tracking-widest uppercase">Propósito & Impacto</span>
+                <h2 class="font-cyber text-3xl sm:text-4xl font-extrabold tracking-wide mt-2 text-white">
+                    Liderança & <span class="bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-magenta bg-clip-text text-transparent">Organização</span>
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-cyber-cyan to-cyber-magenta mx-auto rounded mt-3"></div>
+                <p class="text-gray-400 mt-4 text-sm sm:text-base">
+                    Mulheres especialistas em operações, estratégia e dados liderando o movimento Data Delas.
+                </p>
+            </div>
+
+            <!-- Profile Cards Grid -->
+            <div class="space-y-12 max-w-5xl mx-auto">
+                
+                <!-- Main Founder Card: Carolina Artioli -->
+                <div class="bg-cyber-card/80 border border-cyber-border rounded-3xl p-6 sm:p-10 shadow-neon-purple relative overflow-hidden backdrop-blur-md hover:border-cyber-cyan/50 transition-all duration-300">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                        <div class="md:col-span-4 flex justify-center relative">
+                            <div class="absolute inset-0 bg-gradient-to-br from-cyber-cyan to-cyber-magenta opacity-30 rounded-2xl blur-[15px]"></div>
+                            
+                            <div class="relative w-full max-w-[260px] aspect-square rounded-2xl overflow-hidden border-2 border-cyber-cyan/50 shadow-neon-cyan p-1 bg-cyber-card">
+                                <img src="image_e5a0e4.jpg" alt="Carolina Artioli - Fundadora do Data Delas" class="w-full h-full object-cover rounded-xl" onerror="this.src='https://placehold.co/400x400/0f1422/ff007f?text=Carolina+Artioli'">
+                                
+                                <div class="absolute bottom-3 left-3 right-3 bg-cyber-bg/95 border border-cyber-border rounded-lg p-2 text-center backdrop-blur-sm">
+                                    <span class="block font-cyber text-xs font-bold text-cyber-cyan">CAROLINA ARTIOLI</span>
+                                    <span class="block text-[9px] text-gray-400 font-tech tracking-wider uppercase mt-0.5">Fundadora & Gerente de Operações</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-8 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <div>
+                                    <h3 class="font-cyber text-2xl font-bold text-white">Carolina Artioli</h3>
+                                    <p class="text-cyber-magenta font-tech font-bold text-sm tracking-wider uppercase">Gerente de Operações - Marketplace na 99</p>
+                                </div>
+                                <a href="mailto:carolinaartioli@hotmail.com" class="px-3 py-1.5 rounded-lg bg-cyber-bg border border-cyber-cyan/40 text-cyber-cyan text-xs font-tech hover:bg-cyber-cyan hover:text-cyber-bg transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-envelope"></i> Contato
+                                </a>
+                            </div>
+
+                            <p class="text-gray-300 text-xs sm:text-sm leading-relaxed font-light">
+                                Profissional com mais de 12 anos de experiência em operações, gestão de processos, CX e produtos digitais. Com histórico de liderar operações complexas em startups e multinacionais, une visão estratégica à execução operacional orientada a dados para impulsionar a diversidade na tecnologia.
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-2 pt-2">
+                                <div class="bg-cyber-bg/60 p-2.5 rounded-lg border border-cyber-border/60">
+                                    <span class="block text-white font-tech text-xs font-bold"><i class="fa-solid fa-diagram-project text-cyber-cyan mr-1"></i> Gestão de Operações</span>
+                                    <span class="text-[10px] text-gray-400">Eficiência, redução de custos & compliance</span>
+                                </div>
+                                <div class="bg-cyber-bg/60 p-2.5 rounded-lg border border-cyber-border/60">
+                                    <span class="block text-white font-tech text-xs font-bold"><i class="fa-solid fa-chart-line text-cyber-magenta mr-1"></i> Produtos & CX</span>
+                                    <span class="text-[10px] text-gray-400">Discovery, dashboards & jornadas B2B/B2C</span>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Operações</span>
+                                <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Transformação Digital</span>
+                                <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Power BI</span>
+                                <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">CX / CS</span>
+                                <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Liderança</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Secondary Team Grid: Camila Matias & Aira Ferreira -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-cyber-card/80 border border-cyber-border rounded-3xl p-6 shadow-lg hover:border-cyber-cyan/50 transition-all duration-300 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyber-cyan to-blue-600 p-0.5 shadow-neon-cyan flex-shrink-0 overflow-hidden">
+                                    <div class="w-full h-full bg-cyber-card rounded-[14px] flex items-center justify-center text-cyber-cyan font-cyber text-xl font-bold">
+                                        CM
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-cyber text-lg font-bold text-white">Camila Matias</h4>
+                                    <p class="text-cyber-cyan font-tech text-xs uppercase font-semibold">Organização & Recursos Humanos</p>
+                                </div>
+                            </div>
+
+                            <p class="text-gray-300 text-xs leading-relaxed">
+                                Profissional da área de Recursos Humanos focada na aplicação prática de habilidades técnicas em Ciência de Dados. Atua com mentalidade orientada à resolução de problemas complexos e suporte contínuo à tomada de decisão baseada em evidências.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-cyber-border/80 flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Recursos Humanos</span>
+                            <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Ciência de Dados</span>
+                            <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Data-Driven</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-cyber-card/80 border border-cyber-border rounded-3xl p-6 shadow-lg hover:border-cyber-purple/50 transition-all duration-300 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyber-purple to-cyber-magenta p-0.5 shadow-neon-purple flex-shrink-0 overflow-hidden">
+                                    <div class="w-full h-full bg-cyber-card rounded-[14px] flex items-center justify-center text-cyber-magenta font-cyber text-xl font-bold">
+                                        AF
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-cyber text-lg font-bold text-white">Aira Ferreira</h4>
+                                    <p class="text-cyber-magenta font-tech text-xs uppercase font-semibold">Analista de Dados • MBA ESALQ/USP</p>
+                                </div>
+                            </div>
+
+                            <p class="text-gray-300 text-xs leading-relaxed">
+                                Cursando MBA em Data Science & Analytics pela ESALQ/USP, une visão operacional e capacidade analítica. Possui mais de 6 anos de vivência prática na área da saúde (UTI, telemonitoramento e coordenação de equipes), especializando-se em auditoria automatizada, qualidade de dados e construção de dashboards gerenciais.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-cyber-border/80 flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">SQL</span>
+                            <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Python</span>
+                            <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Power BI</span>
+                            <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">Auditoria de Dados</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-cyber-bg border-t border-cyber-border pt-16 pb-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-cyber-border/80">
+                
+                <!-- Col 1: Brand -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border border-cyber-cyan/50">
+                            <img src="logo_data_delas.png" alt="Logo Data Delas" class="w-full h-full object-cover" onerror="this.src='image_e59da3.png'; this.onerror=function(){this.src='https://placehold.co/100x100/0f1422/00f2fe?text=DD'};">
+                        </div>
+                        <span class="font-cyber text-lg tracking-wider text-white font-bold">DATA DELAS</span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed max-w-sm">
+                        Capacitando e impulsionando mulheres nas áreas de Tecnologia, Análise de Dados e Inteligência Artificial para posições de destaque no mercado.
+                    </p>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="md:col-span-3 space-y-3 font-tech">
+                    <h4 class="text-white text-sm font-bold uppercase tracking-wider">Navegação</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="#sobre" class="hover:text-cyber-cyan transition-colors">Sobre Nós</a></li>
+                        <li><a href="#parcerias" class="hover:text-cyber-cyan transition-colors">Parcerias Estratégicas</a></li>
+                        <li><a href="#vagas" class="hover:text-cyber-cyan transition-colors">Mural de Vagas</a></li>
+                        <li><a href="#equipe" class="hover:text-cyber-cyan transition-colors">Liderança & Squad</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Socials & Contact -->
+                <div class="md:col-span-4 space-y-3 font-tech">
+                    <h4 class="text-white text-sm font-bold uppercase tracking-wider">Conecte-se</h4>
+                    <p class="text-xs text-gray-400">Faça parte da nossa rede no WhatsApp e siga o Data Delas no LinkedIn.</p>
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <a href="https://chat.whatsapp.com/GAePcMCiRjv5PTwh7STKRH?mode=hqctcla" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-emerald-600/20 border border-emerald-500/50 text-emerald-400 text-xs font-bold uppercase tracking-wider hover:bg-emerald-600 hover:text-white transition-all">
+                            <i class="fab fa-whatsapp text-sm"></i> WhatsApp
+                        </a>
+                        <a href="https://www.linkedin.com/company/data-delas/" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-blue-600/20 border border-blue-500/50 text-blue-400 text-xs font-bold uppercase tracking-wider hover:bg-blue-600 hover:text-white transition-all">
+                            <i class="fab fa-linkedin text-sm"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 font-tech">
+                <p>&copy; 2026 Data Delas - Comunidade de Tecnologia e Dados. Todos os direitos reservados.</p>
+                
+                <div class="flex items-center gap-3 mt-2 sm:mt-0">
+                    <p>Desenvolvido com 💙 para Mulheres em Tech</p>
+                    
+                    <!-- Botão Staff Discreto sem Texto -->
+                    <button onclick="requestStaffAccess()" title="Acesso Restrito" class="text-gray-700 hover:text-cyber-cyan transition-colors p-1" aria-label="Painel Staff">
+                        <i class="fa-solid fa-lock text-[11px]"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: "Estou na dúvida se devo me candidatar" (Incentivo e Empoderamento) -->
+    <div id="encouragementModal" class="fixed inset-0 bg-cyber-bg/90 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div class="bg-cyber-card border-2 border-cyber-magenta/80 rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-neon-magenta max-h-[90vh] overflow-y-auto">
+            <button onclick="closeEncouragementModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyber-magenta to-cyber-purple flex items-center justify-center text-white text-2xl shadow-neon-magenta">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <div>
+                    <span class="font-cyber text-xs text-cyber-cyan uppercase tracking-widest">Confiança & Carreira Feminina</span>
+                    <h3 class="font-cyber text-2xl font-bold text-white">Você é mais capaz do que imagina! 💡</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+                <p>
+                    Estudos mostram que <strong class="text-white">mulheres costumam se candidatar apenas quando preenchem 100% dos requisitos</strong> de uma vaga, enquanto homens aplicam preenchendo cerca de 60%.
+                </p>
+                <p>
+                    Aqui vão algumas dicas da nossa equipe para você perder o receio:
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-gray-400 pl-2">
+                    <li><strong class="text-cyber-cyan">Projetos valem muito:</strong> Projetos pessoais, acadêmicos ou voluntários mostram sua capacidade técnica na prática.</li>
+                    <li><strong class="text-cyber-cyan">Habilidades transferíveis:</strong> Experiências em outras áreas (atendimento, saúde, RH) trazem bagagem valiosa de resolução de problemas e comunicação.</li>
+                    <li><strong class="text-cyber-cyan">Vontade de aprender:</strong> Nenhuma empresa espera que você saiba tudo no primeiro dia. O mais importante é sua capacidade de aprender e evoluir!</li>
+                </ul>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-cyber-border flex justify-end">
+                <button onclick="closeEncouragementModal()" class="px-6 py-2.5 rounded-xl bg-cyber-purple/30 border border-cyber-purple/60 text-cyber-cyan font-cyber font-bold text-xs uppercase hover:bg-cyber-purple/50 transition-all">
+                    Entendi, vou me candidatar! 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE LOGIN DA STAFF -->
+    <div id="staffLoginModal" class="fixed inset-0 bg-cyber-bg/95 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div class="bg-cyber-card border-2 border-cyber-purple rounded-3xl max-w-md w-full p-6 sm:p-8 relative shadow-neon-purple">
+            <button onclick="closeStaffLoginModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6 space-y-2">
+                <div class="w-14 h-14 rounded-2xl bg-cyber-purple/20 border border-cyber-purple/80 flex items-center justify-center text-cyber-magenta text-2xl mx-auto shadow-neon-magenta">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="font-cyber text-xl font-bold text-white">Acesso Restrito Staff</h3>
+                <p class="text-gray-400 text-xs font-tech">Digite a chave de acesso da liderança Data Delas para gerenciar e publicar vagas.</p>
+            </div>
+
+            <form onsubmit="handleStaffLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-gray-300 font-tech text-xs uppercase mb-1">Chave de Acesso / Senha</label>
+                    <div class="relative">
+                        <input type="password" id="staff-access-key" required placeholder="••••••••••••" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-white focus:border-cyber-cyan focus:outline-none text-sm pr-10">
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-3.5 text-gray-400 hover:text-cyber-cyan text-xs">
+                            <i id="eye-icon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <p id="login-error-msg" class="text-red-400 text-[11px] font-tech mt-1.5 hidden flex items-center gap-1">
+                        <i class="fa-solid fa-circle-exclamation"></i> Chave de acesso incorreta. Tente novamente.
+                    </p>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyber-purple to-cyber-magenta font-cyber text-white font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity shadow-neon-magenta">
+                    Entrar no Painel <i class="fa-solid fa-arrow-right-to-bracket ml-1"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL STAFF (CADASTRO E EXCLUSÃO DE VAGAS) -->
+    <div id="staffModal" class="fixed inset-0 bg-cyber-bg/90 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div class="bg-cyber-card border-2 border-cyber-cyan rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-neon-cyan max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-cyber-cyan/20 border border-cyber-cyan flex items-center justify-center text-cyber-cyan">
+                        <i class="fa-solid fa-user-shield text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-cyber text-[10px] text-cyber-cyan uppercase tracking-widest">Painel Autenticado</span>
+                        <h3 class="font-cyber text-xl font-bold text-white">Gerenciar Vagas (Staff)</h3>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="logoutStaff()" title="Sair da sessão Staff" class="text-xs bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 text-red-300 px-2.5 py-1.5 rounded-lg font-tech transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-right-from-bracket"></i> Sair
+                    </button>
+                    <button onclick="closeStaffModal()" class="text-gray-400 hover:text-white text-xl p-1">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORMULÁRIO DE NOVA VAGA -->
+            <form onsubmit="handleStaffJobSubmit(event)" class="space-y-4 text-xs font-tech border-b border-cyber-border pb-6 mb-6">
+                <h4 class="font-cyber text-sm text-cyber-cyan font-bold uppercase tracking-wider"><i class="fa-solid fa-plus-circle mr-1"></i> Cadastrar Nova Vaga</h4>
+                
+                <div>
+                    <label class="block text-gray-300 uppercase mb-1">Nome da Vaga / Cargo *</label>
+                    <input type="text" id="staff-job-title" required placeholder="Ex: Analista de Dados Sr / Analytics Engineer" class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3.5 py-2.5 text-white focus:border-cyber-cyan focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-gray-300 uppercase mb-1">Empresa *</label>
+                        <input type="text" id="staff-job-company" required placeholder="Ex: Empresa Parceira / Fintech" class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3.5 py-2.5 text-white focus:border-cyber-cyan focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 uppercase mb-1">Senioridade *</label>
+                        <select id="staff-job-seniority" class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3.5 py-2.5 text-white focus:border-cyber-cyan focus:outline-none">
+                            <option value="Júnior">Júnior</option>
+                            <option value="Pleno">Pleno</option>
+                            <option value="Sênior">Sênior</option>
+                            <option value="Liderança / Coordenação">Liderança / Coordenação</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-gray-300 uppercase mb-1">Modelo de Trabalho *</label>
+                        <select id="staff-job-model" onchange="toggleCityInput()" class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3.5 py-2.5 text-white focus:border-cyber-cyan focus:outline-none">
+                            <option value="Remoto">Remoto</option>
+                            <option value="Híbrido">Híbrido</option>
+                            <option value="Presencial">Presencial</option>
+                        </select>
+                    </div>
+                    <div id="city-input-container" class="hidden">
+                        <label class="block text-gray-300 uppercase mb-1">Cidade / Estado</label>
+                        <input type="text" id="staff-job-city" placeholder="Ex: São Paulo / SP" class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3.5 py-2.5 text-white focus:border-cyber-cyan focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 uppercase mb-1">Skills Técnicas (separadas por vírgula) *</label>
+                    <input type="text" id="staff-job-skills" required placeholder="Ex: SQL, Python, Power BI, dbt, Excel" class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3.5 py-2.5 text-white focus:border-cyber-cyan focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 uppercase mb-1">Link para Candidatura (URL) *</label>
+                    <input type="url" id="staff-job-link" required placeholder="https://linkedin.com/jobs/... ou https://chat.whatsapp.com/..." class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3.5 py-2.5 text-white focus:border-cyber-cyan focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 uppercase mb-1">Resumo / Requisitos da Vaga</label>
+                    <textarea id="staff-job-desc" rows="2" placeholder="Breve descrição dos desafios e atribuições da oportunidade..." class="w-full bg-cyber-bg border border-cyber-border rounded-lg px-3.5 py-2.5 text-white focus:border-cyber-cyan focus:outline-none"></textarea>
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyber-cyan to-emerald-500 font-cyber text-cyber-bg font-bold uppercase tracking-wider hover:opacity-90 transition-opacity">
+                        Publicar Nova Vaga <i class="fa-solid fa-check-circle ml-1"></i>
+                    </button>
+                </div>
+            </form>
+
+            <!-- GERENCIADOR / LISTA DE VAGAS PARA EXCLUSÃO -->
+            <div class="space-y-3 font-tech text-xs">
+                <h4 class="font-cyber text-sm text-cyber-magenta font-bold uppercase tracking-wider flex items-center justify-between">
+                    <span><i class="fa-solid fa-trash-can mr-1"></i> Vagas Ativas no Mural</span>
+                    <span id="staff-job-count" class="text-xs font-normal text-gray-400"></span>
+                </h4>
+                
+                <div id="staffJobsList" class="space-y-2 max-h-60 overflow-y-auto pr-1">
+                    <!-- Lista injetada via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // =========================================================================
+        // AUTENTICAÇÃO STAFF DIRETA E INFALÍVEL
+        // =========================================================================
+        const TARGET_PASS = "datadelas2026";
+
+        function requestStaffAccess() {
+            const isAuthenticated = sessionStorage.getItem('data_delas_staff_auth') === 'true';
+            if (isAuthenticated) {
+                openStaffModal();
+            } else {
+                openStaffLoginModal();
+            }
+        }
+
+        function openStaffLoginModal() {
+            document.getElementById('login-error-msg').classList.add('hidden');
+            document.getElementById('staff-access-key').value = '';
+            document.getElementById('staffLoginModal').classList.remove('hidden');
+            document.getElementById('staffLoginModal').classList.add('flex');
+        }
+
+        function closeStaffLoginModal() {
+            document.getElementById('staffLoginModal').classList.add('hidden');
+            document.getElementById('staffLoginModal').classList.remove('flex');
+        }
+
+        function togglePasswordVisibility() {
+            const input = document.getElementById('staff-access-key');
+            const icon = document.getElementById('eye-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fa-solid fa-eye';
+            }
+        }
+
+        function handleStaffLogin(e) {
+            e.preventDefault();
+            const inputKey = document.getElementById('staff-access-key').value.trim().toLowerCase();
+
+            if (inputKey === TARGET_PASS) {
+                sessionStorage.setItem('data_delas_staff_auth', 'true');
+                closeStaffLoginModal();
+                openStaffModal();
+            } else {
+                document.getElementById('login-error-msg').classList.remove('hidden');
+            }
+        }
+
+        function logoutStaff() {
+            sessionStorage.removeItem('data_delas_staff_auth');
+            closeStaffModal();
+            alert('Você saiu da sessão da Staff.');
+        }
+
+        // Initial Default Jobs Array
+        const initialJobs = [
+            {
+                id: '1',
+                title: 'Analista de Dados Pleno / Senior',
+                company: 'Empresa Parceira • Tecnologia / Fintech',
+                model: 'Remoto',
+                city: '',
+                seniority: 'Pleno / Sênior',
+                skills: ['SQL', 'Power BI', 'Python', 'CLT'],
+                link: 'https://chat.whatsapp.com/GAePcMCiRjv5PTwh7STKRH?mode=hqctcla',
+                description: 'Atuação direta na construção de dashboards em Power BI, consultas avançadas em SQL, análise de KPIs de produto e relacionamento com stakeholders de negócios.'
+            },
+            {
+                id: '2',
+                title: 'Analytics Engineer Jr / Pleno',
+                company: 'Startup de E-Commerce & Logística',
+                model: 'Híbrido',
+                city: 'São Paulo - SP',
+                seniority: 'Júnior / Pleno',
+                skills: ['dbt', 'Snowflake', 'SQL', 'BigQuery'],
+                link: 'https://chat.whatsapp.com/GAePcMCiRjv5PTwh7STKRH?mode=hqctcla',
+                description: 'Responsável por modelagem de dados usando dbt, manutenção de pipelines de dados no Snowflake/BigQuery e suporte técnico à equipe de BI.'
+            },
+            {
+                id: '3',
+                title: 'Coordenadora de Operações & CX',
+                company: 'Empresa em Rápido Crescimento',
+                model: 'Remoto',
+                city: '',
+                seniority: 'Liderança',
+                skills: ['Operações', 'NPS', 'Liderança', 'CS'],
+                link: 'https://chat.whatsapp.com/GAePcMCiRjv5PTwh7STKRH?mode=hqctcla',
+                description: 'Liderança de time de atendimento e experiência do cliente, análise de métricas de NPS, retenção e otimização contínua de fluxos operacionais.'
+            }
+        ];
+
+        function getJobs() {
+            const savedJobs = localStorage.getItem('data_delas_jobs');
+            if (savedJobs) {
+                try {
+                    return JSON.parse(savedJobs);
+                } catch(e) {
+                    return initialJobs;
+                }
+            }
+            return initialJobs;
+        }
+
+        // Render Jobs in Main Grid
+        function renderJobs() {
+            const jobsGrid = document.getElementById('jobsGrid');
+            const jobs = getJobs();
+            
+            if (jobs.length === 0) {
+                jobsGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-cyber-card border border-cyber-border rounded-2xl">
+                        <p class="text-gray-400 font-tech text-base">Nenhuma vaga cadastrada no momento.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            jobsGrid.innerHTML = jobs.map(job => {
+                const locationText = job.model === 'Remoto' ? 'Full Remote' : `${job.model} (${job.city || 'Brasil'})`;
+                const skillTags = job.skills.map(s => `<span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">${s.trim()}</span>`).join(' ');
+
+                return `
+                    <div class="bg-cyber-card border border-cyber-border rounded-2xl p-6 hover:border-cyber-cyan/60 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-2.5 py-1 rounded-md bg-cyber-bg border border-cyber-cyan/30 text-[10px] text-cyber-cyan font-tech font-bold uppercase tracking-wider">
+                                    ${locationText}
+                                </span>
+                                <span class="text-[10px] text-gray-400 font-tech">${job.seniority}</span>
+                            </div>
+
+                            <h3 class="font-cyber text-lg font-bold text-white group-hover:text-cyber-cyan transition-colors mb-1">
+                                ${job.title}
+                            </h3>
+                            <p class="text-cyber-magenta font-tech font-semibold text-xs mb-3">${job.company}</p>
+
+                            <p class="text-gray-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                                ${job.description}
+                            </p>
+
+                            <div class="flex flex-wrap gap-1.5 mb-6">
+                                ${skillTags}
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-cyber-border/80 flex flex-col gap-2">
+                            <button onclick="openEncouragementModal()" class="w-full py-1.5 rounded-lg bg-cyber-purple/20 hover:bg-cyber-purple/40 border border-cyber-purple/50 text-cyber-cyan text-[11px] font-tech flex items-center justify-center gap-1.5 transition-colors">
+                                <i class="fa-solid fa-lightbulb text-cyber-magenta"></i> Dúvida se deve aplicar? Clique aqui
+                            </button>
+                            <div class="flex items-center justify-between mt-1">
+                                <span class="text-[11px] text-cyber-neonGreen font-tech"><i class="fa-solid fa-check-double mr-1"></i>Vaga Verificada</span>
+                                <a href="${job.link}" target="_blank" class="px-4 py-2 rounded-lg bg-cyber-bg border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-cyber-bg font-cyber text-xs uppercase font-bold tracking-wider transition-all duration-300">
+                                    Candidatar-se
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render List of Jobs inside Staff Management Modal (for Deleting)
+        function renderStaffJobsList() {
+            const listContainer = document.getElementById('staffJobsList');
+            const countSpan = document.getElementById('staff-job-count');
+            const jobs = getJobs();
+
+            countSpan.textContent = `(${jobs.length} vagas)`;
+
+            if (jobs.length === 0) {
+                listContainer.innerHTML = `<p class="text-gray-500 italic text-[11px]">Nenhuma vaga para exibir.</p>`;
+                return;
+            }
+
+            listContainer.innerHTML = jobs.map(job => `
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-cyber-bg border border-cyber-border hover:border-cyber-purple/50 transition-colors">
+                    <div class="overflow-hidden pr-2">
+                        <span class="block text-white font-semibold truncate text-xs">${job.title}</span>
+                        <span class="block text-[10px] text-gray-400 truncate">${job.company} • ${job.model}</span>
+                    </div>
+                    <button onclick="deleteJob('${job.id}')" title="Excluir vaga" class="px-2.5 py-1 rounded bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 text-red-300 text-[11px] font-tech transition-colors flex items-center gap-1 flex-shrink-0">
+                        <i class="fa-solid fa-trash-can text-[10px]"></i> Excluir
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Delete Job Function
+        function deleteJob(id) {
+            if (confirm('Tem certeza que deseja excluir esta vaga do Mural?')) {
+                let jobs = getJobs();
+                jobs = jobs.filter(j => j.id.toString() !== id.toString());
+                localStorage.setItem('data_delas_jobs', JSON.stringify(jobs));
+                
+                renderJobs();
+                renderStaffJobsList();
+            }
+        }
+
+        function toggleCityInput() {
+            const model = document.getElementById('staff-job-model').value;
+            const container = document.getElementById('city-input-container');
+            if (model === 'Híbrido' || model === 'Presencial') {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        function handleStaffJobSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('staff-job-title').value;
+            const company = document.getElementById('staff-job-company').value;
+            const seniority = document.getElementById('staff-job-seniority').value;
+            const model = document.getElementById('staff-job-model').value;
+            const city = document.getElementById('staff-job-city').value;
+            const rawSkills = document.getElementById('staff-job-skills').value;
+            const link = document.getElementById('staff-job-link').value;
+            const description = document.getElementById('staff-job-desc').value;
+
+            const skills = rawSkills.split(',').map(s => s.trim()).filter(s => s.length > 0);
+
+            const newJob = {
+                id: Date.now().toString(),
+                title,
+                company,
+                model,
+                city,
+                seniority,
+                skills: skills.length > 0 ? skills : ['Tech', 'Dados'],
+                link,
+                description: description || 'Oportunidade adicionada via curadoria da equipe do Data Delas.'
+            };
+
+            const jobs = getJobs();
+            jobs.unshift(newJob);
+            localStorage.setItem('data_delas_jobs', JSON.stringify(jobs));
+
+            // Reseta o formulário
+            e.target.reset();
+
+            renderJobs();
+            renderStaffJobsList();
+            alert('🎉 Vaga publicada com sucesso no Mural do Data Delas!');
+        }
+
+        // Staff Modal Controls
+        function openStaffModal() {
+            renderStaffJobsList();
+            document.getElementById('staffModal').classList.remove('hidden');
+            document.getElementById('staffModal').classList.add('flex');
+        }
+        function closeStaffModal() {
+            document.getElementById('staffModal').classList.add('hidden');
+            document.getElementById('staffModal').classList.remove('flex');
+        }
+
+        // Encouragement Modal Controls
+        function openEncouragementModal() {
+            document.getElementById('encouragementModal').classList.remove('hidden');
+            document.getElementById('encouragementModal').classList.add('flex');
+        }
+        function closeEncouragementModal() {
+            document.getElementById('encouragementModal').classList.add('hidden');
+            document.getElementById('encouragementModal').classList.remove('flex');
+        }
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderJobs();
+        });
+    </script>
+</body>
+</html>
