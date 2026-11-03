@@ -884,7 +884,12 @@
 
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 font-tech">
                 <p>&copy; 2026 Data Delas - Comunidade de Tecnologia e Dados. Todos os direitos reservados.</p>
-                <p class="mt-2 sm:mt-0">Desenvolvido com 💙 para Mulheres em Tech por Amanda Veloso (github.com/amandaveloso)</p>
+                <div class="flex items-center gap-3 mt-2 sm:mt-0">
+                    <p>Desenvolvido com 💙 para Mulheres em Tech por Amanda Veloso (github.com/amandaveloso)</p>
+                    <button onclick="requestStaffAccess()" title="Area Restrita" class="text-gray-700 hover:text-cyber-cyan transition-colors p-1.5 rounded-md hover:bg-cyber-card/60" aria-label="Area Logada">
+                        <i class="fa-solid fa-lock text-[11px]"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </footer>
@@ -1028,6 +1033,134 @@
                 const text = activeBlock.querySelector('.toggle-text-target');
                 if (icon) icon.className = isCollapsed ? 'fa-solid fa-chevron-down text-cyber-cyan toggle-icon-target' : 'fa-solid fa-chevron-up text-cyber-magenta toggle-icon-target';
                 if (text) text.textContent = isCollapsed ? 'Expandir' : 'Recolher';
+            }
+        }
+    </script>
+    <!-- MODAL DE LOGIN (CADEADO DISCRETO -> AREA LOGADA) -->
+    <div id="staffLoginModal" class="fixed inset-0 bg-cyber-bg/95 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div class="bg-cyber-card border-2 border-cyber-purple rounded-3xl max-w-md w-full p-6 sm:p-8 relative shadow-neon-purple">
+            <button onclick="closeStaffLoginModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6 space-y-2">
+                <div class="w-14 h-14 rounded-2xl bg-cyber-purple/20 border border-cyber-purple/80 flex items-center justify-center text-cyber-cyan text-2xl mx-auto shadow-neon-cyan">
+                    <i class="fa-solid fa-lock-open"></i>
+                </div>
+                <span class="font-cyber text-[10px] text-cyber-cyan uppercase tracking-widest">Acesso Restrito &bull; Data Delas</span>
+                <h3 class="font-cyber text-xl font-bold text-white">&Aacute;rea Logada &amp; Mentor IA</h3>
+                <p class="text-gray-400 text-xs font-tech">Digite sua chave de acesso para entrar no Radar Inteligente de Vagas &amp; Mentoria de Carreira.</p>
+            </div>
+
+            <form onsubmit="handleStaffLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-gray-300 font-tech text-xs uppercase mb-1">Seu Nome (Opcional)</label>
+                    <input type="text" id="staff-user-name" placeholder="Ex: Amanda / Carolina" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white focus:border-cyber-cyan focus:outline-none text-sm mb-3">
+
+                    <label class="block text-gray-300 font-tech text-xs uppercase mb-1">Chave de Acesso *</label>
+                    <div class="relative">
+                        <input type="password" id="staff-access-key" required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-white focus:border-cyber-cyan focus:outline-none text-sm pr-10">
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-3.5 text-gray-400 hover:text-cyber-cyan text-xs">
+                            <i id="eye-icon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <p id="login-error-msg" class="text-red-400 text-[11px] font-tech mt-1.5 hidden items-center gap-1">
+                        <i class="fa-solid fa-circle-exclamation"></i> <span id="login-error-text">Chave incorreta. Tente novamente.</span>
+                    </p>
+                </div>
+
+                <button id="login-submit-btn" type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-magenta font-cyber text-white font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity shadow-neon-purple flex items-center justify-center gap-2">
+                    <span>Entrar na &Aacute;rea Logada</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function requestStaffAccess() {
+            const token = localStorage.getItem('dd_auth_token');
+            if (token) {
+                try {
+                    const res = await fetch('/api/auth', {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    if (res.ok) {
+                        window.location.href = '/portal';
+                        return;
+                    }
+                } catch (e) {}
+            }
+            openStaffLoginModal();
+        }
+
+        function openStaffLoginModal() {
+            const errEl = document.getElementById('login-error-msg');
+            errEl.classList.add('hidden');
+            errEl.classList.remove('flex');
+            document.getElementById('staff-access-key').value = '';
+            document.getElementById('staffLoginModal').classList.remove('hidden');
+            document.getElementById('staffLoginModal').classList.add('flex');
+        }
+
+        function closeStaffLoginModal() {
+            document.getElementById('staffLoginModal').classList.add('hidden');
+            document.getElementById('staffLoginModal').classList.remove('flex');
+        }
+
+        function togglePasswordVisibility() {
+            const input = document.getElementById('staff-access-key');
+            const icon = document.getElementById('eye-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fa-solid fa-eye';
+            }
+        }
+
+        async function handleStaffLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('staff-access-key').value.trim();
+            const name = document.getElementById('staff-user-name').value.trim();
+            const submitBtn = document.getElementById('login-submit-btn');
+            const errEl = document.getElementById('login-error-msg');
+            const errText = document.getElementById('login-error-text');
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i> Autenticando...';
+            errEl.classList.add('hidden');
+
+            try {
+                const res = await fetch('/api/auth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password, name })
+                });
+                const data = await res.json();
+
+                if (!res.ok || !data.authenticated) {
+                    errText.textContent = data.error || 'Chave incorreta. Tente novamente.';
+                    errEl.classList.remove('hidden');
+                    errEl.classList.add('flex');
+                    return;
+                }
+
+                localStorage.setItem('dd_auth_token', data.token);
+                localStorage.setItem('dd_auth_role', data.role);
+                localStorage.setItem('dd_capabilities', JSON.stringify(data.capabilities || {}));
+                if (name) {
+                    localStorage.setItem('dd_user_name', name);
+                }
+
+                window.location.href = '/portal';
+            } catch (err) {
+                errText.textContent = 'Erro de conexao com o servidor. Tente novamente.';
+                errEl.classList.remove('hidden');
+                errEl.classList.add('flex');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Entrar na &Aacute;rea Logada</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>';
             }
         }
     </script>

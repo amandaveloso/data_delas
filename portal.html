@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Logada • Mentor de Carreira & Radar de Vagas | Data Delas</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💙</text></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#080b11',
+                            card: '#0f1422',
+                            border: '#1f293d',
+                            cyan: '#00f2fe',
+                            magenta: '#ff007f',
+                            purple: '#7000ff',
+                            neonGreen: '#39ff14',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Rajdhani', 'sans-serif'],
+                        cyber: ['Orbitron', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 15px rgba(0, 242, 254, 0.35)',
+                        'neon-magenta': '0 0 15px rgba(255, 0, 127, 0.35)',
+                        'neon-purple': '0 0 20px rgba(112, 0, 255, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #080b11;
+            font-family: 'Inter', sans-serif;
+            background-image:
+                radial-gradient(circle at 12% 18%, rgba(112, 0, 255, 0.09) 0%, transparent 40%),
+                radial-gradient(circle at 88% 82%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+        ::-webkit-scrollbar { width: 7px; height: 7px; }
+        ::-webkit-scrollbar-track { background: #080b11; }
+        ::-webkit-scrollbar-thumb { background: #1f293d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f2fe; }
+
+        /* Estilização rica das mensagens do Mentor IA */
+        .mentor-prose p { margin-bottom: 0.7rem; line-height: 1.65; }
+        .mentor-prose p:last-child { margin-bottom: 0; }
+        .mentor-prose strong { color: #ffffff; font-weight: 700; }
+        .mentor-prose h1, .mentor-prose h2, .mentor-prose h3, .mentor-prose h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00f2fe;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+        }
+        .mentor-prose ul, .mentor-prose ol {
+            margin: 0.5rem 0 0.85rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .mentor-prose ul { list-style-type: disc; }
+        .mentor-prose ol { list-style-type: decimal; }
+        .mentor-prose li::marker { color: #ff007f; font-weight: bold; }
+        .mentor-prose a {
+            color: #00f2fe;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            word-break: break-word;
+        }
+        .mentor-prose hr {
+            border-color: #1f293d;
+            margin: 0.9rem 0;
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen relative overflow-x-hidden">
+    <div class="fixed inset-0 cyber-grid pointer-events-none z-0"></div>
+
+    <!-- TOAST DE NOTIFICAÇÃO EM TEMPO REAL -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- TELA DE LOGIN DIRETO (CASO ACESSE /portal PELO LINK ENVIADO À FOUNDER) -->
+    <div id="authGate" class="fixed inset-0 bg-cyber-bg/95 backdrop-blur-xl z-50 flex items-center justify-center p-4">
+        <div class="bg-cyber-card border-2 border-cyber-purple/80 rounded-3xl max-w-md w-full p-7 sm:p-9 shadow-neon-purple relative">
+            <div class="text-center space-y-2 mb-6">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyber-cyan/20 to-cyber-purple/30 border border-cyber-cyan/60 flex items-center justify-center text-cyber-cyan text-2xl mx-auto shadow-neon-cyan">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <span class="font-cyber text-[10px] text-cyber-cyan uppercase tracking-widest block pt-1">Produto Exclusivo • Data Delas</span>
+                <h1 class="font-cyber text-2xl font-bold text-white">Radar & Mentor de Carreira</h1>
+                <p class="text-gray-400 text-xs font-tech leading-relaxed">
+                    Área restrita para administradoras, founder e futuras assinantes do Radar Inteligente de Vagas.
+                </p>
+            </div>
+
+            <form onsubmit="handleGateLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-gray-300 font-tech text-xs uppercase mb-1">Seu Nome (Opcional p/ personalizar)</label>
+                    <input type="text" id="gate-name" placeholder="Ex: Amanda / Carolina Artioli" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white focus:border-cyber-cyan focus:outline-none text-sm">
+                </div>
+                <div>
+                    <label class="block text-gray-300 font-tech text-xs uppercase mb-1">Chave de Acesso *</label>
+                    <div class="relative">
+                        <input type="password" id="gate-password" required placeholder="••••••••••••" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-white focus:border-cyber-cyan focus:outline-none text-sm pr-10">
+                        <button type="button" onclick="toggleGatePass()" class="absolute right-3 top-3.5 text-gray-400 hover:text-cyber-cyan text-xs">
+                            <i id="gate-eye" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <p id="gate-error" class="hidden text-red-400 text-xs font-tech mt-2 items-center gap-1.5">
+                        <i class="fa-solid fa-circle-exclamation"></i> <span id="gate-error-text">Chave inválida.</span>
+                    </p>
+                </div>
+
+                <button id="gate-submit-btn" type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-magenta font-cyber text-white font-bold text-xs uppercase tracking-wider shadow-neon-cyan hover:opacity-95 transition-all flex items-center justify-center gap-2">
+                    <span>Entrar na Área Logada</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="mt-6 pt-4 border-t border-cyber-border text-center">
+                <a href="index.html" class="text-xs font-tech text-gray-400 hover:text-cyber-cyan transition-colors">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Voltar para o Portal Público Data Delas
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL DA ÁREA LOGADA -->
+    <div id="portalApp" class="hidden relative z-10 min-h-screen flex flex-col">
+
+        <!-- BARRA DE STATUS ADMIN (VISÍVEL APENAS PARA ADMS / FOUNDER) -->
+        <div id="adminTopBar" class="hidden bg-cyber-purple/15 border-b border-cyber-purple/40 px-4 py-2 text-xs font-tech">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyber-purple/30 border border-cyber-purple/60 text-cyber-cyan font-bold uppercase tracking-wider text-[10px]">
+                        <i class="fa-solid fa-crown text-cyber-magenta"></i> Modo Staff / Founder
+                    </span>
+                    <span id="statusGeminiBadge" class="inline-flex items-center gap-1 text-[11px] text-gray-300">
+                        <i class="fa-solid fa-circle-notch animate-spin text-cyber-cyan"></i> Verificando Google API...
+                    </span>
+                    <span id="statusEmailBadge" class="inline-flex items-center gap-1 text-[11px] text-gray-400"></span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="togglePreviewAsSubscriber()" id="previewModeBtn" class="px-2.5 py-1 rounded-md bg-cyber-card border border-cyber-border hover:border-cyber-cyan text-gray-300 hover:text-white transition-colors text-[11px]">
+                        <i class="fa-solid fa-eye mr-1 text-cyber-cyan"></i> Simular Visão Cliente Final
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTÃO FLUTUANTE P/ SAIR DO MODO SIMULAÇÃO CLIENTE -->
+        <button id="exitSubscriberPreviewBtn" onclick="togglePreviewAsSubscriber()" class="hidden fixed bottom-4 left-4 z-40 px-3.5 py-2 rounded-xl bg-cyber-purple/90 border border-cyber-cyan text-white font-tech text-xs shadow-neon-purple flex items-center gap-2">
+            <i class="fa-solid fa-eye-slash text-cyber-cyan"></i> Visão Assinante Ativa • Voltar ao Modo Admin
+        </button>
+
+        <!-- HEADER DA ÁREA LOGADA -->
+        <header class="sticky top-0 z-40 bg-cyber-bg/85 backdrop-blur-md border-b border-cyber-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" title="Voltar ao site público" class="relative w-10 h-10 rounded-full overflow-hidden border border-cyber-cyan/50 shadow-neon-cyan bg-cyber-card flex-shrink-0">
+                        <img src="logo_data_delas.png" alt="Data Delas" class="w-full h-full object-cover" onerror="this.src='image_e59da3.png'; this.onerror=function(){this.src='https://placehold.co/100x100/0f1422/00f2fe?text=DD'};">
+                    </a>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-cyber text-sm sm:text-base font-bold bg-gradient-to-r from-cyber-cyan via-white to-cyber-magenta bg-clip-text text-transparent">DATA DELAS</span>
+                            <span class="px-2 py-0.5 rounded bg-cyber-cyan/15 border border-cyber-cyan/40 text-[9px] font-cyber text-cyber-cyan uppercase tracking-wider">Radar PRO</span>
+                        </div>
+                        <p id="welcomeUserText" class="text-[11px] text-gray-400 font-tech">Área Exclusiva • Mapeamento & Busca Inteligente de Vagas</p>
+                    </div>
+                </div>
+
+                <!-- NAVEGAÇÃO DE ABAS DO PRODUTO -->
+                <nav class="hidden lg:flex items-center gap-2 bg-cyber-card/90 p-1.5 rounded-xl border border-cyber-border font-tech text-sm">
+                    <button onclick="switchTab('mentor')" id="nav-mentor" class="tab-btn px-4 py-2 rounded-lg font-bold transition-all flex items-center gap-2 bg-gradient-to-r from-cyber-cyan/20 to-cyber-purple/30 text-cyber-cyan border border-cyber-cyan/40">
+                        <i class="fa-solid fa-comments"></i> 1. Mentor IA (Diagnóstico)
+                    </button>
+                    <button onclick="switchTab('radar')" id="nav-radar" class="tab-btn px-4 py-2 rounded-lg font-bold transition-all flex items-center gap-2 text-gray-400 hover:text-white border border-transparent">
+                        <i class="fa-solid fa-compass"></i> 2. Vagas & Empresas
+                        <span id="radarJobsCountBadge" class="px-1.5 py-0.2 rounded-full bg-cyber-bg border border-cyber-border text-[10px] text-cyber-cyan">0</span>
+                    </button>
+                    <button onclick="switchTab('alerts')" id="nav-alerts" class="tab-btn px-4 py-2 rounded-lg font-bold transition-all flex items-center gap-2 text-gray-400 hover:text-white border border-transparent">
+                        <i class="fa-solid fa-envelope-open-text"></i> 3. Frequência & E-mail
+                    </button>
+                </nav>
+
+                <!-- SINO DE ALERTAS + SAIR -->
+                <div class="flex items-center gap-2.5">
+                    <button onclick="openAlertsDrawer()" class="relative p-2.5 rounded-xl bg-cyber-card border border-cyber-border hover:border-cyber-cyan text-gray-300 hover:text-cyber-cyan transition-colors" title="Alertas de Novas Vagas">
+                        <i class="fa-solid fa-bell text-sm"></i>
+                        <span id="unreadBellBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-cyber-magenta text-white font-cyber text-[9px] font-bold items-center justify-center shadow-neon-magenta">0</span>
+                    </button>
+
+                    <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cyber-card border border-cyber-border hover:border-cyber-cyan text-xs font-tech text-gray-300 hover:text-white transition-colors">
+                        <i class="fa-solid fa-globe text-cyber-cyan"></i> Ver Portal
+                    </a>
+
+                    <button onclick="logoutPortal()" title="Encerrar sessão" class="px-3 py-2 rounded-xl bg-red-500/15 hover:bg-red-500/30 border border-red-500/40 text-red-300 text-xs font-tech transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden sm:inline">Sair</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- NAVEGAÇÃO MOBILE -->
+            <div class="lg:hidden grid grid-cols-3 gap-1 px-3 pb-2.5 font-tech text-xs">
+                <button onclick="switchTab('mentor')" id="mnav-mentor" class="py-2 rounded-lg font-bold text-center bg-cyber-cyan/15 text-cyber-cyan border border-cyber-cyan/40">
+                    1. Mentor IA
+                </button>
+                <button onclick="switchTab('radar')" id="mnav-radar" class="py-2 rounded-lg font-bold text-center bg-cyber-card text-gray-400 border border-cyber-border">
+                    2. Vagas & Match
+                </button>
+                <button onclick="switchTab('alerts')" id="mnav-alerts" class="py-2 rounded-lg font-bold text-center bg-cyber-card text-gray-400 border border-cyber-border">
+                    3. Frequência
+                </button>
+            </div>
+        </header>
+
+        <!-- AVISO CASO GEMINI_API_KEY AINDA NÃO ESTEJA CONFIGURADA NA VERCEL -->
+        <div id="missingKeyBanner" class="hidden max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4">
+            <div class="bg-amber-950/60 border border-amber-400/50 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                <div class="space-y-1">
+                    <strong class="text-amber-300 font-cyber uppercase tracking-wider block">
+                        <i class="fa-solid fa-key mr-1"></i> Falta conectar sua GEMINI_API_KEY na Vercel
+                    </strong>
+                    <p class="text-amber-100/90 leading-relaxed">
+                        Para manter sua chave 100% secreta, adicione a variável <code class="bg-black/40 px-1.5 py-0.5 rounded text-cyber-cyan">GEMINI_API_KEY</code> no painel da Vercel em <strong>Settings &rarr; Environment Variables</strong> e faça um Redeploy.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTEÚDO DAS ABAS -->
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+            <!-- =================================================================== -->
+            <!-- ABA 1: MENTOR ESPECIALISTA IA (CONVERSA GUIADA EM 2 ETAPAS)          -->
+            <!-- =================================================================== -->
+            <section id="tab-mentor" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                <!-- COLUNA DO CHAT (8 COLUNAS) -->
+                <div class="lg:col-span-8 bg-cyber-card/90 border border-cyber-border rounded-3xl shadow-neon-purple flex flex-col h-[76vh] min-h-[540px] overflow-hidden">
+                    <!-- Cabeçalho do Chat -->
+                    <div class="px-5 py-4 bg-cyber-bg/70 border-b border-cyber-border flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyber-cyan to-cyber-purple p-0.5 shadow-neon-cyan">
+                                <div class="w-full h-full bg-cyber-card rounded-[14px] flex items-center justify-center text-cyber-cyan text-lg">
+                                    <i class="fa-solid fa-user-astronaut"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h2 class="font-cyber text-sm sm:text-base font-bold text-white">Mentora Especialista de Carreira</h2>
+                                    <span class="inline-flex items-center gap-1 text-[10px] font-tech text-cyber-neonGreen">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-cyber-neonGreen animate-ping"></span> Online
+                                    </span>
+                                </div>
+                                <p id="stageSubtitle" class="text-[11px] text-cyber-cyan font-tech uppercase tracking-wider">
+                                    Etapa 1 de 2 • Investigação Guiada em Blocos (2 a 3 perguntas por vez)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <button onclick="resetDiagnosisConversation()" title="Começar um novo mapeamento do zero" class="px-3 py-1.5 rounded-lg bg-cyber-card border border-cyber-border hover:border-cyber-magenta text-gray-300 hover:text-white text-xs font-tech transition-colors flex items-center gap-1.5">
+                                <i class="fa-solid fa-rotate-right text-cyber-magenta"></i> Reiniciar Perfil
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mensagens do Chat -->
+                    <div id="chatMessages" class="flex-1 overflow-y-auto p-5 space-y-5">
+                        <!-- Injetado via JS -->
+                    </div>
+
+                    <!-- Banner de Conclusão Etapa 2 -> Indexar Vagas -->
+                    <div id="readyForRadarBanner" class="hidden mx-4 mb-3 p-4 rounded-2xl bg-gradient-to-r from-cyber-cyan/15 via-cyber-purple/25 to-cyber-magenta/20 border border-cyber-cyan/60 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-neon-cyan">
+                        <div class="text-xs space-y-0.5 text-center sm:text-left">
+                            <strong class="font-cyber text-cyber-cyan uppercase tracking-wider block">
+                                <i class="fa-solid fa-sparkles mr-1"></i> Diagnóstico Completo! Empresas & Vagas Mapeadas
+                            </strong>
+                            <p class="text-gray-200">Transforme este diagnóstico no seu Radar automático, indexe as vagas no portal e escolha sua frequência de e-mail.</p>
+                        </div>
+                        <button onclick="extractAndActivateRadar()" id="extractRadarBtn" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-emerald-400 text-cyber-bg font-cyber font-extrabold text-xs uppercase tracking-wider whitespace-nowrap hover:scale-[1.02] transition-all">
+                            Ativar Meu Radar & Indexar <i class="fa-solid fa-bolt ml-1"></i>
+                        </button>
+                    </div>
+
+                    <!-- Caixa de Entrada -->
+                    <form onsubmit="handleChatSubmit(event)" class="p-4 bg-cyber-bg/85 border-t border-cyber-border">
+                        <div class="flex items-end gap-3">
+                            <textarea
+                                id="chatInput"
+                                rows="2"
+                                placeholder="Responda às perguntas do bloco com tranquilidade... (Enter envia, Shift+Enter quebra linha)"
+                                onkeydown="handleChatKeydown(event)"
+                                class="flex-1 bg-cyber-card border border-cyber-border rounded-2xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-cyber-cyan focus:outline-none resize-none"
+                            ></textarea>
+                            <button
+                                id="chatSendBtn"
+                                type="submit"
+                                class="px-5 py-3.5 rounded-2xl bg-gradient-to-r from-cyber-cyan to-cyber-purple text-cyber-bg font-cyber font-extrabold text-xs uppercase tracking-wider shadow-neon-cyan hover:opacity-95 transition-all flex items-center gap-2 flex-shrink-0"
+                            >
+                                <span class="hidden sm:inline">Enviar</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- COLUNA LATERAL: DIAGNÓSTICO DOS 5 PILARES (4 COLUNAS) -->
+                <div class="lg:col-span-4 space-y-5">
+                    <div class="bg-cyber-card/90 border border-cyber-border rounded-3xl p-6 space-y-5">
+                        <div>
+                            <span class="font-cyber text-[10px] text-cyber-magenta uppercase tracking-widest">Metodologia Data Delas</span>
+                            <h3 class="font-cyber text-lg font-bold text-white mt-0.5">Mapa dos 5 Pilares</h3>
+                            <p class="text-xs text-gray-400 mt-1 leading-relaxed">
+                                A mentora conduz de 8 a 15 perguntas em blocos leves de 2 a 3 perguntas até cobrir todos os pilares do seu momento profissional.
+                            </p>
+                        </div>
+
+                        <!-- Barra de Etapas -->
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <div id="stepIndicator1" class="p-3 rounded-xl bg-cyber-cyan/15 border border-cyber-cyan/60 text-xs">
+                                <span class="font-cyber text-[10px] text-cyber-cyan block font-bold">ETAPA 1</span>
+                                <span class="font-tech text-white font-semibold">Investigação em Blocos</span>
+                            </div>
+                            <div id="stepIndicator2" class="p-3 rounded-xl bg-cyber-bg/60 border border-cyber-border text-xs opacity-60">
+                                <span class="font-cyber text-[10px] text-gray-400 block font-bold">ETAPA 2</span>
+                                <span class="font-tech text-gray-300 font-semibold">10-20 Empresas & Vagas</span>
+                            </div>
+                        </div>
+
+                        <!-- Lista dos 5 Pilares -->
+                        <div class="space-y-2.5" id="pillarsChecklist">
+                            <div data-pillar="1" class="pillar-item flex items-start gap-3 p-3 rounded-xl bg-cyber-bg/70 border border-cyber-border transition-all">
+                                <div class="pillar-icon w-6 h-6 rounded-lg bg-cyber-border text-gray-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
+                                <div>
+                                    <span class="block text-xs font-bold text-white">Valores no Trabalho</span>
+                                    <span class="block text-[11px] text-gray-400">Autonomia, flexibilidade, diversidade, transparência</span>
+                                </div>
+                            </div>
+                            <div data-pillar="2" class="pillar-item flex items-start gap-3 p-3 rounded-xl bg-cyber-bg/70 border border-cyber-border transition-all">
+                                <div class="pillar-icon w-6 h-6 rounded-lg bg-cyber-border text-gray-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
+                                <div>
+                                    <span class="block text-xs font-bold text-white">Atuações e Responsabilidades</span>
+                                    <span class="block text-[11px] text-gray-400">Desafios diários onde você mais brilha e entrega</span>
+                                </div>
+                            </div>
+                            <div data-pillar="3" class="pillar-item flex items-start gap-3 p-3 rounded-xl bg-cyber-bg/70 border border-cyber-border transition-all">
+                                <div class="pillar-icon w-6 h-6 rounded-lg bg-cyber-border text-gray-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
+                                <div>
+                                    <span class="block text-xs font-bold text-white">Ferramentas e Tecnologias</span>
+                                    <span class="block text-[11px] text-gray-400">Stack atual e tecnologias que deseja dominar</span>
+                                </div>
+                            </div>
+                            <div data-pillar="4" class="pillar-item flex items-start gap-3 p-3 rounded-xl bg-cyber-bg/70 border border-cyber-border transition-all">
+                                <div class="pillar-icon w-6 h-6 rounded-lg bg-cyber-border text-gray-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
+                                <div>
+                                    <span class="block text-xs font-bold text-white">Perfil da Empresa</span>
+                                    <span class="block text-[11px] text-gray-400">Cultura, porte, liderança e modelo de trabalho</span>
+                                </div>
+                            </div>
+                            <div data-pillar="5" class="pillar-item flex items-start gap-3 p-3 rounded-xl bg-cyber-bg/70 border border-cyber-border transition-all">
+                                <div class="pillar-icon w-6 h-6 rounded-lg bg-cyber-border text-gray-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</div>
+                                <div>
+                                    <span class="block text-xs font-bold text-white">Impacto na Sociedade</span>
+                                    <span class="block text-[11px] text-gray-400">Propósito, setor e causas que movem você</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-cyber-border space-y-2">
+                            <button onclick="extractAndActivateRadar()" id="manualExtractBtn" class="w-full py-3 rounded-xl bg-cyber-purple/25 hover:bg-cyber-purple/40 border border-cyber-purple/60 text-cyber-cyan font-cyber font-bold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Sincronizar Perfil com Meu Radar
+                            </button>
+                            <p class="text-[11px] text-gray-500 text-center font-tech">
+                                Ao concluir a Etapa 2, sincronize para liberar a busca contínua e os alertas por e-mail.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =================================================================== -->
+            <!-- ABA 2: VAGAS INDEXADAS, EMPRESAS PRIORITÁRIAS E PERFIL MAPEADO       -->
+            <!-- =================================================================== -->
+            <section id="tab-radar" class="hidden space-y-8">
+
+                <!-- ESTADO VAZIO (QUANDO AINDA NÃO SINCRONIZOU O PERFIL) -->
+                <div id="radarEmptyState" class="bg-cyber-card/90 border border-cyber-border rounded-3xl p-10 text-center max-w-2xl mx-auto space-y-4">
+                    <div class="w-16 h-16 rounded-2xl bg-cyber-cyan/15 border border-cyber-cyan/40 text-cyber-cyan text-2xl flex items-center justify-center mx-auto">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <h3 class="font-cyber text-xl font-bold text-white">Seu Radar Inteligente aguarda seu diagnóstico</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Converse com a <strong>Mentora Especialista IA</strong> na Aba 1 para mapear seus 5 pilares. Assim que ela entregar suas empresas e vagas recomendadas (Etapa 2), clique em <strong>"Ativar Meu Radar & Indexar"</strong>!
+                    </p>
+                    <button onclick="switchTab('mentor')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyber-cyan to-cyber-purple text-cyber-bg font-cyber font-bold text-xs uppercase tracking-wider shadow-neon-cyan">
+                        Ir para o Diagnóstico com a Mentora <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- CONTEÚDO COMPLETO DO RADAR -->
+                <div id="radarContent" class="hidden space-y-8">
+
+                    <!-- HERO DO PERFIL CONSOLIDADO + BOTÃO DE VARREDURA EM TEMPO REAL -->
+                    <div class="bg-gradient-to-r from-cyber-card via-cyber-purple/20 to-cyber-card border border-cyber-cyan/40 rounded-3xl p-6 sm:p-8 shadow-neon-cyan">
+                        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                            <div class="space-y-2 max-w-3xl">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-cyber-cyan/15 border border-cyber-cyan/50 text-[10px] font-cyber text-cyber-cyan uppercase tracking-widest">
+                                        Perfil Mapeado Ativo
+                                    </span>
+                                    <span id="activeFrequencyPill" class="px-2.5 py-0.5 rounded-full bg-cyber-magenta/15 border border-cyber-magenta/50 text-[10px] font-tech text-cyber-magenta font-bold uppercase tracking-wider">
+                                        Busca: 3x por Semana
+                                    </span>
+                                </div>
+                                <h2 id="profileHeadline" class="font-cyber text-2xl sm:text-3xl font-extrabold text-white"></h2>
+                                <p id="profileSummary" class="text-xs sm:text-sm text-gray-300 leading-relaxed"></p>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row lg:flex-col gap-3 flex-shrink-0">
+                                <button onclick="runLiveJobSweep()" id="runSweepBtn" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-emerald-400 text-cyber-bg font-cyber font-extrabold text-xs uppercase tracking-wider shadow-neon-cyan hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-satellite-dish"></i> Buscar Novas Vagas Agora
+                                </button>
+                                <button onclick="switchTab('alerts')" class="px-5 py-2.5 rounded-xl bg-cyber-bg border border-cyber-border hover:border-cyber-magenta text-xs font-tech text-gray-300 hover:text-white transition-colors text-center">
+                                    <i class="fa-solid fa-sliders text-cyber-magenta mr-1"></i> Configurar Frequência & E-mail
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resumo dos 5 Pilares em Cards Compactos -->
+                        <div id="profilePillarsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-6 pt-6 border-t border-cyber-border/80"></div>
+                    </div>
+
+                    <!-- SEÇÃO: VAGAS INDEXADAS NO PORTAL PARA O PERFIL -->
+                    <div class="space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <span class="font-cyber text-[10px] text-cyber-neonGreen uppercase tracking-widest">
+                                    <i class="fa-solid fa-bolt mr-1"></i> Indexação Inteligente no Portal
+                                </span>
+                                <h3 class="font-cyber text-xl sm:text-2xl font-bold text-white">Vagas Compatíveis com Seu Perfil</h3>
+                            </div>
+                            <div class="flex items-center gap-2 font-tech text-xs">
+                                <button onclick="filterRadarJobs('all')" id="filter-all" class="px-3.5 py-1.5 rounded-lg bg-cyber-cyan text-cyber-bg font-bold">Todas</button>
+                                <button onclick="filterRadarJobs('new')" id="filter-new" class="px-3.5 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-gray-300 hover:text-white">Novas 🔔</button>
+                                <button onclick="filterRadarJobs('remote')" id="filter-remote" class="px-3.5 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-gray-300 hover:text-white">Remotas</button>
+                            </div>
+                        </div>
+
+                        <div id="indexedJobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+                    </div>
+
+                    <!-- SEÇÃO: CARGOS IDEAIS (5 A 10 SUGESTÕES) -->
+                    <div class="bg-cyber-card/80 border border-cyber-border rounded-3xl p-6 space-y-4">
+                        <div>
+                            <span class="font-cyber text-[10px] text-cyber-cyan uppercase tracking-widest">Alvos de Recolocação & Transição</span>
+                            <h3 class="font-cyber text-lg font-bold text-white">Cargos & Títulos Ideais para o Seu Momento</h3>
+                        </div>
+                        <div id="idealRolesList" class="flex flex-wrap gap-2.5"></div>
+                    </div>
+
+                    <!-- SEÇÃO: EMPRESAS PRIORITÁRIAS (10 A 20 EMPRESAS) -->
+                    <div class="space-y-4">
+                        <div>
+                            <span class="font-cyber text-[10px] text-cyber-magenta uppercase tracking-widest">Match Cultural, Técnico & Propósito</span>
+                            <h3 class="font-cyber text-xl sm:text-2xl font-bold text-white">Empresas Prioritárias Mapeadas</h3>
+                            <p class="text-xs text-gray-400">Clique em qualquer empresa para consultar vagas abertas alinhadas ao seu perfil.</p>
+                        </div>
+                        <div id="priorityCompaniesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- =================================================================== -->
+            <!-- ABA 3: FREQUÊNCIA DA BUSCA, E-MAIL & CENTRAL DE DISPAROS            -->
+            <!-- =================================================================== -->
+            <section id="tab-alerts" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                <!-- FORMULÁRIO DE CONFIGURAÇÃO DO PRODUTO (6 COLUNAS) -->
+                <div class="lg:col-span-6 bg-cyber-card/90 border border-cyber-border rounded-3xl p-6 sm:p-8 space-y-6 shadow-neon-purple">
+                    <div>
+                        <span class="font-cyber text-[10px] text-cyber-cyan uppercase tracking-widest">Assinatura Radar Data Delas</span>
+                        <h2 class="font-cyber text-xl sm:text-2xl font-bold text-white mt-1">Frequência & Alertas de Vagas</h2>
+                        <p class="text-xs text-gray-400 mt-1 leading-relaxed">
+                            Escolha com que frequência nosso agente deve varrer o mercado, indexar oportunidades no seu portal e enviar o resumo para o seu e-mail.
+                        </p>
+                    </div>
+
+                    <form onsubmit="saveAlertPreferences(event)" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-tech uppercase text-gray-300 mb-1">Seu Nome *</label>
+                                <input type="text" id="pref-name" required placeholder="Ex: Amanda" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-cyber-cyan focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-tech uppercase text-gray-300 mb-1">E-mail para Receber Vagas *</label>
+                                <input type="email" id="pref-email" required placeholder="voce@email.com" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-cyber-cyan focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- ESCOLHA DE FREQUÊNCIA -->
+                        <div class="space-y-2.5">
+                            <label class="block text-xs font-tech uppercase text-gray-300">Frequência da Busca Automática *</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label id="freq-card-3x" onclick="selectFrequencyCard('3x_week')" class="cursor-pointer p-4 rounded-2xl bg-cyber-cyan/10 border-2 border-cyber-cyan transition-all flex flex-col justify-between gap-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-cyber text-xs font-bold text-cyber-cyan uppercase">3x por Semana</span>
+                                        <input type="radio" name="frequency" value="3x_week" checked class="accent-cyan-400">
+                                    </div>
+                                    <p class="text-[11px] text-gray-300 leading-relaxed">
+                                        Segundas, Quartas e Sextas às 08h30. Curadoria ideal sem sobrecarga na caixa de entrada.
+                                    </p>
+                                </label>
+
+                                <label id="freq-card-daily" onclick="selectFrequencyCard('daily')" class="cursor-pointer p-4 rounded-2xl bg-cyber-bg border-2 border-cyber-border hover:border-cyber-purple transition-all flex flex-col justify-between gap-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-cyber text-xs font-bold text-white uppercase">Todo o Dia</span>
+                                        <input type="radio" name="frequency" value="daily" class="accent-cyan-400">
+                                    </div>
+                                    <p class="text-[11px] text-gray-300 leading-relaxed">
+                                        Varredura diária às 08h30. Ideal para busca intensiva e recolocação rápida.
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- OPÇÕES DE INDEXAÇÃO E ALERTA IMEDIATO -->
+                        <div class="space-y-3 pt-2">
+                            <label class="flex items-start gap-3 p-3.5 rounded-xl bg-cyber-bg/80 border border-cyber-border cursor-pointer hover:border-cyber-cyan/50 transition-colors">
+                                <input type="checkbox" id="pref-instant-alert" checked class="mt-1 accent-pink-500 w-4 h-4">
+                                <div class="text-xs">
+                                    <span class="font-bold text-white block">Avisar sempre que surgirem novas vagas 🔔</span>
+                                    <span class="text-gray-400">Dispara notificação no portal e alerta de oportunidade recém-publicada nas suas empresas prioritárias.</span>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start gap-3 p-3.5 rounded-xl bg-cyber-bg/80 border border-cyber-border cursor-pointer hover:border-cyber-cyan/50 transition-colors">
+                                <input type="checkbox" id="pref-auto-index" checked class="mt-1 accent-cyan-400 w-4 h-4">
+                                <div class="text-xs">
+                                    <span class="font-bold text-white block">Indexar automaticamente no meu Portal Data Delas</span>
+                                    <span class="text-gray-400">Salva todas as vagas compatíveis na aba "Vagas & Empresas" com percentual de Match.</span>
+                                </div>
+                            </label>
+
+                            <label id="adminAutoPublicMirrorWrap" class="hidden items-start gap-3 p-3.5 rounded-xl bg-cyber-purple/15 border border-cyber-purple/50 cursor-pointer">
+                                <input type="checkbox" id="pref-public-mirror" class="mt-1 accent-purple-500 w-4 h-4">
+                                <div class="text-xs">
+                                    <span class="font-bold text-cyber-cyan block">[Admin] Espelhar vagas Top Match (&ge;92%) no Mural Público</span>
+                                    <span class="text-gray-300">Publica automaticamente as melhores vagas encontradas também na página inicial pública do Data Delas.</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                            <button type="submit" class="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-cyber-purple text-cyber-bg font-cyber font-extrabold text-xs uppercase tracking-wider shadow-neon-cyan hover:opacity-95 transition-all">
+                                Salvar Minha Assinatura de Radar <i class="fa-solid fa-check ml-1"></i>
+                            </button>
+                            <button type="button" onclick="sendTestDigestNow()" id="sendTestEmailBtn" class="px-5 py-3.5 rounded-xl bg-cyber-magenta/20 hover:bg-cyber-magenta/35 border border-cyber-magenta text-white font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane text-cyber-magenta"></i> Disparar E-mail Agora
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- PRÉ-VISUALIZAÇÃO DO E-MAIL & HISTÓRICO DE ENVIOS (6 COLUNAS) -->
+                <div class="lg:col-span-6 space-y-5">
+                    <div class="bg-cyber-card/90 border border-cyber-border rounded-3xl p-6 space-y-4">
+                        <div class="flex items-center justify-between gap-2">
+                            <div>
+                                <span class="font-cyber text-[10px] text-cyber-magenta uppercase tracking-widest">Experiência da Assinante</span>
+                                <h3 class="font-cyber text-lg font-bold text-white">Prévia do E-mail de Vagas</h3>
+                            </div>
+                            <button onclick="sendTestDigestNow()" class="text-xs font-tech text-cyber-cyan hover:underline">
+                                <i class="fa-solid fa-rotate mr-1"></i> Atualizar Prévia / Enviar
+                            </button>
+                        </div>
+
+                        <div id="emailDispatchStatus" class="hidden p-3 rounded-xl text-xs font-tech"></div>
+
+                        <div class="rounded-2xl overflow-hidden border border-cyber-border bg-cyber-bg h-[430px]">
+                            <iframe id="emailPreviewFrame" title="Prévia do E-mail Data Delas" class="w-full h-full bg-[#080b11]"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Histórico de Varreduras e Alertas -->
+                    <div class="bg-cyber-card/80 border border-cyber-border rounded-3xl p-5 space-y-3">
+                        <h4 class="font-cyber text-xs uppercase tracking-wider text-gray-300">
+                            <i class="fa-solid fa-clock-rotate-left text-cyber-cyan mr-1"></i> Histórico de Alertas & Indexações
+                        </h4>
+                        <div id="alertsHistoryList" class="space-y-2 max-h-48 overflow-y-auto text-xs font-tech"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL LATERAL DE NOTIFICAÇÕES (SINO) -->
+    <div id="alertsDrawer" class="fixed inset-0 bg-cyber-bg/80 backdrop-blur-sm z-50 hidden justify-end">
+        <div class="bg-cyber-card border-l border-cyber-border w-full max-w-md h-full p-6 flex flex-col justify-between">
+            <div class="space-y-4 overflow-y-auto">
+                <div class="flex items-center justify-between border-b border-cyber-border pb-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bell text-cyber-magenta"></i>
+                        <h3 class="font-cyber text-base font-bold text-white">Alertas de Novas Vagas</h3>
+                    </div>
+                    <button onclick="closeAlertsDrawer()" class="text-gray-400 hover:text-white text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div id="drawerNotificationsList" class="space-y-3 text-xs"></div>
+            </div>
+            <button onclick="clearUnreadNotifications(); closeAlertsDrawer(); switchTab('radar');" class="w-full py-3 rounded-xl bg-cyber-cyan text-cyber-bg font-cyber font-bold text-xs uppercase tracking-wider">
+                Ver Todas as Vagas Indexadas
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // ESTADO LOCAL & CONSTANTES DA ÁREA LOGADA
+        // =========================================================================
+        const STORAGE_KEYS = {
+            TOKEN: 'dd_auth_token',
+            ROLE: 'dd_auth_role',
+            USER_NAME: 'dd_user_name',
+            CHAT: 'dd_mentor_chat_v1',
+            CHAT_META: 'dd_mentor_meta_v1',
+            CHAT_SOURCES: 'dd_mentor_sources_v1',
+            PROFILE: 'dd_mapped_profile_v1',
+            INDEXED_JOBS: 'dd_indexed_jobs_v1',
+            PREFS: 'dd_radar_prefs_v1',
+            ALERTS_LOG: 'dd_alerts_log_v1',
+            PUBLIC_JOBS: 'data_delas_jobs'
+        };
+
+        let currentRole = 'subscriber';
+        let previewAsSubscriber = false;
+        let currentJobFilter = 'all';
+        let isSendingMessage = false;
+
+        function escapeHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        // Conversor leve e seguro de Markdown para HTML nas respostas da Mentora
+        function renderMarkdown(mdText) {
+            const escaped = escapeHtml(mdText || '');
+            const lines = escaped.split('\n');
+            let html = '';
+            let inUl = false;
+            let inOl = false;
+
+            const closeLists = () => {
+                if (inUl) { html += '</ul>'; inUl = false; }
+                if (inOl) { html += '</ol>'; inOl = false; }
+            };
+
+            const formatInline = (txt) => {
+                return txt
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>')
+                    .replace(/(^|[\s(])(https?:\/\/[^\s)<]+)/g, '$1<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>');
+            };
+
+            for (const rawLine of lines) {
+                const line = rawLine.trim();
+                if (!line) {
+                    closeLists();
+                    continue;
+                }
+                if (/^---+$/.test(line)) {
+                    closeLists();
+                    html += '<hr>';
+                    continue;
+                }
+                const headingMatch = line.match(/^(#{1,4})\s+(.+)$/);
+                if (headingMatch) {
+                    closeLists();
+                    html += `<h3>${formatInline(headingMatch[2])}</h3>`;
+                    continue;
+                }
+                const ulMatch = line.match(/^[-*•]\s+(.+)$/);
+                if (ulMatch) {
+                    if (inOl) { html += '</ol>'; inOl = false; }
+                    if (!inUl) { html += '<ul>'; inUl = true; }
+                    html += `<li>${formatInline(ulMatch[1])}</li>`;
+                    continue;
+                }
+                const olMatch = line.match(/^\d+[.)]\s+(.+)$/);
+                if (olMatch) {
+                    if (inUl) { html += '</ul>'; inUl = false; }
+                    if (!inOl) { html += '<ol>'; inOl = true; }
+                    html += `<li>${formatInline(olMatch[1])}</li>`;
+                    continue;
+                }
+                closeLists();
+                html += `<p>${formatInline(line)}</p>`;
+            }
+            closeLists();
+            return html;
+        }
+
+        function showToast(title, subtitle, tone = 'cyan') {
+            const container = document.getElementById('toastContainer');
+            const borderClass = tone === 'magenta' ? 'border-cyber-magenta' : 'border-cyber-cyan';
+            const iconClass = tone === 'magenta' ? 'fa-bell text-cyber-magenta' : 'fa-circle-check text-cyber-cyan';
+
+            const el = document.createElement('div');
+            el.className = `pointer-events-auto bg-cyber-card/95 backdrop-blur-md border-l-4 ${borderClass} border border-cyber-border rounded-2xl p-4 shadow-lg transition-all duration-300`;
+            el.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid ${iconClass} mt-0.5"></i>
+                    <div class="text-xs">
+                        <strong class="font-cyber text-white block">${escapeHtml(title)}</strong>
+                        <span class="text-gray-300 leading-snug block mt-0.5">${escapeHtml(subtitle)}</span>
+                    </div>
+                </div>
+            `;
+            container.appendChild(el);
+            setTimeout(() => {
+                el.style.opacity = '0';
+                setTimeout(() => el.remove(), 300);
+            }, 5000);
+        }
+
+        // =========================================================================
+        // AUTENTICAÇÃO & INICIALIZAÇÃO
+        // =========================================================================
+        function toggleGatePass() {
+            const input = document.getElementById('gate-password');
+            const eye = document.getElementById('gate-eye');
+            if (input.type === 'password') {
+                input.type = 'text';
+                eye.className = 'fa-solid fa-eye-slash';
+            } else {
+                input.type = 'password';
+                eye.className = 'fa-solid fa-eye';
+            }
+        }
+
+        async function handleGateLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('gate-password').value.trim();
+            const name = document.getElementById('gate-name').value.trim();
+            const btn = document.getElementById('gate-submit-btn');
+            const errEl = document.getElementById('gate-error');
+            const errTxt = document.getElementById('gate-error-text');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i> Autenticando...';
+            errEl.classList.add('hidden');
+
+            try {
+                const res = await fetch('/api/auth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password, name })
+                });
+                const data = await res.json();
+
+                if (!res.ok || !data.authenticated) {
+                    errTxt.textContent = data.error || 'Chave incorreta.';
+                    errEl.classList.remove('hidden');
+                    errEl.classList.add('flex');
+                    return;
+                }
+
+                localStorage.setItem(STORAGE_KEYS.TOKEN, data.token);
+                localStorage.setItem(STORAGE_KEYS.ROLE, data.role);
+                localStorage.setItem('dd_capabilities', JSON.stringify(data.capabilities || {}));
+                if (name) {
+                    localStorage.setItem(STORAGE_KEYS.USER_NAME, name);
+                    const prefs = getPrefs();
+                    if (!prefs.userName) {
+                        prefs.userName = name;
+                        localStorage.setItem(STORAGE_KEYS.PREFS, JSON.stringify(prefs));
+                    }
+                }
+
+                unlockPortalUI(data.role, data.capabilities || {});
+            } catch (err) {
+                errTxt.textContent = 'Publique na Vercel para conectar com o servidor seguro da API.';
+                errEl.classList.remove('hidden');
+                errEl.classList.add('flex');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>Entrar na Área Logada</span> <i class="fa-solid fa-arrow-right"></i>';
+            }
+        }
+
+        async function checkExistingSession() {
+            const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+            if (!token) return;
+
+            try {
+                const res = await fetch('/api/auth', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                if (!res.ok) {
+                    localStorage.removeItem(STORAGE_KEYS.TOKEN);
+                    return;
+                }
+                const data = await res.json();
+                if (data.authenticated) {
+                    localStorage.setItem('dd_capabilities', JSON.stringify(data.capabilities || {}));
+                    unlockPortalUI(data.role, data.capabilities || {});
+                }
+            } catch (err) {
+                // Mantém tela de login
+            }
+        }
+
+        function unlockPortalUI(role, capabilities) {
+            currentRole = role || 'subscriber';
+            document.getElementById('authGate').classList.add('hidden');
+            document.getElementById('portalApp').classList.remove('hidden');
+
+            const savedName = localStorage.getItem(STORAGE_KEYS.USER_NAME) || getPrefs().userName || '';
+            if (savedName) {
+                document.getElementById('welcomeUserText').textContent = `Olá, ${savedName} 💙 • Radar & Mentoria Personalizada`;
+            }
+
+            applyRoleVisibility(capabilities);
+            loadSavedPreferencesIntoForm();
+            renderChatHistory();
+            renderRadarSection();
+            renderAlertsHistory();
+            updateBellCounter();
+            refreshEmailPreviewSilent();
+
+            // Inicia automaticamente o Bloco 1 da Etapa 1 caso o chat esteja vazio
+            const history = getChatHistory();
+            if (history.length === 0) {
+                triggerInitialMentorGreeting();
+            }
+        }
+
+        function applyRoleVisibility(capabilities = {}) {
+            const isAdminEffective = currentRole === 'admin' && !previewAsSubscriber;
+            const adminBar = document.getElementById('adminTopBar');
+            const exitBtn = document.getElementById('exitSubscriberPreviewBtn');
+            const adminMirror = document.getElementById('adminAutoPublicMirrorWrap');
+            const missingBanner = document.getElementById('missingKeyBanner');
+
+            if (isAdminEffective) {
+                adminBar.classList.remove('hidden');
+                exitBtn.classList.add('hidden');
+            } else {
+                adminBar.classList.add('hidden');
+                if (currentRole === 'admin' && previewAsSubscriber) {
+                    exitBtn.classList.remove('hidden');
+                }
+            }
+
+            if (capabilities.hasGeminiKey === false) {
+                missingBanner.classList.remove('hidden');
+                document.getElementById('statusGeminiBadge').innerHTML =
+                    '<i class="fa-solid fa-triangle-exclamation text-amber-400"></i> GEMINI_API_KEY pendente na Vercel';
+            } else if (capabilities.hasGeminiKey === true) {
+                missingBanner.classList.add('hidden');
+                document.getElementById('statusGeminiBadge').innerHTML =
+                    '<i class="fa-solid fa-shield-check text-cyber-neonGreen"></i> Google API Key Protegida & Ativa';
+            }
+
+            const emailBadge = document.getElementById('statusEmailBadge');
+            if (capabilities.hasEmailProvider) {
+                emailBadge.innerHTML = '• <i class="fa-solid fa-envelope-circle-check text-cyber-cyan"></i> Disparo Real Resend Ativo';
+            } else {
+                emailBadge.innerHTML = '• <i class="fa-solid fa-flask text-cyber-magenta"></i> E-mail em Modo Preview Instantâneo';
+            }
+        }
+
+        function togglePreviewAsSubscriber() {
+            previewAsSubscriber = !previewAsSubscriber;
+            const caps = JSON.parse(localStorage.getItem('dd_capabilities') || '{}');
+            applyRoleVisibility(caps);
+            renderRadarSection();
+            showToast(
+                previewAsSubscriber ? 'Modo Visão Cliente Final' : 'Modo Admin Restaurado',
+                previewAsSubscriber
+                    ? 'Você está vendo exatamente como a assinante verá após contratar o produto.'
+                    : 'Controles administrativos e publicação no Mural reativados.'
+            );
+        }
+
+        function logoutPortal() {
+            localStorage.removeItem(STORAGE_KEYS.TOKEN);
+            window.location.href = 'index.html';
+        }
+
+        // =========================================================================
+        // NAVEGAÇÃO ENTRE ABAS
+        // =========================================================================
+        function switchTab(tab) {
+            ['mentor', 'radar', 'alerts'].forEach((t) => {
+                document.getElementById(`tab-${t}`).classList.toggle('hidden', t !== tab);
+
+                const dBtn = document.getElementById(`nav-${t}`);
+                if (dBtn) {
+                    if (t === tab) {
+                        dBtn.className = 'tab-btn px-4 py-2 rounded-lg font-bold transition-all flex items-center gap-2 bg-gradient-to-r from-cyber-cyan/20 to-cyber-purple/30 text-cyber-cyan border border-cyber-cyan/40';
+                    } else {
+                        dBtn.className = 'tab-btn px-4 py-2 rounded-lg font-bold transition-all flex items-center gap-2 text-gray-400 hover:text-white border border-transparent';
+                    }
+                }
+
+                const mBtn = document.getElementById(`mnav-${t}`);
+                if (mBtn) {
+                    if (t === tab) {
+                        mBtn.className = 'py-2 rounded-lg font-bold text-center bg-cyber-cyan/15 text-cyber-cyan border border-cyber-cyan/40';
+                    } else {
+                        mBtn.className = 'py-2 rounded-lg font-bold text-center bg-cyber-card text-gray-400 border border-cyber-border';
+                    }
+                }
+            });
+
+            if (tab === 'alerts') {
+                refreshEmailPreviewSilent();
+            }
+        }
+
+        // =========================================================================
+        // ABA 1: CONVERSA COM A MENTORA IA (ETAPA 1 & ETAPA 2)
+        // =========================================================================
+        function getChatHistory() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEYS.CHAT) || '[]');
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveChatHistory(messages) {
+            localStorage.setItem(STORAGE_KEYS.CHAT, JSON.stringify(messages));
+        }
+
+        function getChatMeta() {
+            try {
+                return JSON.parse(
+                    localStorage.getItem(STORAGE_KEYS.CHAT_META) ||
+                        '{"stage":1,"pillars":[],"readyForRadar":false}'
+                );
+            } catch (e) {
+                return { stage: 1, pillars: [], readyForRadar: false };
+            }
+        }
+
+        function updateDiagnosticSidebar(meta) {
+            const covered = Array.isArray(meta.pillars) ? meta.pillars.map(Number) : [];
+            document.querySelectorAll('.pillar-item').forEach((el) => {
+                const num = Number(el.getAttribute('data-pillar'));
+                const icon = el.querySelector('.pillar-icon');
+                if (covered.includes(num)) {
+                    el.className = 'pillar-item flex items-start gap-3 p-3 rounded-xl bg-cyber-cyan/10 border border-cyber-cyan/50 transition-all';
+                    icon.className = 'pillar-icon w-6 h-6 rounded-lg bg-cyber-cyan text-cyber-bg flex items-center justify-center text-xs font-extrabold flex-shrink-0 mt-0.5';
+                    icon.innerHTML = '<i class="fa-solid fa-check"></i>';
+                } else {
+                    el.className = 'pillar-item flex items-start gap-3 p-3 rounded-xl bg-cyber-bg/70 border border-cyber-border transition-all';
+                    icon.className = 'pillar-icon w-6 h-6 rounded-lg bg-cyber-border text-gray-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5';
+                    icon.textContent = String(num);
+                }
+            });
+
+            const s1 = document.getElementById('stepIndicator1');
+            const s2 = document.getElementById('stepIndicator2');
+            const subtitle = document.getElementById('stageSubtitle');
+            const banner = document.getElementById('readyForRadarBanner');
+
+            if (meta.stage === 2 || meta.readyForRadar) {
+                s1.className = 'p-3 rounded-xl bg-cyber-bg/70 border border-cyber-neonGreen/50 text-xs';
+                s2.className = 'p-3 rounded-xl bg-cyber-magenta/20 border border-cyber-magenta text-xs opacity-100 shadow-neon-magenta';
+                s2.querySelector('span:first-child').className = 'font-cyber text-[10px] text-cyber-magenta block font-bold';
+                subtitle.textContent = 'Etapa 2 Concluída • Recomendações de Empresas & Pesquisa de Vagas';
+                banner.classList.remove('hidden');
+            } else {
+                s1.className = 'p-3 rounded-xl bg-cyber-cyan/15 border border-cyber-cyan/60 text-xs';
+                s2.className = 'p-3 rounded-xl bg-cyber-bg/60 border border-cyber-border text-xs opacity-60';
+                subtitle.textContent = 'Etapa 1 de 2 • Investigação Guiada em Blocos (2 a 3 perguntas por vez)';
+                banner.classList.add('hidden');
+            }
+        }
+
+        function renderChatHistory() {
+            const container = document.getElementById('chatMessages');
+            const messages = getChatHistory();
+            const meta = getChatMeta();
+            updateDiagnosticSidebar(meta);
+
+            if (messages.length === 0) {
+                container.innerHTML = `
+                    <div class="flex items-center justify-center h-full text-center text-gray-400 text-xs font-tech">
+                        <div>
+                            <i class="fa-solid fa-circle-notch animate-spin text-cyber-cyan text-xl mb-2"></i>
+                            <p>Iniciando sua sessão de mentoria personalizada...</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = messages
+                .map((msg) => {
+                    if (msg.role === 'user') {
+                        return `
+                            <div class="flex justify-end">
+                                <div class="max-w-[85%] rounded-2xl rounded-tr-sm bg-gradient-to-br from-cyber-purple/45 to-cyber-magenta/35 border border-cyber-magenta/50 px-4 py-3 text-xs sm:text-sm text-white leading-relaxed">
+                                    ${escapeHtml(msg.content).replace(/\n/g, '<br>')}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    const sourcesHtml =
+                        Array.isArray(msg.sources) && msg.sources.length > 0
+                            ? `<div class="mt-3 pt-2.5 border-t border-cyber-border/80 flex flex-wrap gap-1.5 items-center">
+                                <span class="text-[10px] font-tech text-cyber-cyan uppercase mr-1"><i class="fa-brands fa-google mr-1"></i>Fontes verificadas:</span>
+                                ${msg.sources
+                                    .slice(0, 5)
+                                    .map(
+                                        (s) =>
+                                            `<a href="${escapeHtml(s.uri)}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded bg-cyber-bg border border-cyber-border hover:border-cyber-cyan text-[10px] text-gray-300 hover:text-cyber-cyan truncate max-w-[200px]">${escapeHtml(s.title)}</a>`
+                                    )
+                                    .join('')}
+                               </div>`
+                            : '';
+
+                    return `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-xl bg-cyber-cyan/15 border border-cyber-cyan/50 flex items-center justify-center text-cyber-cyan text-xs flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div class="max-w-[88%] rounded-2xl rounded-tl-sm bg-cyber-bg/95 border border-cyber-border px-4 py-3.5 text-xs sm:text-sm text-gray-200 mentor-prose">
+                                ${renderMarkdown(msg.content)}
+                                ${sourcesHtml}
+                            </div>
+                        </div>
+                    `;
+                })
+                .join('');
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function appendTypingIndicator(label = 'A Mentora está preparando o próximo bloco...') {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.id = 'typingBubble';
+            div.className = 'flex items-center gap-3';
+            div.innerHTML = `
+                <div class="w-8 h-8 rounded-xl bg-cyber-cyan/15 border border-cyber-cyan/50 flex items-center justify-center text-cyber-cyan text-xs">
+                    <i class="fa-solid fa-circle-notch animate-spin"></i>
+                </div>
+                <div class="rounded-2xl bg-cyber-bg/90 border border-cyber-border px-4 py-3 text-xs font-tech text-cyber-cyan">
+                    ${escapeHtml(label)}
+                </div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const el = document.getElementById('typingBubble');
+            if (el) el.remove();
+        }
+
+        async function triggerInitialMentorGreeting() {
+            if (isSendingMessage) return;
+            isSendingMessage = true;
+            const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+
+            try {
+                const res = await fetch('/api/agent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ messages: [] })
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    const fallbackMsg = {
+                        role: 'model',
+                        content: `⚠️ **Não foi possível conectar com a API do Google Gemini:** ${data.error || 'Verifique a variável GEMINI_API_KEY no painel da Vercel.'}`
+                    };
+                    saveChatHistory([fallbackMsg]);
+                    renderChatHistory();
+                    return;
+                }
+
+                const history = [{ role: 'model', content: data.reply, sources: data.sources || [] }];
+                saveChatHistory(history);
+                if (data.meta) {
+                    localStorage.setItem(STORAGE_KEYS.CHAT_META, JSON.stringify(data.meta));
+                }
+                renderChatHistory();
+            } catch (err) {
+                saveChatHistory([
+                    {
+                        role: 'model',
+                        content: '⚠️ **Conexão pendente:** Publique os arquivos na Vercel e adicione sua `GEMINI_API_KEY` em Environment Variables para iniciar a conversa com a Mentora.'
+                    }
+                ]);
+                renderChatHistory();
+            } finally {
+                isSendingMessage = false;
+            }
+        }
+
+        function handleChatKeydown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleChatSubmit(e);
+            }
+        }
+
+        async function handleChatSubmit(e) {
+            if (e) e.preventDefault();
+            if (isSendingMessage) return;
+
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const history = getChatHistory();
+            history.push({ role: 'user', content: text });
+            saveChatHistory(history);
+            input.value = '';
+            renderChatHistory();
+
+            isSendingMessage = true;
+            const sendBtn = document.getElementById('chatSendBtn');
+            sendBtn.disabled = true;
+
+            const userCount = history.filter((m) => m.role === 'user').length;
+            appendTypingIndicator(
+                userCount >= 3
+                    ? 'Analisando suas respostas e pesquisando empresas/vagas compatíveis...'
+                    : 'Analisando seu perfil e formulando o próximo bloco...'
+            );
+
+            try {
+                const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+                const res = await fetch('/api/agent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ messages: history })
+                });
+
+                const data = await res.json();
+                removeTypingIndicator();
+
+                if (!res.ok) {
+                    showToast('Erro na Mentora IA', data.error || 'Tente novamente em instantes.', 'magenta');
+                    return;
+                }
+
+                history.push({
+                    role: 'model',
+                    content: data.reply,
+                    sources: data.sources || []
+                });
+                saveChatHistory(history);
+
+                if (Array.isArray(data.sources) && data.sources.length > 0) {
+                    const prevSources = JSON.parse(localStorage.getItem(STORAGE_KEYS.CHAT_SOURCES) || '[]');
+                    localStorage.setItem(
+                        STORAGE_KEYS.CHAT_SOURCES,
+                        JSON.stringify([...prevSources, ...data.sources])
+                    );
+                }
+
+                if (data.meta) {
+                    localStorage.setItem(STORAGE_KEYS.CHAT_META, JSON.stringify(data.meta));
+                }
+
+                renderChatHistory();
+
+                if (data.meta?.readyForRadar || data.meta?.stage === 2) {
+                    showToast(
+                        'Etapa 2 Concluída! 🎉',
+                        'Clique em "Ativar Meu Radar & Indexar" para estruturar suas vagas e alertas!'
+                    );
+                }
+            } catch (err) {
+                removeTypingIndicator();
+                showToast('Falha de rede', 'Não foi possível enviar sua resposta.', 'magenta');
+            } finally {
+                isSendingMessage = false;
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        function resetDiagnosisConversation() {
+            if (!confirm('Deseja reiniciar a conversa com a Mentora para testar um novo mapeamento do zero?')) return;
+            localStorage.removeItem(STORAGE_KEYS.CHAT);
+            localStorage.removeItem(STORAGE_KEYS.CHAT_META);
+            localStorage.removeItem(STORAGE_KEYS.CHAT_SOURCES);
+            renderChatHistory();
+            triggerInitialMentorGreeting();
+        }
+
+        // =========================================================================
+        // EXTRAÇÃO DO PERFIL & INDEXAÇÃO DE VAGAS NO PORTAL
+        // =========================================================================
+        async function extractAndActivateRadar() {
+            const history = getChatHistory();
+            if (history.filter((m) => m.role === 'user').length < 1) {
+                showToast('Responda ao menos um bloco', 'Converse um pouco com a Mentora antes de sincronizar seu Radar.', 'magenta');
+                return;
+            }
+
+            const btn1 = document.getElementById('extractRadarBtn');
+            const btn2 = document.getElementById('manualExtractBtn');
+            const orig1 = btn1 ? btn1.innerHTML : '';
+            const orig2 = btn2 ? btn2.innerHTML : '';
+
+            if (btn1) { btn1.disabled = true; btn1.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i> Estruturando Radar...'; }
+            if (btn2) { btn2.disabled = true; btn2.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i> Estruturando Empresas & Vagas...'; }
+
+            try {
+                const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+                const sources = JSON.parse(localStorage.getItem(STORAGE_KEYS.CHAT_SOURCES) || '[]');
+                const res = await fetch('/api/radar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        action: 'extract_profile',
+                        messages: history,
+                        sources
+                    })
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    showToast('Erro ao estruturar Radar', data.error || 'Tente novamente.', 'magenta');
+                    return;
+                }
+
+                localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(data.profile));
+
+                // Indexa as vagas no Portal da Assinante
+                const existing = getIndexedJobs();
+                const merged = mergeJobsDeduplicated(data.jobs || [], existing);
+                localStorage.setItem(STORAGE_KEYS.INDEXED_JOBS, JSON.stringify(merged));
+
+                addAlertLogEntry({
+                    title: `${(data.jobs || []).length} vagas indexadas no seu Portal`,
+                    detail: `Perfil "${data.profile.headline}" estruturado com ${(data.profile.priorityCompanies || []).length} empresas prioritárias.`,
+                    unread: true
+                });
+
+                maybeMirrorTopJobsToPublicMural(data.jobs || []);
+                renderRadarSection();
+                updateBellCounter();
+                switchTab('radar');
+
+                showToast(
+                    'Radar Ativado & Vagas Indexadas!',
+                    'Confira suas empresas prioritárias, vagas compatíveis e configure a frequência de e-mail.'
+                );
+            } catch (err) {
+                showToast('Erro ao processar perfil', 'Tente novamente em alguns segundos.', 'magenta');
+            } finally {
+                if (btn1) { btn1.disabled = false; btn1.innerHTML = orig1; }
+                if (btn2) { btn2.disabled = false; btn2.innerHTML = orig2; }
+            }
+        }
+
+        function getSavedProfile() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEYS.PROFILE) || 'null');
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function getIndexedJobs() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEYS.INDEXED_JOBS) || '[]');
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function mergeJobsDeduplicated(newJobs, oldJobs) {
+            const seen = new Set();
+            const out = [];
+            for (const j of [...newJobs, ...oldJobs]) {
+                const key = `${String(j.title || '').toLowerCase().trim()}::${String(j.company || '').toLowerCase().trim()}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
+                out.push(j);
+            }
+            return out;
+        }
+
+        // =========================================================================
+        // VARREDURA ATIVA DE NOVAS VAGAS (GOOGLE SEARCH + ALERTA AUTOMÁTICO)
+        // =========================================================================
+        async function runLiveJobSweep() {
+            const profile = getSavedProfile();
+            if (!profile) {
+                switchTab('mentor');
+                return;
+            }
+
+            const btn = document.getElementById('runSweepBtn');
+            const origHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-satellite-dish animate-spin"></i> Buscando Vagas Reais na Web...';
+
+            try {
+                const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+                const oldJobs = getIndexedJobs();
+                const existingJobKeys = oldJobs.map(
+                    (j) => `${String(j.title).toLowerCase().trim()}::${String(j.company).toLowerCase().trim()}`
+                );
+
+                const res = await fetch('/api/radar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        action: 'run_sweep',
+                        profile,
+                        existingJobKeys
+                    })
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    showToast('Falha na busca', data.error || 'Tente novamente.', 'magenta');
+                    return;
+                }
+
+                // Marca vagas antigas como já vistas e insere as novas no topo
+                const agedOldJobs = oldJobs.map((j) => ({ ...j, isNew: false }));
+                const prefs = getPrefs();
+
+                if (prefs.autoIndex !== false) {
+                    const merged = mergeJobsDeduplicated(data.jobs || [], agedOldJobs);
+                    localStorage.setItem(STORAGE_KEYS.INDEXED_JOBS, JSON.stringify(merged));
+                }
+
+                const newJobs = (data.jobs || []).filter((j) => j.isNew);
+                maybeMirrorTopJobsToPublicMural(newJobs);
+
+                renderRadarSection();
+
+                if (newJobs.length > 0) {
+                    addAlertLogEntry({
+                        title: `🔔 ${newJobs.length} nova(s) vaga(s) detectada(s)!`,
+                        detail: newJobs.map((j) => `${j.title} (${j.company})`).join(' • '),
+                        unread: true
+                    });
+                    updateBellCounter();
+                    showToast(
+                        `🔔 ${newJobs.length} Novas Vagas Encontradas!`,
+                        'As oportunidades foram indexadas no seu portal.',
+                        'magenta'
+                    );
+
+                    // Se "Avisar sempre que surgirem vagas" estiver ativo e tiver e-mail, dispara alerta!
+                    if (prefs.instantAlert && prefs.email) {
+                        await dispatchEmailNotification('instant_alert', newJobs, true);
+                    }
+                } else {
+                    showToast('Varredura concluída', 'Suas vagas indexadas já estão atualizadas!');
+                }
+            } catch (err) {
+                showToast('Erro de conexão', 'Não foi possível concluir a busca web.', 'magenta');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = origHtml;
+            }
+        }
+
+        function filterRadarJobs(filter) {
+            currentJobFilter = filter;
+            ['all', 'new', 'remote'].forEach((f) => {
+                const btn = document.getElementById(`filter-${f}`);
+                if (!btn) return;
+                if (f === filter) {
+                    btn.className = 'px-3.5 py-1.5 rounded-lg bg-cyber-cyan text-cyber-bg font-bold';
+                } else {
+                    btn.className = 'px-3.5 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-gray-300 hover:text-white';
+                }
+            });
+            renderRadarSection();
+        }
+
+        function publishJobToPublicMural(jobId) {
+            const jobs = getIndexedJobs();
+            const found = jobs.find((j) => String(j.id) === String(jobId));
+            if (!found) return;
+
+            const publicJobs = JSON.parse(localStorage.getItem(STORAGE_KEYS.PUBLIC_JOBS) || '[]');
+            const exists = publicJobs.some(
+                (p) =>
+                    p.title.toLowerCase() === found.title.toLowerCase() &&
+                    p.company.toLowerCase() === found.company.toLowerCase()
+            );
+            if (exists) {
+                showToast('Já está no Mural Público', 'Esta vaga já consta na página inicial do Data Delas.');
+                return;
+            }
+
+            const formattedPublic = {
+                id: `radar-pub-${Date.now()}`,
+                title: found.title,
+                company: found.company,
+                model: found.model.includes('Remoto') ? 'Remoto' : found.model,
+                city: found.city || '',
+                seniority: found.seniority || 'Pleno',
+                skills: found.skills || ['Dados', 'Tech'],
+                link: found.url || found.link,
+                description: found.description || found.matchReason,
+                source: 'radar_ia'
+            };
+
+            publicJobs.unshift(formattedPublic);
+            localStorage.setItem(STORAGE_KEYS.PUBLIC_JOBS, JSON.stringify(publicJobs));
+
+            // Sincroniza na nuvem se KV estiver ativo
+            const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+            fetch('/api/radar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ action: 'sync_public_jobs', jobs: publicJobs })
+            }).catch(() => {});
+
+            showToast('Publicada no Mural Público! 🚀', `"${found.title}" agora aparece na Home do Data Delas.`);
+        }
+
+        function maybeMirrorTopJobsToPublicMural(newJobs) {
+            const prefs = getPrefs();
+            if (!prefs.publicMirror || currentRole !== 'admin') return;
+            for (const j of newJobs) {
+                if ((Number(j.matchScore) || 0) >= 92) {
+                    publishJobToPublicMural(j.id);
+                }
+            }
+        }
+
+        function renderRadarSection() {
+            const profile = getSavedProfile();
+            const jobs = getIndexedJobs();
+            document.getElementById('radarJobsCountBadge').textContent = String(jobs.length);
+
+            const emptyEl = document.getElementById('radarEmptyState');
+            const contentEl = document.getElementById('radarContent');
+
+            if (!profile) {
+                emptyEl.classList.remove('hidden');
+                contentEl.classList.add('hidden');
+                return;
+            }
+
+            emptyEl.classList.add('hidden');
+            contentEl.classList.remove('hidden');
+
+            const prefs = getPrefs();
+            document.getElementById('activeFrequencyPill').textContent =
+                prefs.frequency === 'daily' ? 'Busca: Todo o Dia (08h30)' : 'Busca: 3x por Semana (Seg/Qua/Sex)';
+
+            document.getElementById('profileHeadline').textContent = profile.headline || 'Seu Mapa de Carreira';
+            document.getElementById('profileSummary').textContent = profile.summary || '';
+
+            const p = profile.pillars || {};
+            const toolsText = Array.isArray(p.ferramentas) ? p.ferramentas.join(', ') : p.ferramentas || '—';
+            const pillarCards = [
+                { label: '1. Valores', val: p.valores || '—', color: 'text-cyber-cyan' },
+                { label: '2. Atuações', val: p.atuacoes || '—', color: 'text-purple-400' },
+                { label: '3. Ferramentas', val: toolsText, color: 'text-cyber-neonGreen' },
+                { label: '4. Empresa Ideal', val: p.perfilEmpresa || '—', color: 'text-cyber-magenta' },
+                { label: '5. Impacto', val: p.impactoSociedade || '—', color: 'text-amber-300' }
+            ];
+
+            document.getElementById('profilePillarsGrid').innerHTML = pillarCards
+                .map(
+                    (c) => `
+                <div class="bg-cyber-bg/80 border border-cyber-border rounded-2xl p-3.5">
+                    <span class="font-cyber text-[10px] ${c.color} uppercase font-bold block mb-1">${escapeHtml(c.label)}</span>
+                    <p class="text-[11px] text-gray-300 leading-relaxed line-clamp-4">${escapeHtml(c.val)}</p>
+                </div>`
+                )
+                .join('');
+
+            // Renderiza Vagas Indexadas
+            let filteredJobs = jobs;
+            if (currentJobFilter === 'new') {
+                filteredJobs = jobs.filter((j) => j.isNew);
+            } else if (currentJobFilter === 'remote') {
+                filteredJobs = jobs.filter((j) => String(j.model).toLowerCase().includes('remot'));
+            }
+
+            const isAdminEffective = currentRole === 'admin' && !previewAsSubscriber;
+            const jobsGrid = document.getElementById('indexedJobsGrid');
+
+            if (filteredJobs.length === 0) {
+                jobsGrid.innerHTML = `
+                    <div class="col-span-full bg-cyber-card border border-cyber-border rounded-2xl p-8 text-center text-xs text-gray-400 font-tech">
+                        Nenhuma vaga neste filtro ainda. Clique em "Buscar Novas Vagas Agora" para varrer novas oportunidades!
+                    </div>
+                `;
+            } else {
+                jobsGrid.innerHTML = filteredJobs
+                    .map((job) => {
+                        const skillsHtml = (job.skills || [])
+                            .map((s) => `<span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] text-gray-400 font-tech">${escapeHtml(s)}</span>`)
+                            .join(' ');
+
+                        return `
+                        <div class="bg-cyber-card border ${job.isNew ? 'border-cyber-cyan/70 shadow-neon-cyan' : 'border-cyber-border'} rounded-2xl p-5 flex flex-col justify-between hover:-translate-y-1 transition-all">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <div class="flex items-center gap-1.5">
+                                        ${
+                                            job.isNew
+                                                ? `<span class="px-2 py-0.5 rounded bg-cyber-magenta text-white font-cyber text-[9px] font-bold uppercase">NOVA 🔔</span>`
+                                                : ''
+                                        }
+                                        <span class="px-2 py-0.5 rounded bg-cyber-bg border border-cyber-cyan/30 text-[10px] text-cyber-cyan font-tech font-bold uppercase">
+                                            ${escapeHtml(job.model)}
+                                        </span>
+                                    </div>
+                                    <span class="px-2.5 py-0.5 rounded-full bg-emerald-950 border border-emerald-400/40 text-cyber-neonGreen font-cyber text-[10px] font-bold">
+                                        ${escapeHtml(job.matchScore || 92)}% Match
+                                    </span>
+                                </div>
+
+                                <h4 class="font-cyber text-base font-bold text-white mb-1">${escapeHtml(job.title)}</h4>
+                                <p class="text-cyber-magenta font-tech font-semibold text-xs mb-3">${escapeHtml(job.company)} • ${escapeHtml(job.seniority)}</p>
+
+                                <div class="p-2.5 rounded-xl bg-cyber-bg/70 border border-cyber-border/70 mb-3">
+                                    <span class="text-[10px] font-tech text-cyber-cyan uppercase font-bold block">Por que combina com você:</span>
+                                    <p class="text-[11px] text-gray-300 leading-relaxed mt-0.5">${escapeHtml(job.matchReason || job.description)}</p>
+                                </div>
+
+                                <div class="flex flex-wrap gap-1.5 mb-4">${skillsHtml}</div>
+                            </div>
+
+                            <div class="pt-3 border-t border-cyber-border flex flex-col gap-2">
+                                <a href="${escapeHtml(job.url || job.link)}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-blue-500 text-cyber-bg font-cyber font-bold text-xs uppercase tracking-wider text-center hover:opacity-95 transition-opacity">
+                                    Ver Vaga / Candidatar-se <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>`;
+                    })
+                    .join('');
+            }
+
+            // Renderiza Cargos Ideais
+            const roles = profile.idealRoles || [];
+            document.getElementById('idealRolesList').innerHTML = roles
+                .map(
+                    (role) => `
+                <a href="https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(role)}&location=Brasil" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-cyber-bg border border-cyber-cyan/40 hover:border-cyber-cyan text-xs font-tech text-white hover:text-cyber-cyan transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase text-cyber-magenta text-[10px]"></i> ${escapeHtml(role)}
+                </a>`
+                )
+                .join('');
+
+            // Renderiza Empresas Prioritárias (10 a 20)
+            const companies = profile.priorityCompanies || [];
+            document.getElementById('priorityCompaniesGrid').innerHTML = companies
+                .map((comp, idx) => {
+                    const name = typeof comp === 'string' ? comp : comp.name;
+                    const sector = typeof comp === 'object' && comp.sector ? comp.sector : 'Tech & Dados';
+                    const reason =
+                        typeof comp === 'object' && comp.matchReason
+                            ? comp.matchReason
+                            : 'Empresa alinhada aos valores e stack mapeados.';
+                    const searchUrl = `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(
+                        name + ' ' + (roles[0] || 'Dados')
+                    )}&location=Brasil`;
+
+                    return `
+                    <a href="${escapeHtml(searchUrl)}" target="_blank" rel="noopener noreferrer" class="group bg-cyber-card/90 border border-cyber-border hover:border-cyber-magenta/70 rounded-2xl p-4 transition-all flex flex-col justify-between gap-3">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-1.5">
+                                <span class="text-[10px] font-cyber text-cyber-cyan">#${idx + 1} PRIORITÁRIA</span>
+                                <span class="px-2 py-0.5 rounded bg-cyber-bg text-[10px] font-tech text-gray-400">${escapeHtml(sector)}</span>
+                            </div>
+                            <h4 class="font-cyber text-sm font-bold text-white group-hover:text-cyber-magenta transition-colors">${escapeHtml(name)}</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed mt-1.5">${escapeHtml(reason)}</p>
+                        </div>
+                        <span class="text-[11px] font-tech text-cyber-cyan flex items-center gap-1 pt-2 border-t border-cyber-border/60">
+                            Buscar vagas abertas na ${escapeHtml(name)} <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </span>
+                    </a>`;
+                })
+                .join('');
+        }
+
+        // =========================================================================
+        // ABA 3: PREFERÊNCIAS DE FREQUÊNCIA (TODO DIA / 3X SEMANA) & E-MAIL
+        // =========================================================================
+        function getPrefs() {
+            try {
+                return (
+                    JSON.parse(localStorage.getItem(STORAGE_KEYS.PREFS)) || {
+                        userName: localStorage.getItem(STORAGE_KEYS.USER_NAME) || '',
+                        email: '',
+                        frequency: '3x_week',
+                        instantAlert: true,
+                        autoIndex: true,
+                        publicMirror: false
+                    }
+                );
+            } catch (e) {
+                return {
+                    userName: '',
+                    email: '',
+                    frequency: '3x_week',
+                    instantAlert: true,
+                    autoIndex: true,
+                    publicMirror: false
+                };
+            }
+        }
+
+        function selectFrequencyCard(freq) {
+            const c3x = document.getElementById('freq-card-3x');
+            const cDaily = document.getElementById('freq-card-daily');
+            const radios = document.querySelectorAll('input[name="frequency"]');
+            radios.forEach((r) => { r.checked = r.value === freq; });
+
+            if (freq === 'daily') {
+                cDaily.className = 'cursor-pointer p-4 rounded-2xl bg-cyber-cyan/10 border-2 border-cyber-cyan transition-all flex flex-col justify-between gap-2';
+                c3x.className = 'cursor-pointer p-4 rounded-2xl bg-cyber-bg border-2 border-cyber-border hover:border-cyber-purple transition-all flex flex-col justify-between gap-2';
+            } else {
+                c3x.className = 'cursor-pointer p-4 rounded-2xl bg-cyber-cyan/10 border-2 border-cyber-cyan transition-all flex flex-col justify-between gap-2';
+                cDaily.className = 'cursor-pointer p-4 rounded-2xl bg-cyber-bg border-2 border-cyber-border hover:border-cyber-purple transition-all flex flex-col justify-between gap-2';
+            }
+        }
+
+        function loadSavedPreferencesIntoForm() {
+            const prefs = getPrefs();
+            document.getElementById('pref-name').value = prefs.userName || '';
+            document.getElementById('pref-email').value = prefs.email || '';
+            document.getElementById('pref-instant-alert').checked = prefs.instantAlert !== false;
+            document.getElementById('pref-auto-index').checked = prefs.autoIndex !== false;
+            document.getElementById('pref-public-mirror').checked = Boolean(prefs.publicMirror);
+            selectFrequencyCard(prefs.frequency || '3x_week');
+        }
+
+        async function saveAlertPreferences(e) {
+            e.preventDefault();
+            const selectedRadio = document.querySelector('input[name="frequency"]:checked');
+            const prefs = {
+                userName: document.getElementById('pref-name').value.trim(),
+                email: document.getElementById('pref-email').value.trim(),
+                frequency: selectedRadio ? selectedRadio.value : '3x_week',
+                instantAlert: document.getElementById('pref-instant-alert').checked,
+                autoIndex: document.getElementById('pref-auto-index').checked,
+                publicMirror: document.getElementById('pref-public-mirror').checked
+            };
+
+            localStorage.setItem(STORAGE_KEYS.PREFS, JSON.stringify(prefs));
+            if (prefs.userName) {
+                localStorage.setItem(STORAGE_KEYS.USER_NAME, prefs.userName);
+                document.getElementById('welcomeUserText').textContent = `Olá, ${prefs.userName} 💙 • Radar & Mentoria Personalizada`;
+            }
+
+            // Salva assinatura no backend (suporta agendamento automático na nuvem quando KV ativo)
+            const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+            const profile = getSavedProfile();
+            fetch('/api/radar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    action: 'save_subscription',
+                    subscription: {
+                        ...prefs,
+                        active: true,
+                        profile
+                    }
+                })
+            }).catch(() => {});
+
+            const freqLabel = prefs.frequency === 'daily' ? 'Todo o Dia (08h30)' : '3x por Semana (Seg, Qua, Sex)';
+            addAlertLogEntry({
+                title: `Assinatura atualizada: ${freqLabel}`,
+                detail: `Alertas configurados para ${prefs.email}`,
+                unread: false
+            });
+
+            renderRadarSection();
+            renderAlertsHistory();
+            refreshEmailPreviewSilent();
+            showToast('Preferências Salvas!', `Frequência "${freqLabel}" configurada para ${prefs.email}.`);
+        }
+
+        async function sendTestDigestNow() {
+            const jobs = getIndexedJobs();
+            await dispatchEmailNotification('digest', jobs, false);
+        }
+
+        async function dispatchEmailNotification(triggerType, jobsList, silent = false) {
+            const prefs = getPrefs();
+            const profile = getSavedProfile() || {};
+            const btn = document.getElementById('sendTestEmailBtn');
+            const statusBox = document.getElementById('emailDispatchStatus');
+
+            const userName = document.getElementById('pref-name')?.value.trim() || prefs.userName || 'Assinante Data Delas';
+            const email = document.getElementById('pref-email')?.value.trim() || prefs.email || '';
+            const selectedRadio = document.querySelector('input[name="frequency"]:checked');
+            const freq = selectedRadio ? selectedRadio.value : prefs.frequency;
+            const frequencyLabel = freq === 'daily' ? 'Todo o Dia (Diária)' : '3x por Semana (Seg, Qua, Sex)';
+
+            if (btn && !silent) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i> Processando...';
+            }
+
+            try {
+                const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+                const res = await fetch('/api/notify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        email,
+                        userName,
+                        frequencyLabel,
+                        triggerType,
+                        summary: profile.summary || '',
+                        jobs: jobsList || getIndexedJobs(),
+                        companies: profile.priorityCompanies || []
+                    })
+                });
+
+                const data = await res.json();
+                if (data.htmlPreview) {
+                    const frame = document.getElementById('emailPreviewFrame');
+                    if (frame) frame.srcdoc = data.htmlPreview;
+                }
+
+                if (!silent && statusBox) {
+                    statusBox.classList.remove('hidden');
+                    if (data.sent) {
+                        statusBox.className = 'p-3.5 rounded-xl text-xs font-tech bg-emerald-950/70 border border-emerald-400/50 text-emerald-200';
+                        statusBox.innerHTML = `<i class="fa-solid fa-circle-check text-cyber-neonGreen mr-1"></i> <strong>E-mail real enviado!</strong> Entregue para ${escapeHtml(email)}.`;
+                        showToast('E-mail Enviado! ✉️', `Confira a caixa de entrada de ${email}.`);
+                    } else {
+                        statusBox.className = 'p-3.5 rounded-xl text-xs font-tech bg-cyber-purple/20 border border-cyber-cyan/50 text-gray-200';
+                        statusBox.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-cyber-cyan mr-1"></i> ${escapeHtml(data.message || 'Prévia gerada com sucesso!')}`;
+                        showToast('Disparo Simulado & Prévia Pronta!', 'Veja abaixo exatamente como o e-mail chega para a assinante.');
+                    }
+                }
+
+                addAlertLogEntry({
+                    title: data.sent ? `✉️ E-mail enviado para ${email}` : `✨ Prévia de e-mail gerada (${frequencyLabel})`,
+                    detail: data.subject || 'Radar de Vagas Data Delas',
+                    unread: false
+                });
+                renderAlertsHistory();
+            } catch (err) {
+                if (!silent) {
+                    showToast('Erro no disparo', 'Não foi possível gerar o e-mail.', 'magenta');
+                }
+            } finally {
+                if (btn && !silent) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-paper-plane text-cyber-magenta"></i> Disparar E-mail Agora';
+                }
+            }
+        }
+
+        async function refreshEmailPreviewSilent() {
+            await dispatchEmailNotification('digest', getIndexedJobs(), true);
+        }
+
+        // =========================================================================
+        // CENTRAL DE NOTIFICAÇÕES (SINO & HISTÓRICO)
+        // =========================================================================
+        function getAlertsLog() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEYS.ALERTS_LOG) || '[]');
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function addAlertLogEntry(entry) {
+            const list = getAlertsLog();
+            list.unshift({
+                id: Date.now().toString(),
+                createdAt: new Date().toLocaleString('pt-BR'),
+                ...entry
+            });
+            localStorage.setItem(STORAGE_KEYS.ALERTS_LOG, JSON.stringify(list.slice(0, 30)));
+        }
+
+        function updateBellCounter() {
+            const list = getAlertsLog();
+            const unread = list.filter((i) => i.unread).length;
+            const badge = document.getElementById('unreadBellBadge');
+            if (unread > 0) {
+                badge.textContent = String(unread);
+                badge.classList.remove('hidden');
+                badge.classList.add('flex');
+            } else {
+                badge.classList.add('hidden');
+                badge.classList.remove('flex');
+            }
+        }
+
+        function clearUnreadNotifications() {
+            const list = getAlertsLog().map((i) => ({ ...i, unread: false }));
+            localStorage.setItem(STORAGE_KEYS.ALERTS_LOG, JSON.stringify(list));
+            updateBellCounter();
+        }
+
+        function openAlertsDrawer() {
+            const drawer = document.getElementById('alertsDrawer');
+            const listEl = document.getElementById('drawerNotificationsList');
+            const items = getAlertsLog();
+
+            if (items.length === 0) {
+                listEl.innerHTML = '<p class="text-gray-500 font-tech italic">Nenhum alerta registrado ainda.</p>';
+            } else {
+                listEl.innerHTML = items
+                    .map(
+                        (item) => `
+                    <div class="p-3.5 rounded-xl bg-cyber-bg border ${item.unread ? 'border-cyber-magenta/70' : 'border-cyber-border'} space-y-1">
+                        <div class="flex items-center justify-between gap-2">
+                            <strong class="text-white font-semibold">${escapeHtml(item.title)}</strong>
+                            <span class="text-[10px] text-gray-500 font-tech">${escapeHtml(item.createdAt)}</span>
+                        </div>
+                        <p class="text-gray-400 text-[11px] leading-relaxed">${escapeHtml(item.detail)}</p>
+                    </div>`
+                    )
+                    .join('');
+            }
+
+            drawer.classList.remove('hidden');
+            drawer.classList.add('flex');
+            clearUnreadNotifications();
+        }
+
+        function closeAlertsDrawer() {
+            const drawer = document.getElementById('alertsDrawer');
+            drawer.classList.add('hidden');
+            drawer.classList.remove('flex');
+        }
+
+        function renderAlertsHistory() {
+            const el = document.getElementById('alertsHistoryList');
+            if (!el) return;
+            const items = getAlertsLog();
+            if (items.length === 0) {
+                el.innerHTML = '<p class="text-gray-500 italic">Nenhum envio ou varredura realizado ainda.</p>';
+                return;
+            }
+            el.innerHTML = items
+                .slice(0, 10)
+                .map(
+                    (i) => `
+                <div class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-cyber-bg border border-cyber-border">
+                    <div class="truncate">
+                        <span class="text-white font-semibold block truncate">${escapeHtml(i.title)}</span>
+                        <span class="text-gray-400 text-[11px] block truncate">${escapeHtml(i.detail)}</span>
+                    </div>
+                    <span class="text-[10px] text-gray-500 whitespace-nowrap">${escapeHtml(i.createdAt)}</span>
+                </div>`
+                )
+                .join('');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            checkExistingSession();
+        });
+    </script>
+</body>
+</html>

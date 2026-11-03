@@ -1,0 +1,9 @@
+{
+  "name": "data-delas-portal",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Portal Data Delas + Agente Especialista de Carreira e Radar Inteligente de Vagas",
+  "engines": {
+    "node": ">=18.x"
+  }
+}
