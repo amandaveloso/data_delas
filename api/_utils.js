@@ -119,8 +119,15 @@ async function callGemini({
   const modelsToTry =
     defaultModels.length > 0
       ? defaultModels
-      : ['gemini-3.8-flash', 'gemini-flash-latest'];
+      : [
+          'gemini-3.1-flash-lite',
+          'gemini-flash-lite-latest',
+          'gemini-3.8-flash',
+          'gemini-flash-latest',
+          'gemini-pro-latest'
+        ];
   const triedModels = new Set();
+  const errorsSeen = [];
   let lastError = null;
 
   const normalizedContents = (contents || []).map((c) => ({
@@ -131,6 +138,9 @@ async function callGemini({
   for (const ep of endpointsToTry) {
     for (let mIdx = 0; mIdx < modelsToTry.length; mIdx++) {
       const model = modelsToTry[mIdx];
+      // Aliases "-latest" existem apenas no endpoint generativelanguage (v1beta)
+      if (ep.vertex && model.endsWith('-latest')) continue;
+
       const epModelKey = `${ep.base}::${model}`;
       if (triedModels.has(epModelKey)) continue;
       triedModels.add(epModelKey);
@@ -138,92 +148,120 @@ async function callGemini({
       const attemptConfigs = useSearch && !responseMimeType ? [true, false] : [false];
 
       for (const withSearch of attemptConfigs) {
-        try {
-          const generationConfig = {};
-          if (!model.startsWith('gemini-3.')) {
-            generationConfig.temperature = temperature;
-          }
-          if (responseMimeType && !withSearch) {
-            generationConfig.responseMimeType = responseMimeType;
-          }
+        const supportsLowThinking =
+          model.startsWith('gemini-3') && !model.includes('flash-lite');
+        const thinkingVariants = supportsLowThinking ? [true, false] : [false];
 
-          const body = {
-            contents: normalizedContents
-          };
-
-          if (Object.keys(generationConfig).length > 0) {
-            body.generationConfig = generationConfig;
-          }
-
-          if (systemInstruction) {
-            body.systemInstruction = ep.vertex
-              ? { role: 'system', parts: [{ text: systemInstruction }] }
-              : { parts: [{ text: systemInstruction }] };
-          }
-
-          if (withSearch) {
-            body.tools = ep.vertex ? [{ googleSearch: {} }] : [{ google_search: {} }];
-          }
-
-          const resp = await fetch(`${ep.base}/${model}:generateContent`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-goog-api-key': apiKey
-            },
-            body: JSON.stringify(body)
-          });
-
-          const data = await resp.json();
-
-          if (!resp.ok) {
-            const msg = data?.error?.message || `Erro HTTP ${resp.status} no modelo ${model}`;
-            const suggested = msg.match(/models\/(gemini-[a-z0-9.-]+)/i);
-            if (suggested && suggested[1] && !modelsToTry.includes(suggested[1])) {
-              modelsToTry.push(suggested[1]);
+        let moveNextSearchOrModel = false;
+        for (const useLowThinking of thinkingVariants) {
+          if (moveNextSearchOrModel) break;
+          try {
+            const generationConfig = {};
+            if (!model.startsWith('gemini-3.')) {
+              generationConfig.temperature = temperature;
             }
-            lastError = new Error(msg);
-            continue;
-          }
-
-          const candidate = data?.candidates?.[0];
-          const parts = candidate?.content?.parts || [];
-          const visibleParts = parts.filter((p) => !p.thought);
-          const text = (visibleParts.length > 0 ? visibleParts : parts)
-            .map((p) => p.text || '')
-            .join('')
-            .trim();
-
-          if (!text) {
-            lastError = new Error('Resposta vazia retornada pelo modelo Gemini.');
-            continue;
-          }
-
-          const rawChunks = candidate?.groundingMetadata?.groundingChunks || [];
-          const sources = [];
-          const seenUris = new Set();
-          for (const chunk of rawChunks) {
-            const uri = chunk?.web?.uri;
-            const title = chunk?.web?.title;
-            if (uri && !seenUris.has(uri)) {
-              seenUris.add(uri);
-              sources.push({ uri, title: title || uri });
+            if (useLowThinking) {
+              generationConfig.thinkingConfig = {
+                thinkingLevel: ep.vertex ? 'LOW' : 'low'
+              };
             }
-          }
+            if (responseMimeType && !withSearch) {
+              generationConfig.responseMimeType = responseMimeType;
+            }
 
-          return {
-            text,
-            sources,
-            modelUsed: model,
-            groundedWithSearch: withSearch && sources.length > 0
-          };
-        } catch (fetchErr) {
-          lastError = fetchErr;
+            const body = {
+              contents: normalizedContents
+            };
+
+            if (Object.keys(generationConfig).length > 0) {
+              body.generationConfig = generationConfig;
+            }
+
+            if (systemInstruction) {
+              body.systemInstruction = ep.vertex
+                ? { role: 'system', parts: [{ text: systemInstruction }] }
+                : { parts: [{ text: systemInstruction }] };
+            }
+
+            if (withSearch) {
+              body.tools = ep.vertex ? [{ googleSearch: {} }] : [{ google_search: {} }];
+            }
+
+            const resp = await fetch(`${ep.base}/${model}:generateContent`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-goog-api-key': apiKey
+              },
+              body: JSON.stringify(body),
+              signal: AbortSignal.timeout(16000)
+            });
+
+            const data = await resp.json();
+
+            if (!resp.ok) {
+              const msg = data?.error?.message || `Erro HTTP ${resp.status} no modelo ${model}`;
+              errorsSeen.push(`${ep.vertex ? 'vertex' : 'gla'}/${model}: ${msg}`);
+              const suggested = msg.match(/models\/(gemini-[a-z0-9.-]+)/i);
+              if (suggested && suggested[1] && !modelsToTry.includes(suggested[1])) {
+                modelsToTry.push(suggested[1]);
+              }
+              lastError = new Error(msg);
+              // Se o erro foi especificamente sobre thinkingConfig/thinkingLevel, tenta sem ele;
+              // caso contrário (ex: 503 alta demanda, 404, 403), pula logo para o próximo modelo rápido
+              if (useLowThinking && /thinking/i.test(msg)) {
+                continue;
+              }
+              moveNextSearchOrModel = true;
+              break;
+            }
+
+            const candidate = data?.candidates?.[0];
+            const parts = candidate?.content?.parts || [];
+            const visibleParts = parts.filter((p) => !p.thought);
+            const text = (visibleParts.length > 0 ? visibleParts : parts)
+              .map((p) => p.text || '')
+              .join('')
+              .trim();
+
+            if (!text) {
+              lastError = new Error('Resposta vazia retornada pelo modelo Gemini.');
+              moveNextSearchOrModel = true;
+              break;
+            }
+
+            const rawChunks = candidate?.groundingMetadata?.groundingChunks || [];
+            const sources = [];
+            const seenUris = new Set();
+            for (const chunk of rawChunks) {
+              const uri = chunk?.web?.uri;
+              const title = chunk?.web?.title;
+              if (uri && !seenUris.has(uri)) {
+                seenUris.add(uri);
+                sources.push({ uri, title: title || uri });
+              }
+            }
+
+            return {
+              text,
+              sources,
+              modelUsed: model,
+              groundedWithSearch: withSearch && sources.length > 0
+            };
+          } catch (fetchErr) {
+            errorsSeen.push(`${ep.vertex ? 'vertex' : 'gla'}/${model}: ${fetchErr.message}`);
+            lastError = fetchErr;
+            moveNextSearchOrModel = true;
+            break;
+          }
         }
       }
     }
   }
 
+  if (errorsSeen.length > 0) {
+    throw new Error(errorsSeen.slice(0, 3).join(' | '));
+  }
   throw lastError || new Error('Não foi possível obter resposta da API do Google Gemini.');
 }
 
