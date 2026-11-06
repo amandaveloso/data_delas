@@ -112,7 +112,15 @@ async function callGemini({
         { base: 'https://aiplatform.googleapis.com/v1/publishers/google/models', vertex: true }
       ];
 
-  const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash'];
+  const defaultModels = (process.env.GEMINI_MODEL || '')
+    .split(',')
+    .map((m) => m.trim())
+    .filter(Boolean);
+  const modelsToTry =
+    defaultModels.length > 0
+      ? defaultModels
+      : ['gemini-3.8-flash', 'gemini-flash-latest'];
+  const triedModels = new Set();
   let lastError = null;
 
   const normalizedContents = (contents || []).map((c) => ({
@@ -121,26 +129,36 @@ async function callGemini({
   }));
 
   for (const ep of endpointsToTry) {
-    for (const model of modelsToTry) {
+    for (let mIdx = 0; mIdx < modelsToTry.length; mIdx++) {
+      const model = modelsToTry[mIdx];
+      const epModelKey = `${ep.base}::${model}`;
+      if (triedModels.has(epModelKey)) continue;
+      triedModels.add(epModelKey);
+
       const attemptConfigs = useSearch && !responseMimeType ? [true, false] : [false];
 
       for (const withSearch of attemptConfigs) {
         try {
+          const generationConfig = {};
+          if (!model.startsWith('gemini-3.')) {
+            generationConfig.temperature = temperature;
+          }
+          if (responseMimeType && !withSearch) {
+            generationConfig.responseMimeType = responseMimeType;
+          }
+
           const body = {
-            contents: normalizedContents,
-            generationConfig: {
-              temperature
-            }
+            contents: normalizedContents
           };
+
+          if (Object.keys(generationConfig).length > 0) {
+            body.generationConfig = generationConfig;
+          }
 
           if (systemInstruction) {
             body.systemInstruction = ep.vertex
               ? { role: 'system', parts: [{ text: systemInstruction }] }
               : { parts: [{ text: systemInstruction }] };
-          }
-
-          if (responseMimeType && !withSearch) {
-            body.generationConfig.responseMimeType = responseMimeType;
           }
 
           if (withSearch) {
@@ -160,6 +178,10 @@ async function callGemini({
 
           if (!resp.ok) {
             const msg = data?.error?.message || `Erro HTTP ${resp.status} no modelo ${model}`;
+            const suggested = msg.match(/models\/(gemini-[a-z0-9.-]+)/i);
+            if (suggested && suggested[1] && !modelsToTry.includes(suggested[1])) {
+              modelsToTry.push(suggested[1]);
+            }
             lastError = new Error(msg);
             continue;
           }
